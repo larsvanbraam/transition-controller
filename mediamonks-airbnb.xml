@@ -1,0 +1,9 @@
+<code_scheme name="Project">
+  <TypeScriptCodeStyleSettings>
+    <option name="USE_DOUBLE_QUOTES" value="false" />
+    <option name="FORCE_QUOTE_STYlE" value="true" />
+    <option name="SPACES_WITHIN_IMPORTS" value="true" />
+    <option name="IMPORT_PREFER_ABSOLUTE_PATH" value="TRUE" />
+    <option name="IMPORT_USE_NODE_RESOLUTION" value="TRUE" />
+  </TypeScriptCodeStyleSettings>
+</code_scheme>

@@ -1,0 +1,30 @@
+language: node_js
+
+cache: yarn
+
+node_js:
+  - 'stable'
+  - '6'
+  - '8'
+
+sudo: false
+
+before_install:
+  - yarn global add codeclimate-test-reporter
+
+script:
+  - yarn test
+
+after_script:
+  - codeclimate-test-reporter < coverage/lcov.info
+  - node_modules/.bin/coveralls < coverage/lcov.info
+
+deploy:
+  provider: npm
+  email: 'larsvanbraam@gmail.com'
+  api_key:
+    secure: 'j8grDrkavhuqC0ReDlkRl9qxaeJM4uveoshElIddMv+X/QH95AQ4vokFwiXWRsm6UHNLa8ovTJmcYVdcN5DO6hagLB0wxHjrvWJk5IhJcVlSedGvIdNzpePiT1HvnB0ftPEh3iDdYH6kstAY9vnt1+QXpbIkfpcxH6zdufYGOla99nqGdLLVPo/iX5Kx9Q7PReTzsy8QegGHqJAgGUXM97uKmvhz7Y5S0BNkg7GTJi62cxOEwR+PvgKo5Pvw3AtEkdvIt61R7GlFteJePokiI8Z2tp6zl/nOxXMR+EmayV7Qbm7yZwPSWOp4wOzWwOQG1j+DwyCai5aDugRYwDvXkDU0P4olTGg/uNxmaLZ3Yp0YMh9ZoTncIWe6dkta65X2AAQWom+u/mwINCVS/aAd7rwZBt/G9DdxLJlyRCbTgtEX28qbUEEk3iOXNili1gBk5iRGAGjxq30gBGC80p7MKAUaZoXjhOiw9o0fr9YpJ7p0c+BUg9DY7uKLUCZb2tKJY77EO+MH+2ex7plgv4fXi09aMZ4Q6kJdLV8kFKXZpcL/pJqASNzZprz3tKba8FmLp3t7ESuqygMcN1CIX9IPf0MfLF8W1KnlBJt5FHR+V17sivaofX1AyCzP1iEZ08zSOxWobEXOhvi3fPpz1UE+Oe3deOj+biMU4T2WUPMHIjs='
+  on:
+    tags: true
+    node: '8'
+  skip_cleanup: true
