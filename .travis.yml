@@ -28,3 +28,8 @@ deploy:
     tags: true
     node: '8'
   skip_cleanup: true
+
+addons:
+  code_climate:
+    repo_token:
+      secure: 'aFbsx9JzryWQGObCEUJC8hitkIWOmM1pRXbI6M10k4ovKCbWQAI32DcGM670iylU4MXXzk4Lv3FUgxuQ+ixeQ7wzPcnbNOnFpHtJBPBDv5guzhMv0XA3Boe4cVxC19+7uc+nHQCKp0vatR/kJrLJkMB2W0gLWbFIqWTpAuNk57YFl0M4zaMK3EjQRT68fYXDjaJ/gArnBUJ6s+RCU2RtWgXId76lfIaKDuFE7H//gEbhgzdniObdbYoSBGuk7reKG7K4krt25wnu8OaxpZhrSHLo5iqJlQqt1sObtVoPf/rlDMApnTNR1SrbrVRwWOqgZaoPZzz1tZ9b/c/B8vCskNNtybMPS+kkl4Nhu1dv+EFjXyVK1TqMwV1OJ0VlBXMzCoduk7y1fPLRw4StYXChra8h2LdGPXLzisS++NnbH6qgDIxdHA8i8zButWjFroYov9x++FTVizgNMrkqOfm1+/4GdkjPSul993VXI06AaZMpD4jl5GhzTd65zxOXkMndNDtAzs3XKHoZVdo9+qBPX6uqtY6DZ9d18mnw2meeHzvvSq5VPKHVxLP9xIJ0h8wYg6QL6sKMnWskkcCqi/xGAfvvqt69u+RHARFsWdqqoNkipHBdAY2cTgqZ9IfHCzjOuX/UPkPB6RSqLctX/C/q8K0836d7LhKQap144ChPRQM='
