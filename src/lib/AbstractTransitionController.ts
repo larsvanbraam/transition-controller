@@ -1,9 +1,9 @@
 import { TimelineLite, TimelineMax, Animation } from 'gsap';
 import EventDispatcher from 'seng-event';
 import TransitionEvent from './event/TransitionEvent';
-import IAbstractTransitionControllerOptions from 'lib/interface/IAbstractTranstitionControllerOptions';
-import { cloneTimeline, createTimeline, killAndClearTimeline } from 'lib/util/TimelineUtils';
-import TransitionDirection from 'lib/enum/TransitionDirection';
+import IAbstractTransitionControllerOptions from './interface/IAbstractTranstitionControllerOptions';
+import { cloneTimeline, createTimeline, killAndClearTimeline } from './util/TimelineUtils';
+import TransitionDirection from './enum/TransitionDirection';
 
 /**
  * @class AbstractTransitionController
