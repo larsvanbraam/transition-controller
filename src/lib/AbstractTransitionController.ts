@@ -1,24 +1,58 @@
-import { TimelineLite, TimelineMax } from 'gsap';
+import { TimelineLite, TimelineMax, Animation } from 'gsap';
 import EventDispatcher from 'seng-event';
 import TransitionEvent from './event/TransitionEvent';
 import IAbstractTransitionControllerOptions from 'lib/interface/IAbstractTranstitionControllerOptions';
-import { createTimeline, killAndClearTimeline } from 'lib/util/TimelineUtils';
+import { cloneTimeline, createTimeline, killAndClearTimeline } from 'lib/util/TimelineUtils';
 import TransitionDirection from 'lib/enum/TransitionDirection';
 
 /**
  * @class AbstractTransitionController
- * @description This class is used by all components that you want to be transition in/out
+ * @description The AbstractTransitionController is the base for your transitioning components.
  *
- * When extending the AbstractTransitionController a transition out timeline is not required. If it's not provided it
- * will reverse the transition in timeline when transition out is triggered.
+ * What does it do:
+ * - Handles your transitionIn and transitionOut timelines
+ * - Allow you to trigger transitionIn and transitionOut
+ * - Allows you to force a new transition while an old transition is still running or wait for it to be done
+ * - Dispatches transition events about the state of your component.
+ * - Allows you get retrieve cloned timelines so you can easily nest timelines within other timelines.
+ * - Allows you to specify a looping animation for your component which you can play/pause
+ *
+ * Passing along the parent instance:
+ * When creating a new instance of the transition controller make sure your parent controller contains a reference to
+ * the wrapping element because this is what you will use to run your `querySelector` and `querySelectorAll` on.
+ *
+ * Do I need a transitionOut timeline:
+ * When setting up a new transition controller you do not need to define a transition out because if it's not
+ * provided it will use the reversed transition out as a fallback transition
+ *
+ * Example usage:
+ *
+ * ```javascript
+ * const transitionController = new DummyTransitionController<ParentController>(this, {
+ *   name: 'DummyController',
+ *   debug: false,
+ *   useTimelineMax: false,
+ * });
+ *
+ * transitionController.transitionIn();
+ * ```
  */
-export default abstract class AbstractTransitionController extends EventDispatcher {
-  private static counter: number = 0;
+export default abstract class AbstractTransitionController<
+  T extends EventDispatcher
+> extends EventDispatcher {
   /**
-   * @protected
+   * @private
+   * @static counter
+   * @description a namespace counter used for unique naming of components
+   * @type {number}
+   */
+  private static counter: number = 0;
+
+  /**
+   * @public
    * @description The element on which the transition controller is applied
    */
-  protected element: HTMLElement;
+  public parent: T;
 
   /**
    * @property transitionInTimeline { TimelineLite }
@@ -34,6 +68,13 @@ export default abstract class AbstractTransitionController extends EventDispatch
    * automatically use the reversed version of the transition in timeline for the out animations
    */
   protected transitionOutTimeline: TimelineLite | TimelineMax;
+
+  /**
+   * @property loopingAnimationTimeline { TimelineLite }
+   * @protected
+   * @description The timeline that is used for looping animations.
+   */
+  protected loopingAnimationTimeline: TimelineMax;
 
   /**
    * @type {boolean}
@@ -104,10 +145,10 @@ export default abstract class AbstractTransitionController extends EventDispatch
     useTimelineMax: false,
   };
 
-  constructor(element: HTMLElement, options: IAbstractTransitionControllerOptions = {}) {
+  constructor(parent: T, options: IAbstractTransitionControllerOptions = {}) {
     super();
-    // Store the element reference
-    this.element = element;
+    // Store the parent reference
+    this.parent = parent;
     // Merge the options
     Object.assign(this.options, options);
     // Create the timelines
@@ -294,6 +335,24 @@ export default abstract class AbstractTransitionController extends EventDispatch
   }
 
   /**
+   * @public
+   * @method startLoopingAnimations
+   * @description Method that starts the looping animation
+   */
+  public startLoopingAnimation(): void {
+    this.loopingAnimationTimeline.play();
+  }
+
+  /**
+   * @public
+   * @method stopLoopingAnimation
+   * @description Method that stops the looping animation
+   */
+  public stopLoopingAnimation(): void {
+    this.loopingAnimationTimeline.pause();
+  }
+
+  /**
    * @protected
    * @method init
    * @description This method will be used for setting up the timelines for the component
@@ -318,6 +377,49 @@ export default abstract class AbstractTransitionController extends EventDispatch
   protected abstract setupTransitionInTimeline(): void;
 
   /**
+   * @public
+   * @method getSubTimeline
+   * @description When nesting transition components you might want to nest the timelines as well, this makes it
+   * easier to time all the component transitions
+   * @param {string | HTMLElement | T} component
+   * @param {TransitionDirection} direction
+   * @returns { Animation }
+   */
+  public getSubTimeline(
+    component: string | HTMLElement | T,
+    direction: TransitionDirection = TransitionDirection.IN,
+  ): Animation {
+    const subTimeline = this.getSubTimelineByComponent(component, direction);
+    return cloneTimeline(subTimeline, direction, this.options.useTimelineMax).restart();
+  }
+
+  /**
+   * @public
+   * @method getSubTimelineDuration
+   * @param {string | HTMLElement | T} component
+   * @param {TransitionDirection} direction
+   * @returns {Animation}
+   */
+  public getSubTimelineDuration(
+    component: string | HTMLElement | T,
+    direction: TransitionDirection = TransitionDirection.IN,
+  ): number {
+    return this.getSubTimelineByComponent(component, direction).duration();
+  }
+
+  /**
+   * @protected
+   * @abstract getSubTimelineByComponent
+   * @param {string | HTMLElement | T} component
+   * @param {TransitionDirection} direction
+   * @returns {gsap.TimelineLite | gsap.TimelineMax}
+   */
+  protected abstract getSubTimelineByComponent(
+    component: string | HTMLElement | T,
+    direction: TransitionDirection,
+  ): TimelineLite | TimelineMax;
+
+  /**
    * @private
    * @method createTransitionTimelines
    * @description Setup the transition timelines
@@ -330,11 +432,14 @@ export default abstract class AbstractTransitionController extends EventDispatch
       onReverseStart: () => this.handleTransitionStart(TransitionDirection.OUT),
       onReverseComplete: () => this.handleTransitionComplete(TransitionDirection.OUT),
     });
-
     this.transitionOutTimeline = createTimeline({
       useTimelineMax: this.options.useTimelineMax,
       onStart: () => this.handleTransitionStart(TransitionDirection.OUT),
       onComplete: () => this.handleTransitionStart(TransitionDirection.OUT),
+    });
+    this.loopingAnimationTimeline = new TimelineMax({
+      paused: true,
+      repeat: -1,
     });
   }
 
@@ -399,7 +504,7 @@ export default abstract class AbstractTransitionController extends EventDispatch
    * @description Clean all the timelines and the resolve method
    */
   private clean(): void {
-    this.element = null;
+    this.parent = null;
     this.isHidden = null;
 
     if (this.transitionOutTimeline !== null) {
@@ -410,6 +515,11 @@ export default abstract class AbstractTransitionController extends EventDispatch
     if (this.transitionInTimeline !== null) {
       killAndClearTimeline(this.transitionInTimeline);
       this.transitionInTimeline = null;
+    }
+
+    if (this.loopingAnimationTimeline) {
+      killAndClearTimeline(this.loopingAnimationTimeline);
+      this.loopingAnimationTimeline = null;
     }
 
     this.transitionOutResolveMethod = null;
