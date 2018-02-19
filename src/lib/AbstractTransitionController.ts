@@ -10,12 +10,12 @@ import TransitionDirection from 'lib/enum/TransitionDirection';
  * @description The AbstractTransitionController is the base for your transitioning components.
  *
  * What does it do:
- * - Handles your transitionIn and transitionOut timelines
- * - Allow you to trigger transitionIn and transitionOut
- * - Allows you to force a new transition while an old transition is still running or wait for it to be done
- * - Dispatches transition events about the state of your component.
- * - Allows you get retrieve cloned timelines so you can easily nest timelines within other timelines.
- * - Allows you to specify a looping animation for your component which you can play/pause
+ * - Handling your components transitionIn and transitionOut method.
+ * - Create separate timelines for transition in and transition out.
+ * - Dispatch transition events to your parent class.
+ * - Force your component to transition in while it's still transitioning out and the other way around.
+ * - Retrieve cloned timelines so you can easily nest timelines within other timelines.
+ * - Setup a looping animation that can be started or stopped.
  *
  * Passing along the parent instance:
  * When creating a new instance of the transition controller make sure your parent controller contains a reference to
