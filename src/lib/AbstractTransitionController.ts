@@ -37,9 +37,7 @@ import TransitionDirection from './enum/TransitionDirection';
  * transitionController.transitionIn();
  * ```
  */
-export default abstract class AbstractTransitionController<
-  T extends EventDispatcher
-> extends EventDispatcher {
+export default abstract class AbstractTransitionController<T> extends EventDispatcher {
   /**
    * @private
    * @static counter
@@ -50,9 +48,17 @@ export default abstract class AbstractTransitionController<
 
   /**
    * @public
-   * @description The element on which the transition controller is applied
+   * @description The parent controller
    */
-  public parent: T;
+  public parentController: T;
+
+  /**
+   * @type {boolean}
+   * @public
+   * @description Check if the component is currently in the transitionedOut state, this is to avoid calling the
+   * transition out method when it's already transitioned out.
+   */
+  public isHidden: boolean = true;
 
   /**
    * @property transitionInTimeline { TimelineLite }
@@ -75,14 +81,6 @@ export default abstract class AbstractTransitionController<
    * @description The timeline that is used for looping animations.
    */
   protected loopingAnimationTimeline: TimelineMax;
-
-  /**
-   * @type {boolean}
-   * @private
-   * @description Check if the component is currently in the transitionedOut state, this is to avoid calling the
-   * transition out method when it's already transitioned out.
-   */
-  private isHidden: boolean = true;
 
   /**
    * @private
@@ -145,10 +143,10 @@ export default abstract class AbstractTransitionController<
     useTimelineMax: false,
   };
 
-  constructor(parent: T, options: IAbstractTransitionControllerOptions = {}) {
+  constructor(parentController: T, options: IAbstractTransitionControllerOptions = {}) {
     super();
     // Store the parent reference
-    this.parent = parent;
+    this.parentController = parentController;
     // Merge the options
     Object.assign(this.options, options);
     // Create the timelines
@@ -504,7 +502,7 @@ export default abstract class AbstractTransitionController<
    * @description Clean all the timelines and the resolve method
    */
   private clean(): void {
-    this.parent = null;
+    this.parentController = null;
     this.isHidden = null;
 
     if (this.transitionOutTimeline !== null) {
