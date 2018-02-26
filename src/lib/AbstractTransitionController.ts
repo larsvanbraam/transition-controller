@@ -316,7 +316,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
         );
       }
 
-      if (this._transitionOutPromise !== null) {
+      if (this._transitionOutPromise === null) {
         if (this.options.debug) {
           console.warn(`[TransitionController][${
             this.options.name
@@ -433,7 +433,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     this.transitionOutTimeline = createTimeline({
       useTimelineMax: this.options.useTimelineMax,
       onStart: () => this.handleTransitionStart(TransitionDirection.OUT),
-      onComplete: () => this.handleTransitionStart(TransitionDirection.OUT),
+      onComplete: () => this.handleTransitionComplete(TransitionDirection.OUT),
     });
     this.loopingAnimationTimeline = new TimelineMax({
       paused: true,
