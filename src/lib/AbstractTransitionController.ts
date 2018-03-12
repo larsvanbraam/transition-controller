@@ -62,25 +62,25 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
 
   /**
    * @property transitionInTimeline { TimelineLite }
-   * @protected
+   * @public
    * @description The timeline that is used for transition in animations.
    */
-  protected transitionInTimeline: TimelineLite | TimelineMax;
+  public transitionInTimeline: TimelineLite | TimelineMax;
 
   /**
    * @property transitionOutTimeline { TimelineLite }
-   * @protected
+   * @public
    * @description The timeline that is used for transition out animations. If no animations are added it will
    * automatically use the reversed version of the transition in timeline for the out animations
    */
-  protected transitionOutTimeline: TimelineLite | TimelineMax;
+  public transitionOutTimeline: TimelineLite | TimelineMax;
 
   /**
    * @property loopingAnimationTimeline { TimelineLite }
-   * @protected
+   * @public
    * @description The timeline that is used for looping animations.
    */
-  protected loopingAnimationTimeline: TimelineMax;
+  public loopingAnimationTimeline: TimelineMax;
 
   /**
    * @private
