@@ -356,23 +356,25 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @description This method will be used for setting up the timelines for the component
    */
   protected init(): void {
-    this.setupTransitionInTimeline();
-    this.setupTransitionOutTimeline();
+    this.setupTransitionInTimeline(this.transitionInTimeline);
+    this.setupTransitionOutTimeline(this.transitionOutTimeline);
   }
 
   /**
    * @public
    * @method setupTransitionOutTimeline
+   * @param {TimelineLite | TimelineMax} timeline
    * @description overwrite this method in the parent class
    */
-  protected abstract setupTransitionOutTimeline(): void;
+  protected abstract setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax): void;
 
   /**
    * @public
    * @method setupTransitionInTimeline
+   * @param {TimelineLite | TimelineMax} timeline
    * @description overwrite this method in the parent class
    * */
-  protected abstract setupTransitionInTimeline(): void;
+  protected abstract setupTransitionInTimeline(timeline: TimelineLite | TimelineMax): void;
 
   /**
    * @public

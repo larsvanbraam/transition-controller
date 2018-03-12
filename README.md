@@ -18,7 +18,7 @@ npm i -S transition-controller
 ```
 
 ## Demo
-TODO: Create a demo
+*TODO: Create a demo*
 
 ## Usage
 The AbstractTransitionController is an abstract class that should be extended by another abstract class for your project

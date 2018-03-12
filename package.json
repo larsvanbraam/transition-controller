@@ -69,7 +69,6 @@
     "@babel/preset-stage-3": "^7.0.0-beta.35",
     "@babel/preset-typescript": "^7.0.0-beta.35",
     "@babel/register": "^7.0.0-beta.35",
-    "@babel/runtime": "^7.0.0-beta.35",
     "@types/chai": "^4.0.10",
     "@types/chai-as-promised": "^7.1.0",
     "@types/mocha": "^2.2.44",
@@ -100,6 +99,7 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.35",
     "@types/gsap": "^1.19.1",
     "gsap": "^1.20.3",
     "lodash": "^4.17.4",
