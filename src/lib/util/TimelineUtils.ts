@@ -62,10 +62,8 @@ export function killAndClearTimeline(timeline: TimelineLite | TimelineMax): void
 export function clearTimeline(timeline: TimelineLite | TimelineMax): void {
   timeline.getChildren().forEach(target => {
     if ((<Tween>target).target) {
-      const vars = <any>target.vars;
-      const clearProps = vars.css ? Object.keys(vars.css).join(',') : '';
-      // Clear the css properties
-      TweenLite.set((<Tween>target).target, { clearProps });
+      // Note: When resetting a timeline clearing just the css properties does not clear the properties like autoAlpha or scale
+      TweenLite.set((<Tween>target).target, { clearProps: 'all' });
     } else {
       clearTimeline(<TimelineLite | TimelineMax>target);
     }
