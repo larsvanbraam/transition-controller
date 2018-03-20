@@ -26,7 +26,12 @@ export function createTimeline(options: ICreateTimelineOptions): TimelineLite | 
       }
       lastTime = newTime;
     },
-    onStart: options.onStart !== null ? options.onStart : null,
+    onStart: () => {
+      // Reset the last time when we restart the timeline
+      lastTime = 0;
+      // Trigger the callback if needed
+      if (options.onStart) options.onStart();
+    },
     onComplete: options.onComplete !== null ? options.onComplete : null,
     onReverseComplete: () => {
       // When the transition out is completed we have to reset the last
