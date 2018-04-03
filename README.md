@@ -17,9 +17,6 @@ yarn add transition-controller
 npm i -S transition-controller
 ```
 
-## Demo
-*TODO: Create a demo*
-
 ## Usage
 The AbstractTransitionController is an abstract class that should be extended by another abstract class for your project
 specific setup.
@@ -36,7 +33,7 @@ specific setup.
 Before you can use the class you need to create your own abstract class that implements the getSubTimelineByComponent method.
 
 ```typescript
-abstract class AbstractDummyTransitionController<T> extends AbstractTransitionController<T> {
+abstract class AbstractDummyTransitionController extends AbstractTransitionController<T> {
  /**
    * @protected
    * @method getSubTimelineByComponent
@@ -59,11 +56,11 @@ abstract class AbstractDummyTransitionController<T> extends AbstractTransitionCo
 }
 ```
 
-#### Example
+#### Example usage
 After you've created you own abstract class you can use the transition controller and start to do amazingly easy transitions
 
 ```typescript
-const transitionController = new DummyTransitionController<ParentController>(this, {
+const transitionController = new DummyTransitionController(this, {
   name: 'DummyController',
   debug: false,
   useTimelineMax: false,
@@ -71,6 +68,19 @@ const transitionController = new DummyTransitionController<ParentController>(thi
 transitionController.transitionIn();
 ```
 
+## Example
+
+I've included an example setup where you can see the loader in action, to run the project follow these steps:
+
+- `git clone https://github.com/larsvanbraam/transition-controller.git`
+- `cd transition-controller`
+- `yarn`
+- `cd example`
+- `yarn`
+- `yarn dev`
+- Open your browser `localhost:8080`
+
+or click [this link](https://larsvanbraam.github.io/transition-controller/example/) to preview online
 
 ## Building
 
