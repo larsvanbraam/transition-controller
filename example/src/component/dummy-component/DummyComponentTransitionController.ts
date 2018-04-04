@@ -1,4 +1,4 @@
-import { TimelineLite, TimelineMax, Elastic } from '../../../../node_modules/gsap';
+import { TimelineLite, TimelineMax, Elastic } from 'gsap';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 
 export default class DummyComponentTransitionController extends AbstractVueTransitionController {

@@ -10,7 +10,9 @@
   "author": "Lars van Braam",
   "license": "ISC",
   "dependencies": {
+    "gsap": "^1.20.4",
     "lodash": "^4.17.5",
+    "seng-event": "^1.2.3",
     "ts-loader": "^4.1.0",
     "vue": "^2.5.16",
     "webpack": "^4.1.1",

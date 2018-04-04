@@ -1,7 +1,7 @@
 import { Vue } from 'vue/types/vue';
 import isElement from 'lodash/isElement';
 import isString from 'lodash/isString';
-import { TimelineLite, TimelineMax } from '../../../node_modules/gsap';
+import { TimelineLite, TimelineMax } from 'gsap';
 import AbstractTransitionController from '../../../src/lib/AbstractTransitionController';
 import TransitionDirection from '../../../src/lib/enum/TransitionDirection';
 

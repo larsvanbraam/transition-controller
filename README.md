@@ -73,9 +73,7 @@ transitionController.transitionIn();
 I've included an example setup where you can see the loader in action, to run the project follow these steps:
 
 - `git clone https://github.com/larsvanbraam/transition-controller.git`
-- `cd transition-controller`
-- `yarn`
-- `cd example`
+- `cd transition-controller/example`
 - `yarn`
 - `yarn dev`
 - Open your browser `localhost:8080`

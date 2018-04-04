@@ -8,8 +8,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.ts'],
+    modules: [path.resolve(projectRoot, 'node_modules')],
     alias: {
-      TweenLite: path.resolve(projectRoot, 'node_modules/gsap/src/uncompressed/TweenLite'),
+      TweenLite: path.resolve(projectRoot, 'example/node_modules/gsap/src/uncompressed/TweenLite'),
     },
   },
   module: {
