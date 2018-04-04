@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Transition Controller example</title>
+
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <style>
     body {
-      padding-top: 25px;
+      padding-top: 100px;
       overflow-x: hidden;
+      overflow-y: scroll;
       width: 100%;
     }
 
@@ -20,9 +23,14 @@
       display: inline-block;
     }
 
-    section {
-      margin: 50px 0;
+    .tab-content {
+     padding: 10px
     }
+
+    section {
+      margin: 0 0 50px;
+    }
+
   </style>
 </head>
 <body>
@@ -31,30 +39,38 @@
 </nav>
 
 <main role="main" class="container" id="app">
-  <section>
-    <h3 id="example">Example</h3>
-    <div class="bs-component">
-      <dummy-component ref="DummyComponent"/>
+  <ul class="nav nav-tabs">
+    <li :class="[{'active': activeTab === 0}]" ><a @click.prevent="handleTabClick(0)" href="#" aria-expanded="true">Example</a></li>
+    <li :class="[{'active': activeTab === 1}]"><a @click.prevent="handleTabClick(1)" href="#" aria-expanded="false">Code</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 0}]">
+      <section>
+        <h3 id="example">Example</h3>
+        <p>The example uses <a href="https://vuejs.org" target="_blank">vue.js</a> to render out a component. But you can do this for any other framework, the only thing you need to do is extend the AbstractTransitionController and create the a method to get your component instance based on your framework.</p>
+        <div class="bs-component">
+          <dummy-component ref="DummyComponent"/>
+        </div>
+        <button :disabled="started" @click="handleStartClick" :class="['btn', 'btn-primary']" v-html="started ? 'Running...' : 'Start'"></button>
+      </section>
+      <section v-if="events.length">
+        <h3 id="events">Events:</h3>
+        <ul class="list-group">
+          <li class="list-group-item" v-for="(event, index) in events">
+            <h5 class="list-group-item-heading">
+              <span class="text-primary icon glyphicon glyphicon-chevron-right"></span>
+              <span v-html="event.eventType"></span>
+            </h5>
+            <pre v-if="event.data">{{event.data}}</pre>
+          </li>
+        </ul>
+      </section>
     </div>
-    <button :disabled="started" @click="handleStartClick" :class="['btn', 'btn-primary']" v-html="started ? 'Running...' : 'Start'"></button>
-  </section>
-  <section v-if="events.length">
-    <h3 id="events">Events:</h3>
-    <ul class="list-group">
-      <li class="list-group-item" v-for="(event, index) in events">
-        <h5 class="list-group-item-heading">
-          <span class="text-primary icon glyphicon glyphicon-chevron-right"></span>
-          <span v-html="event.eventType"></span>
-        </h5>
-        <pre v-if="event.data">{{event.data}}</pre>
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h3 id="example-code">Example Code</h3>
-    <p>The example uses vue.js to render out a component. But you can technically do this for any other framework, the only thing you need to do is extend the AbstractTransitionController and create the a method to get your component based on your framework</p>
-    <h4>AbstractVueTransitionController.ts</h4>
-    <pre class="typescript">import { Vue } from 'vue/types/vue';
+    <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 1}]">
+      <section>
+        <h3 id="example-code">Example Code</h3>
+        <h4>AbstractVueTransitionController.ts</h4>
+        <pre class="typescript">import { Vue } from 'vue/types/vue';
 import isElement from 'lodash/isElement';
 import isString from 'lodash/isString';
 import { TimelineLite, TimelineMax } from 'gsap';
@@ -94,9 +110,9 @@ export default abstract class AbstractVueTransitionController extends AbstractTr
     return instance.transitionController.transitionOutTimeline;
   }
 }</pre>
-    <h4>dummy-component/index.js</h4>
-    <p>After you've created the AbstractTransitionController for your type of framework you can create your component and initialize the transitionController.</p>
-    <pre class="jsx">import DummyComponentTransitionController from './DummyComponentTransitionController';
+
+        <h4>dummy-component/index.js</h4>
+        <pre class="jsx">import DummyComponentTransitionController from './DummyComponentTransitionController';
 
 export default {
   name: 'DummyComponent',
@@ -116,9 +132,9 @@ export default {
     });
   },
 };</pre>
-    <h4>dummy-component/DummyComponentTransitionController.ts</h4>
-    <p>The transitionController for you component should extend the new AbstractTransitionController you've created for you framework.</p>
-    <pre class="typescript">import { TimelineLite, TimelineMax, Elastic } from 'gsap';
+
+        <h4>dummy-component/DummyComponentTransitionController.ts</h4>
+        <pre class="typescript">import { TimelineLite, TimelineMax, Elastic } from 'gsap';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 
 export default class DummyComponentTransitionController extends AbstractVueTransitionController {
@@ -157,7 +173,9 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
   }
 }
 </pre>
-  </section>
+      </section>
+    </div>
+  </div>
 </main>
 </body>
 <script src="./bundle.js"></script>

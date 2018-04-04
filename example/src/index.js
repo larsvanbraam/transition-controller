@@ -9,6 +9,7 @@ new Vue({
   data: {
     started: false,
     events: [],
+    activeTab: 0,
   },
   components: {
     DummyComponent,
@@ -60,6 +61,9 @@ new Vue({
           {},
         ),
       );
+    },
+    handleTabClick(index) {
+      this.activeTab = index;
     },
   },
 });
