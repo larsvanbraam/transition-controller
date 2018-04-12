@@ -75,8 +75,6 @@
 </code></pre>
 				<pre><code class="lang-sh">npm i -S transition-controller
 </code></pre>
-				<h2 id="demo">Demo</h2>
-				<p>TODO: Create a demo</p>
 				<h2 id="usage">Usage</h2>
 				<p>The AbstractTransitionController is an abstract class that should be extended by another abstract class for your project
 				specific setup.</p>
@@ -91,7 +89,7 @@
 				</ul>
 				<h3 id="example-extended-class">Example extended class</h3>
 				<p>Before you can use the class you need to create your own abstract class that implements the getSubTimelineByComponent method.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> AbstractDummyTransitionController&lt;T&gt; <span class="hljs-keyword">extends</span> AbstractTransitionController&lt;T&gt; {
+				<pre><code class="lang-typescript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> AbstractDummyTransitionController <span class="hljs-keyword">extends</span> AbstractTransitionController&lt;T&gt; {
  <span class="hljs-comment">/**
    * @protected
    * @method getSubTimelineByComponent
@@ -113,15 +111,25 @@
   }
 }
 </code></pre>
-				<h4 id="example">Example</h4>
+				<h4 id="example-usage">Example usage</h4>
 				<p>After you&#39;ve created you own abstract class you can use the transition controller and start to do amazingly easy transitions</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> transitionController = <span class="hljs-keyword">new</span> DummyTransitionController&lt;ParentController&gt;(<span class="hljs-keyword">this</span>, {
+				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> transitionController = <span class="hljs-keyword">new</span> DummyTransitionController(<span class="hljs-keyword">this</span>, {
   name: <span class="hljs-string">'DummyController'</span>,
   debug: <span class="hljs-literal">false</span>,
   useTimelineMax: <span class="hljs-literal">false</span>,
 });
 transitionController.transitionIn();
 </code></pre>
+				<h2 id="example">Example</h2>
+				<p>I&#39;ve included an example setup where you can see the loader in action, to run the project follow these steps:</p>
+				<ul>
+					<li><code>git clone https://github.com/larsvanbraam/transition-controller.git</code></li>
+					<li><code>cd transition-controller/example</code></li>
+					<li><code>yarn</code></li>
+					<li><code>yarn dev</code></li>
+					<li>Open your browser <code>localhost:8080</code></li>
+				</ul>
+				<p>or click <a href="https://larsvanbraam.github.io/transition-controller/example/">this link</a> to preview online</p>
 				<h2 id="building">Building</h2>
 				<p>In order to build transition-controller, ensure that you have <a href="http://git-scm.com/downloads">Git</a> and <a href="http://nodejs.org/">Node.js</a> installed.</p>
 				<p>Clone a copy of the repo:</p>
