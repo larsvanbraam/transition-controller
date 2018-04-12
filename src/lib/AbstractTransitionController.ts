@@ -61,6 +61,13 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   public isHidden: boolean = true;
 
   /**
+   * @type {boolean}
+   * @public
+   * @description Flag that is used to keep track if the looping animations are running
+   */
+  public loopingAnimationStarted: boolean = false;
+
+  /**
    * @property transitionInTimeline { TimelineLite }
    * @public
    * @description The timeline that is used for transition in animations.
@@ -339,6 +346,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    */
   public startLoopingAnimation(): void {
     this.loopingAnimationTimeline.play();
+    this.loopingAnimationStarted = true;
   }
 
   /**
@@ -348,6 +356,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    */
   public stopLoopingAnimation(): void {
     this.loopingAnimationTimeline.pause();
+    this.loopingAnimationStarted = false;
   }
 
   /**
