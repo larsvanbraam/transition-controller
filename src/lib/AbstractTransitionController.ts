@@ -358,6 +358,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   protected init(): void {
     this.setupTransitionInTimeline(this.transitionInTimeline);
     this.setupTransitionOutTimeline(this.transitionOutTimeline);
+    this.setupLoopingAnimationTimeline(this.loopingAnimationTimeline);
   }
 
   /**
@@ -375,6 +376,14 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @description overwrite this method in the parent class
    * */
   protected abstract setupTransitionInTimeline(timeline: TimelineLite | TimelineMax): void;
+
+  /**
+   * @public
+   * @method setupLoopingAnimationTimeline
+   * @param {TimelineMax} timeline
+   * @description overwrite this method in the parent class
+   * */
+  protected abstract setupLoopingAnimationTimeline(timeline: TimelineMax): void;
 
   /**
    * @public

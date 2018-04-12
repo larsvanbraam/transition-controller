@@ -171,6 +171,16 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
       ease: Elastic.easeIn,
     });
   }
+
+   /**
+   * @public
+   * @method setupLoopingAnimationTimeline
+   * @param {TimelineMax} timeline
+   * @description overwrite this method in the parent class
+   * */
+  public setupLoopingAnimationTimeline(timeline:TimelineMax): void {
+
+  }
 }
 </pre>
       </section>
