@@ -8,12 +8,12 @@ import TransitionDirection from '../../../src/lib/enum/TransitionDirection';
 export default abstract class AbstractVueTransitionController extends AbstractTransitionController<Vue> {
   /**
    * @public
-   * @method getSubTimelineByComponent
+   * @method getTimelineForComponent
    * @param {string | HTMLElement | Vue} component
    * @param {TransitionDirection} direction
    * @returns {TimelineLite | TimelineMax}
    */
-  protected getSubTimelineByComponent(
+  protected getTimelineForComponent(
     component: string | HTMLElement | Vue,
     direction: TransitionDirection,
   ): TimelineLite | TimelineMax {

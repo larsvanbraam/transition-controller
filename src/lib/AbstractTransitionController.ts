@@ -396,43 +396,43 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
 
   /**
    * @public
-   * @method getSubTimeline
+   * @method getTimeline
    * @description When nesting transition components you might want to nest the timelines as well, this makes it
    * easier to time all the component transitions
    * @param {string | HTMLElement | T} component
    * @param {TransitionDirection} direction
    * @returns { Animation }
    */
-  public getSubTimeline(
+  public getTimeline(
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
   ): Animation {
-    const subTimeline = this.getSubTimelineByComponent(component, direction);
-    return cloneTimeline(subTimeline, direction, this.options.useTimelineMax).restart();
+    const timeline = this.getTimelineForComponent(component, direction);
+    return cloneTimeline(timeline, direction, this.options.useTimelineMax).restart();
   }
 
   /**
    * @public
-   * @method getSubTimelineDuration
+   * @method getTimelineDurationForComponent
    * @param {string | HTMLElement | T} component
    * @param {TransitionDirection} direction
-   * @returns {Animation}
+   * @returns {number}
    */
-  public getSubTimelineDuration(
+  public getTimelineDurationForComponent(
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
   ): number {
-    return this.getSubTimelineByComponent(component, direction).duration();
+    return this.getTimelineForComponent(component, direction).duration();
   }
 
   /**
    * @protected
-   * @abstract getSubTimelineByComponent
+   * @abstract getTimelineForComponent
    * @param {string | HTMLElement | T} component
    * @param {TransitionDirection} direction
    * @returns {gsap.TimelineLite | gsap.TimelineMax}
    */
-  protected abstract getSubTimelineByComponent(
+  protected abstract getTimelineForComponent(
     component: string | HTMLElement | T,
     direction: TransitionDirection,
   ): TimelineLite | TimelineMax;
