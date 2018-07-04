@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TransitionEvent | transition-controller</title>
+	<title>TransitionEvent | TransitionController</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">transition-controller</a>
+					<a href="../index.html" class="title">TransitionController</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -38,8 +38,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -53,7 +51,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../index.html">Globals</a>
 				</li>
 				<li>
 					<a href="transitionevent.html">TransitionEvent</a>
@@ -66,6 +64,15 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<h3 id="transitionevent">TransitionEvent</h3>
+						<p>The transitionController uses the seng-event module to dispatch events to notify parent classes about
+						certain events. The following events can be listened to.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -321,9 +328,14 @@
 					<div class="tsd-signature tsd-kind-icon">TRANSITION_<wbr>IN_<wbr>COMPLETE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;EVENT_TYPE_PLACEHOLDER</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/event/TransitionEvent.ts#L6">event/TransitionEvent.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/event/TransitionEvent.ts#L23">event/TransitionEvent.ts:23</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The transition in complete event is dispatched when the transition in completes</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="transition_in_start" class="tsd-anchor"></a>
@@ -331,9 +343,14 @@
 					<div class="tsd-signature tsd-kind-icon">TRANSITION_<wbr>IN_<wbr>START<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;EVENT_TYPE_PLACEHOLDER</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/event/TransitionEvent.ts#L5">event/TransitionEvent.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/event/TransitionEvent.ts#L16">event/TransitionEvent.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The transition in start event is dispatched when the transition in starts</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="transition_out_complete" class="tsd-anchor"></a>
@@ -341,9 +358,14 @@
 					<div class="tsd-signature tsd-kind-icon">TRANSITION_<wbr>OUT_<wbr>COMPLETE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;EVENT_TYPE_PLACEHOLDER</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/event/TransitionEvent.ts#L8">event/TransitionEvent.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/event/TransitionEvent.ts#L37">event/TransitionEvent.ts:37</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The transition out complete event is dispatched when the transition out completes</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="transition_out_start" class="tsd-anchor"></a>
@@ -351,9 +373,14 @@
 					<div class="tsd-signature tsd-kind-icon">TRANSITION_<wbr>OUT_<wbr>START<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;EVENT_TYPE_PLACEHOLDER</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/event/TransitionEvent.ts#L7">event/TransitionEvent.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/event/TransitionEvent.ts#L30">event/TransitionEvent.ts:30</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The transition out start event is dispatched when the transition out starts</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -403,9 +430,14 @@
 							<aside class="tsd-sources">
 								<p>Overrides AbstractEvent.clone</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/event/TransitionEvent.ts#L10">event/TransitionEvent.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/event/TransitionEvent.ts#L44">event/TransitionEvent.ts:44</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The clone method returns a cloned instance of the original event.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="transitionevent.html" class="tsd-signature-type">TransitionEvent</a></h4>
 						</li>
 					</ul>
@@ -498,7 +530,7 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+						<a href="../index.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
@@ -580,16 +612,16 @@
 						<a href="../interfaces/icreatetimelineoptions.html" class="tsd-kind-icon">ICreate<wbr>Timeline<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#cleartimeline" class="tsd-kind-icon">clear<wbr>Timeline</a>
+						<a href="../index.html#cleartimeline" class="tsd-kind-icon">clear<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#clonetimeline" class="tsd-kind-icon">clone<wbr>Timeline</a>
+						<a href="../index.html#clonetimeline" class="tsd-kind-icon">clone<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#createtimeline" class="tsd-kind-icon">create<wbr>Timeline</a>
+						<a href="../index.html#createtimeline" class="tsd-kind-icon">create<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#killandcleartimeline" class="tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline</a>
+						<a href="../index.html#killandcleartimeline" class="tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline</a>
 					</li>
 				</ul>
 			</nav>

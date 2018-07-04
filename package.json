@@ -21,7 +21,7 @@
     "clean:test": "shx rm -rf coverage .nyc_output",
     "clean:npm": "shx rm -rf lib tmp index.js",
     "doc": "npm-run-all -p doc:*",
-    "doc:typedoc": "typedoc src/ --out docs/ --mode file --exclude \"**/index.ts\"",
+    "doc:typedoc": "typedoc src/ --out docs/ --mode file --exclude \"**/index.ts\" --name TransitionController --excludeExternals --excludePrivate --readme none",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js --cache",
     "lint:ts": "tslint src/**/*.ts -c tslint.json -p tsconfig.json -t verbose",

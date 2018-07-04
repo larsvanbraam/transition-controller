@@ -3,8 +3,8 @@ import ICreateTimelineOptions from '../interface/ICreateTimelineOptions';
 import TransitionDirection from '../enum/TransitionDirection';
 
 /**
- * @method createTimeline
- * @description Method that creates a timeline and adds all the listeners
+ * The create timeline method creates a new TimelineLite or TimelineMax timeline
+ *
  * @param {ICreateTimelineOptions} options
  * @returns {TimelineLite | TimelineMax}
  */
@@ -46,8 +46,12 @@ export function createTimeline(options: ICreateTimelineOptions): TimelineLite | 
 }
 
 /**
- * @method killAndClearTimeline
+ * Sometimes you want to fully kill a timeline and strip all the added
+ * inline styles. This method accepts a timeline and it will remove all
+ * the inline styling and kill the timeline instance.
+ *
  * @param {TimelineLite | TimelineMax} timeline
+ * @returns {void}
  */
 export function killAndClearTimeline(timeline: TimelineLite | TimelineMax): void {
   clearTimeline(timeline);
@@ -55,9 +59,11 @@ export function killAndClearTimeline(timeline: TimelineLite | TimelineMax): void
 }
 
 /**
- * @method clearTimeline
- * @description Method to clear a timeline and remove all the props that have been added
+ * Sometimes you do not want to kill the timeline but only kill the inline
+ * styling. This method accepts a timeline and it will remove all the inline styling.
+ *
  * @param {TimelineLite | TimelineMax} timeline
+ * @returns {void}
  */
 export function clearTimeline(timeline: TimelineLite | TimelineMax): void {
   timeline.getChildren().forEach(target => {
@@ -72,12 +78,15 @@ export function clearTimeline(timeline: TimelineLite | TimelineMax): void {
 }
 
 /**
- * @method cloneTimeline
- * @descriptionm Clone a timeline and return a new instance with the all the same vars
+ *  When you want to clone a timeline (for example when you want to nest it within
+ *  another timeline but also still want to be able to play the original timeline
+ *  this is the method you are looking for. It will create a new TimeLineLite or
+ *  TimelineMax and re-add all the original animations and event listeners.
+ *
  * @param {gsap.TimelineLite | gsap.TimelineMax} source
  * @param {TransitionDirection} direction
  * @param {boolean} useTimelineMax
- * @returns {gsap.TimelineLite | gsap.TimelineMax}
+ * @returns {TimelineLite | TimelineMax}
  */
 export function cloneTimeline(
   source: TimelineLite | TimelineMax,

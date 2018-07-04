@@ -2,6 +2,7 @@
 import Vue from 'vue/dist/vue.esm';
 import TransitionEvent from '../../src/lib/event/TransitionEvent';
 import DummyComponent from './component/dummy-component';
+import LoopComponent from './component/loop-component';
 
 /* eslint-disable no-new */
 new Vue({
@@ -13,6 +14,7 @@ new Vue({
   },
   components: {
     DummyComponent,
+    LoopComponent,
   },
   mounted() {
     // Highlight the code
@@ -29,27 +31,43 @@ new Vue({
     // Bind the events
     this.$nextTick(() => {
       events.forEach(eventName => {
-        this.$refs.DummyComponent.transitionController.addEventListener(eventName, event =>
+        this.$refs.dummyComponent.transitionController.addEventListener(eventName, event =>
           this.handleEvent('DummyComponent', event),
         );
       });
     });
   },
   methods: {
-    handleStartClick() {
+    handleStartClick(type) {
       // Mark as started
       this.started = true;
       // Clear the events
       this.events = [];
       // Get the transition controller
-      const { transitionController } = this.$refs.DummyComponent;
-      // Transition in then out
-      transitionController
-        .transitionIn()
-        .then(() => transitionController.transitionOut())
-        .then(() => {
-          this.started = false;
-        });
+      const { transitionController } = this.$refs.dummyComponent;
+      switch (type) {
+        case 'in':
+          if (!transitionController.isHidden) alert('component is already visible!');
+          transitionController.transitionIn().then(() => {
+            this.started = false;
+          });
+          break;
+        case 'out':
+          if (transitionController.isHidden) alert('component is already hidden!');
+          transitionController.transitionOut().then(() => {
+            this.started = false;
+          });
+          break;
+        default:
+        case 'queue':
+          transitionController
+            .transitionIn()
+            .then(() => transitionController.transitionOut())
+            .then(() => {
+              this.started = false;
+            });
+          break;
+      }
     },
     handleEvent(label, event) {
       this.events.push(

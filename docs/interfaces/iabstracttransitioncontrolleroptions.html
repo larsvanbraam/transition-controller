@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IAbstractTransitionControllerOptions | transition-controller</title>
+	<title>IAbstractTransitionControllerOptions | TransitionController</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">transition-controller</a>
+					<a href="../index.html" class="title">TransitionController</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -38,8 +38,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -53,7 +51,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../index.html">Globals</a>
 				</li>
 				<li>
 					<a href="iabstracttransitioncontrolleroptions.html">IAbstractTransitionControllerOptions</a>
@@ -82,7 +80,11 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iabstracttransitioncontrolleroptions.html#debug" class="tsd-kind-icon">debug</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iabstracttransitioncontrolleroptions.html#loopid" class="tsd-kind-icon">loop<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iabstracttransitioncontrolleroptions.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iabstracttransitioncontrolleroptions.html#transitioncontroller" class="tsd-kind-icon">transition<wbr>Controller</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iabstracttransitioncontrolleroptions.html#transitioninid" class="tsd-kind-icon">transition<wbr>InId</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iabstracttransitioncontrolleroptions.html#transitionoutid" class="tsd-kind-icon">transition<wbr>Out<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iabstracttransitioncontrolleroptions.html#usetimelinemax" class="tsd-kind-icon">use<wbr>Timeline<wbr>Max</a></li>
 							</ul>
 						</section>
@@ -97,15 +99,28 @@
 					<div class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L9">interface/IAbstractTranstitionControllerOptions.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L11">interface/IAbstractTranstitionControllerOptions.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>description</dt>
-							<dd><p>When set to true we show logs in the flow</p>
-							</dd>
-						</dl>
+						<div class="lead">
+							<p>When set to true we show logs in the flow</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="loopid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> loop<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">loop<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L31">interface/IAbstractTranstitionControllerOptions.ts:31</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The active looping id that is used when creating the transition controller</p>
+						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -114,15 +129,58 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L5">interface/IAbstractTranstitionControllerOptions.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L6">interface/IAbstractTranstitionControllerOptions.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>description</dt>
-							<dd><p>The name of the component that is used for logging, if no name is provided it uses a fallback name</p>
-							</dd>
-						</dl>
+						<div class="lead">
+							<p>The name of the component that is used for logging, if no name is provided it uses a fallback name</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="transitioncontroller" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> transition<wbr>Controller</h3>
+					<div class="tsd-signature tsd-kind-icon">transition<wbr>Controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L36">interface/IAbstractTranstitionControllerOptions.ts:36</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The reference to the transition controller instance on your parent controller</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="transitioninid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> transition<wbr>InId</h3>
+					<div class="tsd-signature tsd-kind-icon">transition<wbr>InId<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L21">interface/IAbstractTranstitionControllerOptions.ts:21</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The active transition in id that is used when creating the transition in timeline.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="transitionoutid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> transition<wbr>Out<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">transition<wbr>Out<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L26">interface/IAbstractTranstitionControllerOptions.ts:26</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The active transition in id that is used when creating the transition out timeline.</p>
+						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -131,15 +189,13 @@
 					<div class="tsd-signature tsd-kind-icon">use<wbr>Timeline<wbr>Max<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/5b11b30/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L13">interface/IAbstractTranstitionControllerOptions.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/fbdfbda/src/lib/interface/IAbstractTranstitionControllerOptions.ts#L16">interface/IAbstractTranstitionControllerOptions.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>description</dt>
-							<dd><p>When set to true the transition timelines use TimelineMax instead of TimelineLite</p>
-							</dd>
-						</dl>
+						<div class="lead">
+							<p>When set to true the transition timelines use TimelineMax instead of TimelineLite</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -148,7 +204,7 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+						<a href="../index.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
@@ -172,7 +228,19 @@
 								<a href="iabstracttransitioncontrolleroptions.html#debug" class="tsd-kind-icon">debug</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iabstracttransitioncontrolleroptions.html#loopid" class="tsd-kind-icon">loop<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="iabstracttransitioncontrolleroptions.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iabstracttransitioncontrolleroptions.html#transitioncontroller" class="tsd-kind-icon">transition<wbr>Controller</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iabstracttransitioncontrolleroptions.html#transitioninid" class="tsd-kind-icon">transition<wbr>InId</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iabstracttransitioncontrolleroptions.html#transitionoutid" class="tsd-kind-icon">transition<wbr>Out<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="iabstracttransitioncontrolleroptions.html#usetimelinemax" class="tsd-kind-icon">use<wbr>Timeline<wbr>Max</a>
@@ -185,16 +253,16 @@
 						<a href="icreatetimelineoptions.html" class="tsd-kind-icon">ICreate<wbr>Timeline<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#cleartimeline" class="tsd-kind-icon">clear<wbr>Timeline</a>
+						<a href="../index.html#cleartimeline" class="tsd-kind-icon">clear<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#clonetimeline" class="tsd-kind-icon">clone<wbr>Timeline</a>
+						<a href="../index.html#clonetimeline" class="tsd-kind-icon">clone<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#createtimeline" class="tsd-kind-icon">create<wbr>Timeline</a>
+						<a href="../index.html#createtimeline" class="tsd-kind-icon">create<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#killandcleartimeline" class="tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline</a>
+						<a href="../index.html#killandcleartimeline" class="tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline</a>
 					</li>
 				</ul>
 			</nav>
