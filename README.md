@@ -4,7 +4,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/larsvanbraam/transition-controller.svg?style=flat-square)](https://github.com/larsvanbraam/transition-controller/issues)
 
 # AbstractTransitionController
-
 An abstract transition controller that can be used for transitioning elements
 
 ## Installation
@@ -17,60 +16,17 @@ yarn add transition-controller
 npm i -S transition-controller
 ```
 
-## Usage
-The AbstractTransitionController is an abstract class that should be extended by another abstract class for your project
-specific setup.
+## Documentation
 
-#### You can use this abstract class for the following:
- - Handling your components transitionIn and transitionOut method.
- - Create separate timelines for transition in and transition out.
- - Dispatch transition events to your parent class.
- - Force your component to transition in while it's still transitioning out and the other way around.
- - Retrieve cloned timelines so you can easily nest timelines within other timelines.
- - Setup a looping animation that can be started or stopped.
+### GitBook
+- [General documentation](https://larsvanbraam.gitbook.io/transition-controller/)
 
-### Example extended class
-Before you can use the class you need to create your own abstract class that implements the getSubTimelineByComponent method.
-
-```typescript
-abstract class AbstractDummyTransitionController extends AbstractTransitionController<T> {
- /**
-   * @protected
-   * @method getSubTimelineByComponent
-   * @param {string | HTMLElement | T} component
-   * @param {TransitionDirection} direction
-   * @returns {gsap.TimelineLite | gsap.TimelineMax}
-   */
-  protected getSubTimelineByComponent(component: string | HTMLElement | T, direction: TransitionDirection,): TimelineLite | TimelineMax {
-    const instance:T;
-
-    // Add code that finds the instance based on the 3 provided types
-    ...
-
-    // Return the correct timeline
-    if (direction === TransitionDirection.IN) {
-      return instance.transitionController.transitionInTimeline;
-    }
-    return instance.transitionController.transitionOutTimeline;
-  }
-}
-```
-
-#### Example usage
-After you've created you own abstract class you can use the transition controller and start to do amazingly easy transitions
-
-```typescript
-const transitionController = new DummyTransitionController(this, {
-  name: 'DummyController',
-  debug: false,
-  useTimelineMax: false,
-});
-transitionController.transitionIn();
-```
+### TypeDoc
+- [Latest TypeDoc](https://larsvanbraam.github.io/transition-controller/docs/)
+- [Older TypeDocs](https://transition-controller.larsvanbraam.nl)
 
 ## Example
-
-I've included an example setup where you can see the loader in action, to run the project follow these steps:
+I've included an example setup where you can see the transition controller in action, to run the project follow these steps:
 
 - `git clone https://github.com/larsvanbraam/transition-controller.git`
 - `cd transition-controller/example`

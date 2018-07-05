@@ -24,7 +24,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * The parentController gives you access to the class that constructed the
    * transition controller. You might need this if you want to access elements
    * from the parentController. For example in a Vue.js project you might want
-   * to access the $refs of you Vue.js component to setup your animations.
+   * to access the **$refs** of you Vue.js component to setup your animations.
    *
    * @public
    */
@@ -260,18 +260,13 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    */
   public transitionOut(
     forceTransition: boolean = false,
-    transitionOutId: string = this.options.transitionOutId,
-    resetTransitionOutTimeline: boolean = false,
+    id: string = this.options.transitionOutId,
+    reset: boolean = false,
   ): Promise<void> {
     let oldTransitionPromise = Promise.resolve();
 
     // The transition out timeline might not be created yet, so initialize it runtime.
-    this.setupTimeline(
-      this.transitionOutTimeline,
-      transitionOutId,
-      this.setupTransitionOutTimeline,
-      resetTransitionOutTimeline,
-    );
+    this.setupTimeline(this.transitionOutTimeline, id, this.setupTransitionOutTimeline, reset);
 
     /**
      * Check if we already have a transition out going on, if so we finish it right away! and trigger a
