@@ -1,4 +1,4 @@
-interface IAbstractTransitionControllerOptions {
+export interface IAbstractTransitionControllerOptions {
   /**
    * The name of the component that is used for logging, if no name is provided it uses a fallback name
    */
@@ -34,5 +34,3 @@ interface IAbstractTransitionControllerOptions {
    */
   transitionController?: string;
 }
-
-export default IAbstractTransitionControllerOptions;

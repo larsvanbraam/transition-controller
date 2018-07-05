@@ -1,4 +1,4 @@
-interface ICreateTimelineOptions {
+export interface ICreateTimelineOptions {
   /**
    * This should be the callback method that is triggered when the timeline in starts
    */
@@ -24,5 +24,3 @@ interface ICreateTimelineOptions {
    */
   useTimelineMax?: boolean;
 }
-
-export default ICreateTimelineOptions;

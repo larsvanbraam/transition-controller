@@ -1,5 +1,5 @@
 import { TweenLite, TimelineLite, TimelineMax, Tween } from 'gsap';
-import ICreateTimelineOptions from '../interface/ICreateTimelineOptions';
+import { ICreateTimelineOptions } from '../interface/ICreateTimelineOptions';
 import TransitionDirection from '../enum/TransitionDirection';
 
 /**
