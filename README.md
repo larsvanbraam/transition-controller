@@ -4,7 +4,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/larsvanbraam/transition-controller.svg?style=flat-square)](https://github.com/larsvanbraam/transition-controller/issues)
 
 # AbstractTransitionController
-
 An abstract transition controller that can be used for transitioning elements
 
 ## Installation
@@ -18,10 +17,15 @@ npm i -S transition-controller
 ```
 
 ## Documentation
-Check out GitBook for the [docs](https://larsvanbraam.gitbook.io/transition-controller/)
+
+### GitBook
+- [General documentation](https://larsvanbraam.gitbook.io/transition-controller/)
+
+### TypeDoc
+- [Latest TypeDoc](https://larsvanbraam.github.io/transition-controller/docs/)
+- [Older TypeDocs](https://transition-controller.larsvanbraam.nl)
 
 ## Example
-
 I've included an example setup where you can see the transition controller in action, to run the project follow these steps:
 
 - `git clone https://github.com/larsvanbraam/transition-controller.git`

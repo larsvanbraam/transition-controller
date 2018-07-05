@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>transition-controller</title>
+	<title>TransitionController</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">transition-controller</a>
+					<a href="index.html" class="title">TransitionController</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -38,8 +38,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -53,117 +51,191 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="index.html">Globals</a>
 				</li>
 			</ul>
-			<h1> transition-controller</h1>
+			<h1> TransitionController</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<p><a href="https://travis-ci.org/larsvanbraam/transition-controller"><img src="https://img.shields.io/travis/larsvanbraam/transition-controller.svg?maxAge=2592000" alt="Travis"></a>
-					<a href="https://codeclimate.com/github/larsvanbraam/transition-controller"><img src="https://img.shields.io/codeclimate/github/larsvanbraam/transition-controller.svg?maxAge=2592000" alt="Code Climate"></a>
-					<a href="https://www.npmjs.com/package/transition-controller"><img src="https://img.shields.io/npm/dm/transition-controller.svg?maxAge=2592000" alt="npm"></a>
-				<a href="https://github.com/larsvanbraam/transition-controller/issues"><img src="https://img.shields.io/github/issues/larsvanbraam/transition-controller.svg?style=flat-square" alt="GitHub issues"></a></p>
-				<h1 id="abstracttransitioncontroller">AbstractTransitionController</h1>
-				<p>An abstract transition controller that can be used for transitioning elements</p>
-				<h2 id="installation">Installation</h2>
-				<pre><code class="lang-sh">yarn add transition-controller
-</code></pre>
-				<pre><code class="lang-sh">npm i -S transition-controller
-</code></pre>
-				<h2 id="usage">Usage</h2>
-				<p>The AbstractTransitionController is an abstract class that should be extended by another abstract class for your project
-				specific setup.</p>
-				<h4 id="you-can-use-this-abstract-class-for-the-following-">You can use this abstract class for the following:</h4>
-				<ul>
-					<li>Handling your components transitionIn and transitionOut method.</li>
-					<li>Create separate timelines for transition in and transition out.</li>
-					<li>Dispatch transition events to your parent class.</li>
-					<li>Force your component to transition in while it&#39;s still transitioning out and the other way around.</li>
-					<li>Retrieve cloned timelines so you can easily nest timelines within other timelines.</li>
-					<li>Setup a looping animation that can be started or stopped.</li>
-				</ul>
-				<h3 id="example-extended-class">Example extended class</h3>
-				<p>Before you can use the class you need to create your own abstract class that implements the getSubTimelineByComponent method.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> AbstractDummyTransitionController <span class="hljs-keyword">extends</span> AbstractTransitionController&lt;T&gt; {
- <span class="hljs-comment">/**
-   * @protected
-   * @method getSubTimelineByComponent
-   * @param {string | HTMLElement | T} component
-   * @param {TransitionDirection} direction
-   * @returns {gsap.TimelineLite | gsap.TimelineMax}
-   */</span>
-  <span class="hljs-keyword">protected</span> getSubTimelineByComponent(component: <span class="hljs-built_in">string</span> | HTMLElement | T, direction: TransitionDirection,): TimelineLite | TimelineMax {
-    <span class="hljs-keyword">const</span> instance:T;
-
-    <span class="hljs-comment">// Add code that finds the instance based on the 3 provided types</span>
-    ...
-
-    <span class="hljs-comment">// Return the correct timeline</span>
-    <span class="hljs-keyword">if</span> (direction === TransitionDirection.IN) {
-      <span class="hljs-keyword">return</span> instance.transitionController.transitionInTimeline;
-    }
-    <span class="hljs-keyword">return</span> instance.transitionController.transitionOutTimeline;
-  }
-}
-</code></pre>
-				<h4 id="example-usage">Example usage</h4>
-				<p>After you&#39;ve created you own abstract class you can use the transition controller and start to do amazingly easy transitions</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> transitionController = <span class="hljs-keyword">new</span> DummyTransitionController(<span class="hljs-keyword">this</span>, {
-  name: <span class="hljs-string">'DummyController'</span>,
-  debug: <span class="hljs-literal">false</span>,
-  useTimelineMax: <span class="hljs-literal">false</span>,
-});
-transitionController.transitionIn();
-</code></pre>
-				<h2 id="example">Example</h2>
-				<p>I&#39;ve included an example setup where you can see the loader in action, to run the project follow these steps:</p>
-				<ul>
-					<li><code>git clone https://github.com/larsvanbraam/transition-controller.git</code></li>
-					<li><code>cd transition-controller/example</code></li>
-					<li><code>yarn</code></li>
-					<li><code>yarn dev</code></li>
-					<li>Open your browser <code>localhost:8080</code></li>
-				</ul>
-				<p>or click <a href="https://larsvanbraam.github.io/transition-controller/example/">this link</a> to preview online</p>
-				<h2 id="building">Building</h2>
-				<p>In order to build transition-controller, ensure that you have <a href="http://git-scm.com/downloads">Git</a> and <a href="http://nodejs.org/">Node.js</a> installed.</p>
-				<p>Clone a copy of the repo:</p>
-				<pre><code class="lang-sh">git <span class="hljs-built_in">clone</span> https://github.com/larsvanbraam/transition-controller.git
-</code></pre>
-				<p>Change to the transition-controller directory:</p>
-				<pre><code class="lang-sh"><span class="hljs-built_in">cd</span> transition-controller
-</code></pre>
-				<p>Install dev dependencies:</p>
-				<pre><code class="lang-sh">yarn
-</code></pre>
-				<p>Use one of the following main scripts:</p>
-				<pre><code class="lang-sh">yarn build            <span class="hljs-comment"># build this project</span>
-yarn dev              <span class="hljs-comment"># run compilers in watch mode, both for babel and typescript</span>
-yarn <span class="hljs-built_in">test</span>             <span class="hljs-comment"># run the unit tests incl coverage</span>
-yarn <span class="hljs-built_in">test</span>:dev         <span class="hljs-comment"># run the unit tests in watch mode</span>
-yarn lint             <span class="hljs-comment"># run eslint and tslint on this project</span>
-yarn doc              <span class="hljs-comment"># generate typedoc documentation</span>
-</code></pre>
-				<p>When installing this module, it adds a pre-commit hook, that runs lint and prettier commands
-				before committing, so you can be sure that everything checks out.</p>
-				<h2 id="authors">Authors</h2>
-				<p>View <a href="./AUTHORS.md">AUTHORS.md</a></p>
-				<h2 id="contribute">Contribute</h2>
-				<p>View <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a></p>
-				<h2 id="license">License</h2>
-				<p><a href="./LICENSE">MIT</a> © Lars van Braam</p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum"><a href="enums/transitiondirection.html" class="tsd-kind-icon">Transition<wbr>Direction</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/abstracttransitioncontroller.html" class="tsd-kind-icon">Abstract<wbr>Transition<wbr>Controller</a></li>
+								<li class="tsd-kind-class"><a href="classes/transitionevent.html" class="tsd-kind-icon">Transition<wbr>Event</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface"><a href="interfaces/iabstracttransitioncontrolleroptions.html" class="tsd-kind-icon">IAbstract<wbr>Transition<wbr>Controller<wbr>Options</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/icreatetimelineoptions.html" class="tsd-kind-icon">ICreate<wbr>Timeline<wbr>Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function"><a href="index.html#cleartimeline" class="tsd-kind-icon">clear<wbr>Timeline</a></li>
+								<li class="tsd-kind-function"><a href="index.html#clonetimeline" class="tsd-kind-icon">clone<wbr>Timeline</a></li>
+								<li class="tsd-kind-function"><a href="index.html#createtimeline" class="tsd-kind-icon">create<wbr>Timeline</a></li>
+								<li class="tsd-kind-function"><a href="index.html#killandcleartimeline" class="tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="cleartimeline" class="tsd-anchor"></a>
+					<h3>clear<wbr>Timeline</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Timeline<span class="tsd-signature-symbol">(</span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/9f92cb1/src/lib/util/TimelineUtils.ts#L68">util/TimelineUtils.ts:68</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sometimes you do not want to kill the timeline but only kill the inline
+									styling. This method accepts a timeline and it will remove all the inline styling.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timeline: <span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="clonetimeline" class="tsd-anchor"></a>
+					<h3>clone<wbr>Timeline</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">clone<wbr>Timeline<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span>, direction<span class="tsd-signature-symbol">: </span><a href="enums/transitiondirection.html" class="tsd-signature-type">TransitionDirection</a>, useTimelineMax<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/9f92cb1/src/lib/util/TimelineUtils.ts#L91">util/TimelineUtils.ts:91</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p> When you want to clone a timeline (for example when you want to nest it within
+										another timeline but also still want to be able to play the original timeline
+										this is the method you are looking for. It will create a new TimeLineLite or
+									TimelineMax and re-add all the original animations and event listeners.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>source: <span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></h5>
+								</li>
+								<li>
+									<h5>direction: <a href="enums/transitiondirection.html" class="tsd-signature-type">TransitionDirection</a></h5>
+								</li>
+								<li>
+									<h5>useTimelineMax: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TimelineLite</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">TimelineMax</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="createtimeline" class="tsd-anchor"></a>
+					<h3>create<wbr>Timeline</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Timeline<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="interfaces/icreatetimelineoptions.html" class="tsd-signature-type">ICreateTimelineOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/9f92cb1/src/lib/util/TimelineUtils.ts#L11">util/TimelineUtils.ts:11</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The create timeline method creates a new TimelineLite or TimelineMax timeline</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="interfaces/icreatetimelineoptions.html" class="tsd-signature-type">ICreateTimelineOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TimelineLite</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">TimelineMax</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="killandcleartimeline" class="tsd-anchor"></a>
+					<h3>kill<wbr>And<wbr>Clear<wbr>Timeline</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline<span class="tsd-signature-symbol">(</span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/9f92cb1/src/lib/util/TimelineUtils.ts#L56">util/TimelineUtils.ts:56</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sometimes you want to fully kill a timeline and strip all the added
+										inline styles. This method accepts a timeline and it will remove all
+									the inline styling and kill the timeline instance.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timeline: <span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class="globals current ">
+						<a href="index.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
@@ -185,16 +257,16 @@ yarn doc              <span class="hljs-comment"># generate typedoc documentatio
 						<a href="interfaces/icreatetimelineoptions.html" class="tsd-kind-icon">ICreate<wbr>Timeline<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#cleartimeline" class="tsd-kind-icon">clear<wbr>Timeline</a>
+						<a href="index.html#cleartimeline" class="tsd-kind-icon">clear<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#clonetimeline" class="tsd-kind-icon">clone<wbr>Timeline</a>
+						<a href="index.html#clonetimeline" class="tsd-kind-icon">clone<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#createtimeline" class="tsd-kind-icon">create<wbr>Timeline</a>
+						<a href="index.html#createtimeline" class="tsd-kind-icon">create<wbr>Timeline</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#killandcleartimeline" class="tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline</a>
+						<a href="index.html#killandcleartimeline" class="tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline</a>
 					</li>
 				</ul>
 			</nav>

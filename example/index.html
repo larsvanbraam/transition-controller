@@ -28,7 +28,19 @@
     }
 
     section {
-      margin: 0 0 50px;
+      margin: 0 0 25px;
+    }
+
+    .list-group-item-heading {
+      display: flex;
+      align-items: center;
+    }
+
+    .event-type {
+      white-space:nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 100%;
     }
 
   </style>
@@ -40,55 +52,94 @@
 
 <main role="main" class="container" id="app">
   <ul class="nav nav-tabs">
-    <li :class="[{'active': activeTab === 0}]" ><a @click.prevent="handleTabClick(0)" href="#" aria-expanded="true">Example</a></li>
-    <li :class="[{'active': activeTab === 1}]"><a @click.prevent="handleTabClick(1)" href="#" aria-expanded="false">Code</a></li>
+    <li :class="[{'active': activeTab === 0}]" ><a @click.prevent="handleTabClick(0)" href="#" aria-expanded="true">Introduction</a></li>
+    <li :class="[{'active': activeTab === 1}]" ><a @click.prevent="handleTabClick(1)" href="#" aria-expanded="true">Examples</a></li>
+    <li :class="[{'active': activeTab === 2}]"><a @click.prevent="handleTabClick(2)" href="#" aria-expanded="false">AbstractVueTransitionController Code</a></li>
+    <li :class="[{'active': activeTab === 3}]"><a @click.prevent="handleTabClick(3)" href="#" aria-expanded="false">TransitionIn/TransitionOut Code</a></li>
+    <li :class="[{'active': activeTab === 4}]"><a @click.prevent="handleTabClick(4)" href="#" aria-expanded="false">Loop Code</a></li>
   </ul>
   <div id="myTabContent" class="tab-content">
     <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 0}]">
       <section>
-        <h3 id="example">Example</h3>
-        <p>The example uses <a href="https://vuejs.org" target="_blank">vue.js</a> to render out a component. But you can do this for any other framework, the only thing you need to do is extend the AbstractTransitionController and create the a method to get your component instance based on your framework.</p>
-        <div class="bs-component">
-          <dummy-component ref="DummyComponent"/>
+        <div class="row">
+          <div class="col-lg-6">
+            <section>
+              <h3>Introduction</h3>
+              <p>If you have a great design for you website but you need to add those amazing animations to make things even better. I usually end up installing GreenSock and creating a class that manages all my javascript transitions per component. After a couple of projects you end up copy and pasting the same code over and over again and that just doesn’t feel right. Therefore the AbstractTransitionController was created.</p>
+            </section>
+            <section>
+              <h4>What does it do?</h4>
+              <p>The AbstractTransitionController is a base class that you extend to provide all the necessary transition functionality to TransitionController that is aimed on your desired framework.</p>
+            </section>
+          </div>
+          <div class="col-lg-6">
+            <section>
+              <h3>Documentation</h3>
+              <p>This demo only shows the basics of what is possible with the transition controller. For more detailed documentation please have a look at the GitBook page!</p>
+              <a href="https://larsvanbraam.gitbook.io/transition-controller/" target="_blank" class="btn btn-primary">View full documentation</a>
+            </section>
+          </div>
         </div>
-        <button :disabled="started" @click="handleStartClick" :class="['btn', 'btn-primary']" v-html="started ? 'Running...' : 'Start'"></button>
-      </section>
-      <section v-if="events.length">
-        <h3 id="events">Events:</h3>
-        <ul class="list-group">
-          <li class="list-group-item" v-for="(event, index) in events">
-            <h5 class="list-group-item-heading">
-              <span class="text-primary icon glyphicon glyphicon-chevron-right"></span>
-              <span v-html="event.eventType"></span>
-            </h5>
-            <pre v-if="event.data">{{event.data}}</pre>
-          </li>
-        </ul>
       </section>
     </div>
     <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 1}]">
+      <div class="row">
+        <div class="col-lg-8">
+          <section>
+            <h3>Examples</h3>
+            <p>The examples uses <a href="https://vuejs.org" target="_blank">Vue.js</a> to render out a component. But you can do this for any other framework, the only thing you need to do is extend the AbstractTransitionController and create the a method to get your component instance based on your framework.</p>
+          </section>
+          <section>
+            <h4 id="example-1">TransitionIn/TransitionOut Example</h4>
+            <p>The main functionality of this module is to transition in and transition out your components. Below you can see an example of a component first transitioning in and when it's completed transitioning out</p>
+            <div class="bs-component">
+              <dummy-component ref="dummyComponent"/>
+            </div>
+            <button :disabled="started" @click="handleStartClick('queue')" :class="['btn', 'btn-success']">Transition In + Out</button>
+            <button :disabled="started" @click="handleStartClick('in')" :class="['btn', 'btn-success']">Transition In</button>
+            <button :disabled="started" @click="handleStartClick('out')" :class="['btn', 'btn-success']" >Transition Out</button>
+          </section>
+          <section>
+            <h4 id="example-2">Looping animation example</h4>
+            <p>The example uses <a href="https://vuejs.org" target="_blank">vue.js</a> to render out a component. But you can do this for any other framework, the only thing you need to do is extend the AbstractTransitionController and create the a method to get your component instance based on your framework.</p>
+            <div class="bs-component">
+              <loop-component ref="loopComponent"/>
+            </div>
+          </section>
+        </div>
+        <div class="col-lg-4">
+          <section>
+            <h3 id="events">Events:</h3>
+            <ul class="list-group">
+              <li class="list-group-item" v-for="(event, index) in events">
+                <h6 class="list-group-item-heading">
+                  <span class="text-primary icon glyphicon glyphicon-chevron-right"></span>
+                  <span class="event-type" v-html="event.eventType"></span>
+                </h6>
+                <pre v-if="event.data">{{event.data}}</pre>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 2}]">
       <section>
-        <h3 id="example-code">Example Code</h3>
-        <h4>AbstractVueTransitionController.ts</h4>
+        <h3>AbstractVueTransitionController.ts</h3>
         <pre class="typescript">import { Vue } from 'vue/types/vue';
 import isElement from 'lodash/isElement';
 import isString from 'lodash/isString';
-import { TimelineLite, TimelineMax } from 'gsap';
 import { AbstractTransitionController, TransitionDirection } from 'transition-controller';
 
 export default abstract class AbstractVueTransitionController extends AbstractTransitionController&#60;Vue&#62; {
   /**
-   * @public
-   * @method getSubTimelineByComponent
+   * @protected
+   * @method getComponent
    * @param {string | HTMLElement | Vue} component
-   * @param {TransitionDirection} direction
-   * @returns {TimelineLite | TimelineMax}
+   * @returns {Vue}
    */
-  protected getSubTimelineByComponent(
-    component: string | HTMLElement | Vue,
-    direction: TransitionDirection,
-  ): TimelineLite | TimelineMax {
-    let instance: any;
+  protected getComponent(component: string | HTMLElement | Vue): Vue {
+    let instance: Vue;
 
     if (isElement(component)) {
       instance = this.parentController.$children.find(child => child.$el === component);
@@ -103,16 +154,118 @@ export default abstract class AbstractVueTransitionController extends AbstractTr
       throw new Error(`The requested component [${component}] does not exist`);
     }
 
-    if (direction === TransitionDirection.IN) {
-      return instance.transitionController.transitionInTimeline;
-    }
-
-    return instance.transitionController.transitionOutTimeline;
+    return instance;
   }
 }</pre>
+      </section>
+    </div>
+    <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 3}]">
+      <h4>dummy-component/DummyComponentTransitionController.ts</h4>
+      <p>The example uses multiple timelines per component, this is not something that is required. If no transitionIn/transitionOutId is provided the id argument can be ignored!</p>
+      <pre class="typescript">import { TimelineLite, TimelineMax, Elastic } from 'gsap';
+import AbstractVueTransitionController from '../AbstractVueTransitionController';
+import { TransitionDirection } from 'transition-controller';
 
-        <h4>dummy-component/index.js</h4>
-        <pre class="jsx">import DummyComponentTransitionController from './DummyComponentTransitionController';
+export const TransitionId = {
+  [TransitionDirection.IN]: {
+    LEFT_TO_RIGHT: 'left-to-right',
+    RIGHT_TO_LEFT: 'right-to-left',
+  },
+  [TransitionDirection.OUT]: {
+    TO_RIGHT: 'to-right',
+    TO_LEFT: 'to-left',
+  },
+};
+
+export default class DummyComponentTransitionController extends AbstractVueTransitionController {
+/**
+   * @public
+   * @method setupTransitionInTimeline
+   * @param {TimelineLite | TimelineMax} timeline
+   * @param {Vue} parent
+   * @param {string} id
+   */
+  public setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {
+    switch (id) {
+      case TransitionId[TransitionDirection.IN].RIGHT_TO_LEFT:
+        timeline.fromTo(
+          parent.$el,
+          1,
+          {
+            xPercent: 100,
+            autoAlpha: 0,
+          },
+          {
+            xPercent: 0,
+            autoAlpha: 1,
+            ease: Elastic.easeOut,
+          },
+        );
+        break;
+      case TransitionId[TransitionDirection.IN].LEFT_TO_RIGHT:
+        timeline.fromTo(
+          parent.$el,
+          1,
+          {
+            xPercent: -100,
+            autoAlpha: 0,
+          },
+          {
+            xPercent: 0,
+            autoAlpha: 1,
+            ease: Elastic.easeOut,
+          },
+        );
+        break;
+      default:
+        timeline.fromTo(parent.$el, 1, { autoAlpha: 0 }, { autoAlpha: 1 });
+        break;
+    }
+  }
+
+  /**
+   * @public
+   * @method setupTransitionOutTimeline
+   * @param { TimelineMax } timeline
+   * @param { Vue } parent
+   * @param { string } id
+   */
+  public setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {
+    switch (id) {
+      case TransitionId[TransitionDirection.OUT].TO_LEFT:
+        timeline.to(parent.$el, 1, {
+          xPercent: -100,
+          autoAlpha: 0,
+          ease: Elastic.easeIn,
+        });
+        break;
+      case TransitionId[TransitionDirection.OUT].TO_RIGHT:
+        timeline.to(parent.$el, 1, {
+          xPercent: 100,
+          autoAlpha: 0,
+          ease: Elastic.easeIn,
+        });
+        break;
+      default:
+        timeline.to(parent.$el, 1, { autoAlpha: 0 });
+        break;
+    }
+  }
+
+  /**
+   * @public
+   * @method setupLoopingAnimationTimeline
+   * @param {TimelineMax} timeline
+   * @param {Vue} parent
+   * @param {string} id
+   * @description overwrite this method in the parent class
+   * */
+  public setupLoopingAnimationTimeline(timeline: TimelineLite | TimelineMax, parent: Vue,  id: string): void {}
+}
+</pre>
+
+      <h4>dummy-component/index.js</h4>
+      <pre class="jsx">import DummyComponentTransitionController from './DummyComponentTransitionController';
 
 export default {
   name: 'DummyComponent',
@@ -129,61 +282,128 @@ export default {
       debug: true,
       name: 'DummyComponent',
       useTweenMax: false,
+      transitionInId: TransitionId[TransitionDirection.IN].LEFT_TO_RIGHT,
+      transitionOutId: TransitionId[TransitionDirection.OUT].TO_RIGHT,
     });
   },
 };</pre>
 
-        <h4>dummy-component/DummyComponentTransitionController.ts</h4>
-        <pre class="typescript">import { TimelineLite, TimelineMax, Elastic } from 'gsap';
+      <h4>Main Vue.js application</h4>
+      <pre class="jsx">import Vue from 'vue/dist/vue.esm';
+import DummyComponent from './component/dummy-component';
+
+new Vue({
+  el: '#app',
+  components: {
+    DummyComponent,
+  },
+  mounted() {
+    const {transitionController} = this.$refs.DummyComponent;
+    // Transition in then out
+    transitionController
+      .transitionIn()
+      .then(() => transitionController.transitionOut())
+  },
+});
+</pre>
+    </div>
+    <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 4}]">
+      <h3>Looping animation Example</h3>
+      <h4>loop-component/LoopComponentTransitionController.ts</h4>
+      <pre class="typescript">import { TimelineLite, TimelineMax, Elastic } from 'gsap';
+import Vue from 'vue';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
+
+export const TransitionId = {
+  [TransitionDirection.IN]: {},
+  [TransitionDirection.OUT]: {},
+  LOOP_1: 'loop-1',
+  LOOP_2: 'loop-2',
+};
 
 export default class DummyComponentTransitionController extends AbstractVueTransitionController {
   /**
    * @public
    * @method setupTransitionInTimeline
-   * @param {gsap.TimelineLite | gsap.TimelineMax} timeline
+   * @param {TimelineLite | TimelineMax} timeline
+   * @param {Vue} parent
+   * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: TimelineLite | TimelineMax): void {
-    timeline.fromTo(
-      this.parentController.$el,
-      1,
-      {
-        xPercent: 100,
-        autoAlpha: 0,
-      },
-      {
-        xPercent: 0,
-        autoAlpha: 1,
-        ease: Elastic.easeOut,
-      },
-    );
-  }
+  public setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {}
 
   /**
    * @public
    * @method setupTransitionOutTimeline
-   * @param {gsap.TimelineLite | gsap.TimelineMax} timeline
+   * @param { TimelineMax } timeline
+   * @param { Vue } parent
+   * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax): void {
-    timeline.to(this.parentController.$el, 1, {
-      xPercent: -100,
-      autoAlpha: 0,
-      ease: Elastic.easeIn,
-    });
-  }
+  public setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {}
 
-   /**
+  /**
    * @public
    * @method setupLoopingAnimationTimeline
    * @param {TimelineMax} timeline
+   * @param {Vue} parent
+   * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline:TimelineMax): void {
+  public setupLoopingAnimationTimeline(timeline: TimelineLite | TimelineMax, parent: Vue,  id: string): void {
+    const { button } = parent.$refs;
 
+    switch (id) {
+      case TransitionId.LOOP_1:
+        timeline.fromTo(button, 2, {rotation: 0}, {rotation: 360, ease: Elastic.easeOut});
+        break;
+      case TransitionId.LOOP_2:
+        timeline.fromTo(button, 1, {yPercent: 0}, {yPercent: 100, ease: Elastic.easeInOut});
+        timeline.fromTo(button, 1, {yPercent: 100}, {yPercent: 0, ease: Elastic.easeInOut});
+        break;
+      default:
+        timeline.fromTo(button, 1, {xPercent: 0}, {xPercent: 100, ease: Elastic.easeInOut});
+        timeline.fromTo(button, 1, {xPercent: 100}, {xPercent: 0, ease: Elastic.easeInOut});
+        break;
+    }
   }
 }
 </pre>
-      </section>
+      <h4>loop-component/index.js</h4>
+      <pre class="jsx">import LoopComponentTransitionController, {TransitionId} from './LoopComponentTransitionController';
+import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
+
+export default {
+  name: 'LoopComponent',
+  template: '&#60;div&#62;
+    &#60;section&#62;
+      &#60;button ref="button" @click="handleButtonClick" class="btn btn-primary btn-lg"&#62;Large button&#60;/button&#62;
+    &#60;/section&#62;
+    &#60;button @click="handleStartClick()" class="btn btn-success"&#62;Start Default&#60;/button&#62;
+    &#60;button @click="handleStartClick(TransitionId.LOOP_1)" class="btn btn-success"&#62;Start variant 1&#60;/button&#62;
+    &#60;button @click="handleStartClick(TransitionId.LOOP_2)" class="btn btn-success"&#62;Start variant 2&#60;/button&#60;
+    &#60;button @click="handleStopClick" class="btn btn-warning"&#62;Stop&#60;/button&#60;
+  &#60;/div&#62;',
+  mounted() {
+    this.TransitionId = TransitionId;
+    this.transitionController = new LoopComponentTransitionController(this, {
+      name: 'LoopComponent',
+      debug: true,
+      useTweenMax: false,
+    });
+    this.transitionController.startLoopingAnimation();
+  },
+  methods: {
+    handleButtonClick() {
+      alert('Nothing here!');
+    },
+    handleStartClick(loop) {
+      this.transitionController.startLoopingAnimation(loop);
+    },
+    handleStopClick() {
+      this.transitionController.stopLoopingAnimation();
+    },
+  },
+};
+</pre>
     </div>
   </div>
 </main>

@@ -6,36 +6,10 @@ import { cloneTimeline, createTimeline, killAndClearTimeline } from './util/Time
 import TransitionDirection from './enum/TransitionDirection';
 
 /**
- * @class AbstractTransitionController
- * @description The AbstractTransitionController is the base for your transitioning components.
+ * ### AbstractTransitionController
+ * The AbstractTransitionController is the main class of the module. See the sub-pages for detailed information about the properties and methods.
  *
- * What does it do:
- * - Handling your components transitionIn and transitionOut method.
- * - Create separate timelines for transition in and transition out.
- * - Dispatch transition events to your parent class.
- * - Force your component to transition in while it's still transitioning out and the other way around.
- * - Retrieve cloned timelines so you can easily nest timelines within other timelines.
- * - Setup a looping animation that can be started or stopped.
- *
- * Passing along the parent instance:
- * When creating a new instance of the transition controller make sure your parent controller contains a reference to
- * the wrapping element because this is what you will use to run your `querySelector` and `querySelectorAll` on.
- *
- * Do I need a transitionOut timeline:
- * When setting up a new transition controller you do not need to define a transition out because if it's not
- * provided it will use the reversed transition out as a fallback transition
- *
- * Example usage:
- *
- * ```javascript
- * const transitionController = new DummyTransitionController<ParentController>(this, {
- *   name: 'DummyController',
- *   debug: false,
- *   useTimelineMax: false,
- * });
- *
- * transitionController.transitionIn();
- * ```
+ * @param T This param defines the type of the parent controller, this is of course framework specific.
  */
 export default abstract class AbstractTransitionController<T> extends EventDispatcher {
   /**
@@ -47,109 +21,123 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   private static counter: number = 0;
 
   /**
+   * The parentController gives you access to the class that constructed the
+   * transition controller. You might need this if you want to access elements
+   * from the parentController. For example in a Vue.js project you might want
+   * to access the **$refs** of you Vue.js component to setup your animations.
+   *
    * @public
-   * @description The parent controller
    */
   public parentController: T;
 
   /**
-   * @type {boolean}
+   * The isHidden property gives you the current transition state of the
+   * component. A component is either hidden or not.
+   *
    * @public
-   * @description Check if the component is currently in the transitionedOut state, this is to avoid calling the
-   * transition out method when it's already transitioned out.
    */
   public isHidden: boolean = true;
 
   /**
-   * @type {boolean}
+   * The loopingAnimationStarted property gives you the current looping
+   * transition state of the component a looping animation is either running or not.
+   *
    * @public
-   * @description Flag that is used to keep track if the looping animations are running
    */
   public loopingAnimationStarted: boolean = false;
 
   /**
-   * @property transitionInTimeline { TimelineLite }
+   * The transitionInTimeline property is the timeline that is used for the in animation
+   * of the component.
+   *
    * @public
-   * @description The timeline that is used for transition in animations.
    */
   public transitionInTimeline: TimelineLite | TimelineMax;
 
   /**
-   * @property transitionOutTimeline { TimelineLite }
+   * The transitionOutTimeline property is the timeline that is used for the out
+   * animation of the component.
+   *
    * @public
-   * @description The timeline that is used for transition out animations. If no animations are added it will
-   * automatically use the reversed version of the transition in timeline for the out animations
    */
   public transitionOutTimeline: TimelineLite | TimelineMax;
 
   /**
-   * @property loopingAnimationTimeline { TimelineLite }
+   * The loopingAnimationTimeline property is the timeline that is used for the looping
+   * animations inside of a component. The timeline configuration is setup to loop until pause is called.
+   *
    * @public
-   * @description The timeline that is used for looping animations.
    */
   public loopingAnimationTimeline: TimelineMax;
 
   /**
+   * The resolve method used for resolving the transition in promise.
+   *
    * @private
-   * @property transitionInResolveMethod
-   * @type { ()=>void }
-   * @description The resolve method used for resolving the transition in promise.
    */
   private transitionInResolveMethod: () => void = null;
 
   /**
+   * The resolve method used for resolving the transition out promise.
+   *
    * @private
-   * @property transitionOutResolveMethod
-   * @type { ()=>void }
-   * @description The resolve method used for resolving the transition out promise.
    */
   private transitionOutResolveMethod: () => void = null;
 
   /**
+   * The reject method used for rejecting the transition in promise.
+   *
    * @private
-   * @property transitionInRejectMethod
-   * @type { ()=>void }
-   * @description The reject method used for rejecting the transition in promise.
    */
   private transitionInRejectMethod: () => void = null;
 
   /**
+   * The resolve method used for rejecting the transition out promise.
+   *
    * @private
-   * @property transitionOutRejectMethod
-   * @type { ()=>void }
-   * @description The resolve method used for rejecting the transition out promise.
    */
   private transitionOutRejectMethod: () => void = null;
 
   /**
+   * The transition promise is used so we can wait for the transition in to be completed.
+   *
    * @private
-   * @property transitionInPromise
-   * @type { Promise<void> }
-   * @description The transition promise is used so we can wait for the transition in to be completed.
    */
   private transitionInPromise: Promise<void> = null;
 
   /**
+   * The transition promise is used so we can wait for the transition out to be completed.
+   *
    * @private
-   * @property _transitionOutPromise
-   * @type { Promise<void> }
-   * @description The transition promise is used so we can wait for the transition out to be completed.
    */
   private _transitionOutPromise: Promise<void> = null;
 
   /**
-   * @private
-   * @property options
-   * @description the options for the controller
-   * @type {{}}
+   * The options that were provided when constructing the class are stored on this property
+   *
    * @private
    */
   private options: IAbstractTransitionControllerOptions = {
     name: `unnamed-component-${AbstractTransitionController.counter++}`,
+    transitionController: 'transitionController',
     debug: false,
     useTimelineMax: false,
+    transitionInId: null,
+    transitionOutId: null,
+    loopId: null,
   };
 
+  /**
+   * The constructor initiates the class, it merges the default options with the
+   * provided options and creates the transition timelines.
+   *
+   * **Note:** Keep in mind that the moment the transition controller is constructed
+   * it also calls the init method that triggers the methods to setup the timelines.
+   * So always cconstruct the transition controller after your component is ready.
+   *
+   * @param {T} parentController
+   * @param {IAbstractTransitionControllerOptions} options
+   */
   constructor(parentController: T, options: IAbstractTransitionControllerOptions = {}) {
     super();
     // Store the parent reference
@@ -163,8 +151,13 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * The transitionIn method restarts the transitionInTimeline and returns
+   * a promise to let you know that is is done with the animation. By default the
+   * transition in will wait for any old transitionOut that is still running. If
+   * you want to force your transition in and kill any running transitionOut animations
+   * you should set the forceTransition flag to true when calling the transitionIn method.
+   *
    * @public
-   * @method transitionIn
    * @param { boolean } forceTransition
    * @returns { Promise<any> }
    */
@@ -257,13 +250,23 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * The transitionOut method will look if the transitionOutTimeline has any
+   * animations added to it. If no animations were added it will reverse the
+   * transitionInTimeline. Otherwise it will restart the transitionOutTimeline.
+   *
    * @public
-   * @method transitionOut
-   * @oaran { boolean } forceTransition
+   * @param { boolean } forceTransition
    * @returns {Promise<any>}
    */
-  public transitionOut(forceTransition: boolean = false): Promise<void> {
+  public transitionOut(
+    forceTransition: boolean = false,
+    id: string = this.options.transitionOutId,
+    reset: boolean = false,
+  ): Promise<void> {
     let oldTransitionPromise = Promise.resolve();
+
+    // The transition out timeline might not be created yet, so initialize it runtime.
+    this.setupTimeline(this.transitionOutTimeline, id, this.setupTransitionOutTimeline, reset);
 
     /**
      * Check if we already have a transition out going on, if so we finish it right away! and trigger a
@@ -340,19 +343,27 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * This method is pretty straightforward will start the loopingAnimationTimeline.
+   *
    * @public
-   * @method startLoopingAnimations
    * @description Method that starts the looping animation
    */
-  public startLoopingAnimation(): void {
+  public startLoopingAnimation(id: string = this.options.loopId, reset: boolean = true): void {
+    this.setupTimeline(
+      this.loopingAnimationTimeline,
+      id,
+      this.setupLoopingAnimationTimeline,
+      reset,
+    );
+
     this.loopingAnimationTimeline.play();
     this.loopingAnimationStarted = true;
   }
 
   /**
+   * This method is pretty straightforward will stop the loopingAnimationTimeline.
+   *
    * @public
-   * @method stopLoopingAnimation
-   * @description Method that stops the looping animation
    */
   public stopLoopingAnimation(): void {
     this.loopingAnimationTimeline.pause();
@@ -360,45 +371,11 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
-   * @protected
-   * @method init
-   * @description This method will be used for setting up the timelines for the component
-   */
-  protected init(): void {
-    this.setupTransitionInTimeline(this.transitionInTimeline);
-    this.setupTransitionOutTimeline(this.transitionOutTimeline);
-    this.setupLoopingAnimationTimeline(this.loopingAnimationTimeline);
-  }
-
-  /**
+   * When nesting transition components you might want to nest the timelines
+   * as well, this makes it easier to time all the component transitions. Keep
+   * in mind that the getTimeline method returns a clone of the original timeline.
+   *
    * @public
-   * @method setupTransitionOutTimeline
-   * @param {TimelineLite | TimelineMax} timeline
-   * @description overwrite this method in the parent class
-   */
-  protected abstract setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax): void;
-
-  /**
-   * @public
-   * @method setupTransitionInTimeline
-   * @param {TimelineLite | TimelineMax} timeline
-   * @description overwrite this method in the parent class
-   * */
-  protected abstract setupTransitionInTimeline(timeline: TimelineLite | TimelineMax): void;
-
-  /**
-   * @public
-   * @method setupLoopingAnimationTimeline
-   * @param {TimelineMax} timeline
-   * @description overwrite this method in the parent class
-   * */
-  protected abstract setupLoopingAnimationTimeline(timeline: TimelineMax): void;
-
-  /**
-   * @public
-   * @method getTimeline
-   * @description When nesting transition components you might want to nest the timelines as well, this makes it
-   * easier to time all the component transitions
    * @param {string | HTMLElement | T} component
    * @param {TransitionDirection} direction
    * @returns { Animation }
@@ -407,8 +384,10 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
   ): Animation {
-    const timeline = this.getTimelineForComponent(component, direction);
-    return cloneTimeline(timeline, direction, this.options.useTimelineMax).restart();
+    const componentInstance = this.getComponent(component);
+    const timelineInstance = this.getTimelineInstance(componentInstance);
+
+    return cloneTimeline(timelineInstance, direction, this.options.useTimelineMax).restart();
   }
 
   /**
@@ -422,25 +401,129 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
   ): number {
-    return this.getTimelineForComponent(component, direction).duration();
+    return this.getTimelineInstance(this.getComponent(component)).duration();
   }
 
   /**
+   * This method will be used for setting up the timelines for the component
+   *
    * @protected
-   * @abstract getTimelineForComponent
-   * @param {string | HTMLElement | T} component
-   * @param {TransitionDirection} direction
-   * @returns {gsap.TimelineLite | gsap.TimelineMax}
    */
-  protected abstract getTimelineForComponent(
-    component: string | HTMLElement | T,
-    direction: TransitionDirection,
-  ): TimelineLite | TimelineMax;
+  protected init(): void {
+    this.setupTimeline(
+      this.transitionInTimeline,
+      this.options.transitionInId,
+      this.setupTransitionInTimeline,
+    );
+  }
 
   /**
+   * This method is called by the init method and set’s up the transition out timeline.
+   *
+   * @protected
+   * @param {TimelineLite | TimelineMax} timeline
+   * @param {T} parent
+   * @param {string} id
+   */
+  protected abstract setupTransitionOutTimeline(
+    timeline: TimelineLite | TimelineMax,
+    parent: T,
+    id: string,
+  ): void;
+
+  /**
+   * This method is called by the init method and set’s up the transition in timeline.
+   *
+   * @protected
+   * @param {TimelineLite | TimelineMax} timeline
+   * @param {T} parentController
+   * @param {string} transitionInId
+   */
+  protected abstract setupTransitionInTimeline(
+    timeline: TimelineLite | TimelineMax,
+    parent: T,
+    id: string,
+  ): void;
+
+  /**
+   * This method is called by the init method and set’s up the transition out timeline.
+   *
+   * @protected
+   * @param {TimelineMax} timeline
+   * @param {T} parent
+   * @param {string} id
+   */
+  protected abstract setupLoopingAnimationTimeline(
+    timeline: TimelineMax,
+    parent: T,
+    id: string,
+  ): void;
+
+  /**
+   * @protected
+   * @method abstract getComponent
+   * @description Method that should be created based on your framework. It retrieves a
+   * component based on a string, HTMLElement or the generic
+   */
+  protected abstract getComponent(component: string | HTMLElement | T): T;
+
+  /**
+   * This method set's up a timeline and triggers the provided setup method. We need this method because sometimes we
+   * want to reinitialize the same timeline but clear it first so we do not get weird timelines.
+   *
    * @private
-   * @method createTransitionTimelines
-   * @description Setup the transition timelines
+   * @param {TimelineLite | TimelineMax} timeline
+   * @param {string} id
+   * @param {(timeline: (TimelineLite | TimelineMax), parent: T, id: string) => void} setupMethod
+   * @param {boolean} reset
+   */
+  private setupTimeline(
+    timeline: TimelineLite | TimelineMax,
+    id: string,
+    setupMethod: (timeline: TimelineLite | TimelineMax, parent: T, id: string) => void,
+    reset: boolean = false,
+  ): void {
+    if (timeline.getChildren().length === 0 || reset) {
+      // Clear the current timeline
+      killAndClearTimeline(timeline);
+      // Call provided setup method provided
+      setupMethod(timeline, this.parentController, id);
+    }
+  }
+
+  /**
+   * Method that finds the correct timeline instance on the provided parent controller.
+   *
+   * @private
+   */
+  private getTimelineInstance(
+    component: T,
+    direction: TransitionDirection = TransitionDirection.IN,
+  ): TimelineLite | TimelineMax {
+    const transitionController = <AbstractTransitionController<T>>component[
+      this.options.transitionController
+    ];
+
+    let timeline;
+
+    if (direction === TransitionDirection.OUT) {
+      transitionController.setupTimeline(
+        transitionController.transitionOutTimeline,
+        transitionController.options.transitionOutId,
+        transitionController.setupTransitionOutTimeline,
+      );
+      timeline = transitionController.transitionOutTimeline;
+    } else {
+      timeline = transitionController.transitionInTimeline;
+    }
+
+    return timeline;
+  }
+
+  /**
+   * This method creates the actual empty GSAP timelines.
+   *
+   * @private
    */
   private createTransitionTimelines(): void {
     this.transitionInTimeline = createTimeline({
@@ -462,8 +545,10 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * Method that is triggered when the transition starts. It dispatches the correct
+   * event that is linked to the type of transition.
+   *
    * @private
-   * @method handleTransitionStart
    */
   private handleTransitionStart(direction: TransitionDirection): void {
     switch (direction) {
@@ -485,8 +570,10 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * Method that is triggered when the transition completes. It dispatches the correct
+   * event that is linked to the type of transition.
+   *
    * @private
-   * @method handleTransitionComplete
    * @param { string } type
    */
   private handleTransitionComplete(direction: TransitionDirection): void {
@@ -517,9 +604,9 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * Method that cleans all the timelines and strips out all the resolve methods.
+   *
    * @private
-   * @method clean
-   * @description Clean all the timelines and the resolve method
    */
   private clean(): void {
     this.parentController = null;
@@ -548,10 +635,10 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
-   * @public
-   * @method destruct
-   * @description Because Vue destructs the VM instance before it removes the DOM node we want to finish the
+   * Because Vue destructs the VM instance before it removes the DOM node we want to finish the
    * transition out before actually cleaning everything
+   *
+   * @public
    */
   public dispose(): void {
     if (this._transitionOutPromise !== null && this.transitionOutResolveMethod !== null) {

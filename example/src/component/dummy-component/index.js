@@ -1,4 +1,5 @@
-import DummyComponentTransitionController from './DummyComponentTransitionController';
+import DummyComponentTransitionController, {TransitionId} from './DummyComponentTransitionController';
+import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
 
 export default {
   name: 'DummyComponent',
@@ -13,8 +14,8 @@ export default {
   mounted() {
     this.transitionController = new DummyComponentTransitionController(this, {
       name: 'DummyComponent',
-      debug: true,
-      useTweenMax: false,
+      transitionInId: TransitionId[TransitionDirection.IN].LEFT_TO_RIGHT,
+      transitionOutId: TransitionId[TransitionDirection.OUT].TO_RIGHT,
     });
   },
 };
