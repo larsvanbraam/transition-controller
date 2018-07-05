@@ -266,7 +266,12 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     let oldTransitionPromise = Promise.resolve();
 
     // The transition out timeline might not be created yet, so initialize it runtime.
-    this.setupTimeline(this.transitionOutTimeline, id, this.setupTransitionOutTimeline, reset);
+    this.setupTimeline(
+      this.transitionOutTimeline,
+      id,
+      this.setupTransitionOutTimeline.bind(this),
+      reset,
+    );
 
     /**
      * Check if we already have a transition out going on, if so we finish it right away! and trigger a
@@ -352,7 +357,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     this.setupTimeline(
       this.loopingAnimationTimeline,
       id,
-      this.setupLoopingAnimationTimeline,
+      this.setupLoopingAnimationTimeline.bind(this),
       reset,
     );
 
@@ -413,7 +418,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     this.setupTimeline(
       this.transitionInTimeline,
       this.options.transitionInId,
-      this.setupTransitionInTimeline,
+      this.setupTransitionInTimeline.bind(this),
     );
   }
 
