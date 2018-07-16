@@ -402,6 +402,48 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * Setup timeline is a wrapper method that calls the correct setup methods and clears any old timelines if necessary
+   *
+   * @public
+   * @param {Timeline} type This is the type of timeline that will be initialized.
+   * @param {boolean} reset This means the timeline will be cleared before initializing
+   * @param {string} id This is the id of the timeline that should be initialized.
+   */
+  public setupTimeline(type: TimelineType, reset: boolean = true, id?: string) {
+    switch (type) {
+      case TimelineType.IN:
+        if (reset) killAndClearTimeline(this.transitionInTimeline);
+        const transitionId = id === void 0 ? this.options.transitionInId : id;
+        this.setupTransitionInTimeline(
+          this.transitionInTimeline,
+          this.parentController,
+          transitionId,
+        );
+        break;
+      case TimelineType.OUT:
+        if (reset) killAndClearTimeline(this.transitionOutTimeline);
+        const transitionOutId = id === void 0 ? this.options.transitionOutId : id;
+        this.setupTransitionOutTimeline(
+          this.transitionOutTimeline,
+          this.parentController,
+          transitionOutId,
+        );
+        break;
+      case TimelineType.LOOPING:
+        if (reset) killAndClearTimeline(this.loopingAnimationTimeline);
+        const loopId = id === void 0 ? this.options.loopId : id;
+        this.setupLoopingAnimationTimeline(
+          this.loopingAnimationTimeline,
+          this.parentController,
+          loopId,
+        );
+        break;
+      default:
+        throw new Error(`Unsupported timeline type: ${type}`);
+    }
+  }
+
+  /**
    * This method will be used for setting up the timelines for the component
    *
    * @protected
@@ -461,48 +503,6 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @returns {T} The instance of the component that is requested
    */
   protected abstract getComponent(component: string | HTMLElement | T): T;
-
-  /**
-   * Setup timeline is a wrapper method that calls the correct setup methods and clears any old timelines if necessary
-   *
-   * @protected
-   * @param {Timeline} type This is the type of timeline that will be initialized.
-   * @param {boolean} reset This means the timeline will be cleared before initializing
-   * @param {string} id This is the id of the timeline that should be initialized.
-   */
-  protected setupTimeline(type: TimelineType, reset: boolean = true, id?: string) {
-    switch (type) {
-      case TimelineType.IN:
-        if (reset) killAndClearTimeline(this.transitionInTimeline);
-        const transitionId = id === void 0 ? this.options.transitionInId : id;
-        this.setupTransitionInTimeline(
-          this.transitionInTimeline,
-          this.parentController,
-          transitionId,
-        );
-        break;
-      case TimelineType.OUT:
-        if (reset) killAndClearTimeline(this.transitionOutTimeline);
-        const transitionOutId = id === void 0 ? this.options.transitionOutId : id;
-        this.setupTransitionOutTimeline(
-          this.transitionOutTimeline,
-          this.parentController,
-          transitionOutId,
-        );
-        break;
-      case TimelineType.LOOPING:
-        if (reset) killAndClearTimeline(this.loopingAnimationTimeline);
-        const loopId = id === void 0 ? this.options.loopId : id;
-        this.setupLoopingAnimationTimeline(
-          this.loopingAnimationTimeline,
-          this.parentController,
-          loopId,
-        );
-        break;
-      default:
-        throw new Error(`Unsupported timeline type: ${type}`);
-    }
-  }
 
   /**
    * Method that finds the correct timeline instance on the provided parent controller.
