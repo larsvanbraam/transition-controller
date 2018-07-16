@@ -1,4 +1,4 @@
-import { TweenLite, TimelineLite, TimelineMax, Tween } from 'gsap';
+import { TweenLite, TimelineMax, Tween } from 'gsap';
 import { ICreateTimelineOptions } from '../interface/ICreateTimelineOptions';
 import TransitionDirection from '../enum/TransitionDirection';
 
@@ -6,13 +6,13 @@ import TransitionDirection from '../enum/TransitionDirection';
  * The create timeline method creates a new TimelineLite or TimelineMax timeline
  *
  * @param {ICreateTimelineOptions} options
- * @returns {TimelineLite | TimelineMax}
+ * @returns {TimelineMax}
  */
-export function createTimeline(options: ICreateTimelineOptions): TimelineLite | TimelineMax {
+export function createTimeline(options: ICreateTimelineOptions): TimelineMax {
   let forward = true;
   let lastTime = 0;
 
-  const timeline = new (options.useTimelineMax ? TimelineMax : TimelineLite)({
+  const timeline = new TimelineMax({
     paused: true,
     onUpdate: () => {
       // GreenSock does not support onReverseStart on a timeline therefore we have this little method
@@ -50,10 +50,10 @@ export function createTimeline(options: ICreateTimelineOptions): TimelineLite | 
  * inline styles. This method accepts a timeline and it will remove all
  * the inline styling and kill the timeline instance.
  *
- * @param {TimelineLite | TimelineMax} timeline
+ * @param {TimelineMax} timeline
  * @returns {void}
  */
-export function killAndClearTimeline(timeline: TimelineLite | TimelineMax): void {
+export function killAndClearTimeline(timeline: TimelineMax): void {
   clearTimeline(timeline);
   timeline.kill();
 }
@@ -62,16 +62,16 @@ export function killAndClearTimeline(timeline: TimelineLite | TimelineMax): void
  * Sometimes you do not want to kill the timeline but only kill the inline
  * styling. This method accepts a timeline and it will remove all the inline styling.
  *
- * @param {TimelineLite | TimelineMax} timeline
+ * @param {TimelineMax} timeline
  * @returns {void}
  */
-export function clearTimeline(timeline: TimelineLite | TimelineMax): void {
+export function clearTimeline(timeline: TimelineMax): void {
   timeline.getChildren().forEach(target => {
     if ((<Tween>target).target) {
       // Note: When resetting a timeline clearing just the css properties does not clear the properties like autoAlpha or scale
       TweenLite.set((<Tween>target).target, { clearProps: 'all' });
     } else {
-      clearTimeline(<TimelineLite | TimelineMax>target);
+      clearTimeline(<TimelineMax>target);
     }
   });
   timeline.clear();
@@ -83,23 +83,19 @@ export function clearTimeline(timeline: TimelineLite | TimelineMax): void {
  *  this is the method you are looking for. It will create a new TimeLineLite or
  *  TimelineMax and re-add all the original animations and event listeners.
  *
- * @param {gsap.TimelineLite | gsap.TimelineMax} source
+ * @param {gsap.gsap.TimelineMax} source
  * @param {TransitionDirection} direction
  * @param {boolean} useTimelineMax
- * @returns {TimelineLite | TimelineMax}
+ * @returns {TimelineMax}
  */
-export function cloneTimeline(
-  source: TimelineLite | TimelineMax,
-  direction: TransitionDirection,
-  useTimelineMax: boolean,
-): TimelineLite | TimelineMax {
+export function cloneTimeline(source: TimelineMax, direction: TransitionDirection): TimelineMax {
   const children = source.getChildren(false);
-  const timeline = new (useTimelineMax ? TimelineMax : TimelineLite)(source.vars);
+  const timeline = new TimelineMax(source.vars);
 
   const parseChild = (child, timeline) => {
     if (child.getChildren) {
       const children = child.getChildren(false);
-      const subTimeline = new (useTimelineMax ? TimelineMax : TimelineLite)(child.vars);
+      const subTimeline = new TimelineMax(child.vars);
       // Parse the child animations
       children.forEach(child => parseChild(child, subTimeline));
       // Add the timeline to the parent timeline

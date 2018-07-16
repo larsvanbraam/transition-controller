@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TransitionDirection | TransitionController</title>
+	<title>TimelineType | TransitionController</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="transitiondirection.html">TransitionDirection</a>
+					<a href="timelinetype.html">TimelineType</a>
 				</li>
 			</ul>
-			<h1>Enumeration TransitionDirection</h1>
+			<h1>Enumeration TimelineType</h1>
 		</div>
 	</div>
 </header>
@@ -67,7 +67,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A transition can go into predefined directions, this enum defines those directions.</p>
+						<p>This enum contains the different timeline types that are available</p>
 					</div>
 				</div>
 			</section>
@@ -78,8 +78,9 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="transitiondirection.html#in" class="tsd-kind-icon">IN</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="transitiondirection.html#out" class="tsd-kind-icon">OUT</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="timelinetype.html#in" class="tsd-kind-icon">IN</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="timelinetype.html#looping" class="tsd-kind-icon">LOOPING</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="timelinetype.html#out" class="tsd-kind-icon">OUT</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,12 +94,27 @@
 					<div class="tsd-signature tsd-kind-icon">IN<span class="tsd-signature-symbol">:</span> </div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/enum/TransitionDirection.ts#L8">enum/TransitionDirection.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/enum/TimelineType.ts#L8">enum/TimelineType.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The IN direction of the transition.</p>
+							<p>This is the value for transition in timelines</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="looping" class="tsd-anchor"></a>
+					<h3>LOOPING</h3>
+					<div class="tsd-signature tsd-kind-icon">LOOPING<span class="tsd-signature-symbol">:</span> </div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/enum/TimelineType.ts#L18">enum/TimelineType.ts:18</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>This is the value for the looping timeline</p>
 						</div>
 					</div>
 				</section>
@@ -108,12 +124,12 @@
 					<div class="tsd-signature tsd-kind-icon">OUT<span class="tsd-signature-symbol">:</span> </div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/enum/TransitionDirection.ts#L12">enum/TransitionDirection.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/enum/TimelineType.ts#L13">enum/TimelineType.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The OUT direction of the transition.</p>
+							<p>This is the value for transition out timelines</p>
 						</div>
 					</div>
 				</section>
@@ -129,24 +145,27 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="timelinetype.html" class="tsd-kind-icon">Timeline<wbr>Type</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-enum">
-						<a href="transitiondirection.html" class="tsd-kind-icon">Transition<wbr>Direction</a>
+						<a href="timelinetype.html" class="tsd-kind-icon">Timeline<wbr>Type</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="transitiondirection.html#in" class="tsd-kind-icon">IN</a>
+								<a href="timelinetype.html#in" class="tsd-kind-icon">IN</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="transitiondirection.html#out" class="tsd-kind-icon">OUT</a>
+								<a href="timelinetype.html#looping" class="tsd-kind-icon">LOOPING</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="timelinetype.html#out" class="tsd-kind-icon">OUT</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-enum">
+						<a href="transitiondirection.html" class="tsd-kind-icon">Transition<wbr>Direction</a>
+					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="../classes/abstracttransitioncontroller.html" class="tsd-kind-icon">Abstract<wbr>Transition<wbr>Controller</a>
 					</li>

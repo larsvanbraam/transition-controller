@@ -1,4 +1,4 @@
-import { TimelineLite, TimelineMax, Elastic } from 'gsap';
+import { TimelineMax, Elastic } from 'gsap';
 import Vue from 'vue';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
@@ -18,7 +18,8 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param {Vue} parent
    * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {}
+  public setupTransitionInTimeline(timeline: TimelineMax, parent: Vue, id: string ): void {
+  }
 
   /**
    * @public
@@ -27,7 +28,8 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param { Vue } parent
    * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {}
+  public setupTransitionOutTimeline(timeline: TimelineMax, parent: Vue, id: string ): void {
+  }
 
   /**
    * @public
@@ -37,7 +39,8 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline: TimelineLite | TimelineMax, parent: Vue,  id: string): void {
+  public setupLoopingAnimationTimeline(timeline: TimelineMax, parent: Vue,  id: string): void {
+
     const { button } = parent.$refs;
 
     switch (id) {

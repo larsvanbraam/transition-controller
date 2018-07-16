@@ -68,6 +68,7 @@
 						<section class="tsd-index-section ">
 							<h3>Enumerations</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum"><a href="enums/timelinetype.html" class="tsd-kind-icon">Timeline<wbr>Type</a></li>
 								<li class="tsd-kind-enum"><a href="enums/transitiondirection.html" class="tsd-kind-icon">Transition<wbr>Direction</a></li>
 							</ul>
 						</section>
@@ -103,13 +104,13 @@
 					<a name="cleartimeline" class="tsd-anchor"></a>
 					<h3>clear<wbr>Timeline</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">clear<wbr>Timeline<span class="tsd-signature-symbol">(</span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Timeline<span class="tsd-signature-symbol">(</span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineMax</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/774bbc8/src/lib/util/TimelineUtils.ts#L68">util/TimelineUtils.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/util/TimelineUtils.ts#L68">util/TimelineUtils.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -121,7 +122,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>timeline: <span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></h5>
+									<h5>timeline: <span class="tsd-signature-type">TimelineMax</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -132,13 +133,13 @@
 					<a name="clonetimeline" class="tsd-anchor"></a>
 					<h3>clone<wbr>Timeline</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">clone<wbr>Timeline<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span>, direction<span class="tsd-signature-symbol">: </span><a href="enums/transitiondirection.html" class="tsd-signature-type">TransitionDirection</a>, useTimelineMax<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></li>
+						<li class="tsd-signature tsd-kind-icon">clone<wbr>Timeline<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineMax</span>, direction<span class="tsd-signature-symbol">: </span><a href="enums/transitiondirection.html" class="tsd-signature-type">TransitionDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineMax</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/774bbc8/src/lib/util/TimelineUtils.ts#L91">util/TimelineUtils.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/util/TimelineUtils.ts#L91">util/TimelineUtils.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -152,19 +153,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>source: <span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></h5>
+									<h5>source: <span class="tsd-signature-type">TimelineMax</span></h5>
 								</li>
 								<li>
 									<h5>direction: <a href="enums/transitiondirection.html" class="tsd-signature-type">TransitionDirection</a></h5>
 								</li>
-								<li>
-									<h5>useTimelineMax: <span class="tsd-signature-type">boolean</span></h5>
-								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TimelineLite</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">TimelineMax</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TimelineMax</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -172,13 +167,13 @@
 					<a name="createtimeline" class="tsd-anchor"></a>
 					<h3>create<wbr>Timeline</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Timeline<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="interfaces/icreatetimelineoptions.html" class="tsd-signature-type">ICreateTimelineOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Timeline<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="interfaces/icreatetimelineoptions.html" class="tsd-signature-type">ICreateTimelineOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineMax</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/774bbc8/src/lib/util/TimelineUtils.ts#L11">util/TimelineUtils.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/util/TimelineUtils.ts#L11">util/TimelineUtils.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -192,10 +187,7 @@
 									<h5>options: <a href="interfaces/icreatetimelineoptions.html" class="tsd-signature-type">ICreateTimelineOptions</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TimelineLite</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">TimelineMax</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TimelineMax</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -203,13 +195,13 @@
 					<a name="killandcleartimeline" class="tsd-anchor"></a>
 					<h3>kill<wbr>And<wbr>Clear<wbr>Timeline</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline<span class="tsd-signature-symbol">(</span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">kill<wbr>And<wbr>Clear<wbr>Timeline<span class="tsd-signature-symbol">(</span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimelineMax</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/774bbc8/src/lib/util/TimelineUtils.ts#L56">util/TimelineUtils.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/8dd7630/src/lib/util/TimelineUtils.ts#L56">util/TimelineUtils.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -222,7 +214,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>timeline: <span class="tsd-signature-type">TimelineLite</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimelineMax</span></h5>
+									<h5>timeline: <span class="tsd-signature-type">TimelineMax</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -241,6 +233,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/timelinetype.html" class="tsd-kind-icon">Timeline<wbr>Type</a>
+					</li>
 					<li class=" tsd-kind-enum">
 						<a href="enums/transitiondirection.html" class="tsd-kind-icon">Transition<wbr>Direction</a>
 					</li>

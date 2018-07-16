@@ -39,12 +39,12 @@ new Vue({
   },
   methods: {
     handleStartClick(type) {
-      // Mark as started
       this.started = true;
       // Clear the events
       this.events = [];
       // Get the transition controller
       const { transitionController } = this.$refs.dummyComponent;
+
       switch (type) {
         case 'in':
           if (!transitionController.isHidden) alert('component is already visible!');

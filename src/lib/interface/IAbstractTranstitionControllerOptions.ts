@@ -10,11 +10,6 @@ export interface IAbstractTransitionControllerOptions {
   debug?: boolean;
 
   /**
-   * When set to true the transition timelines use TimelineMax instead of TimelineLite
-   */
-  useTimelineMax?: boolean;
-
-  /**
    * The active transition in id that is used when creating the transition in timeline.
    */
   transitionInId?: string;
