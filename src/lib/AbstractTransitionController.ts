@@ -410,36 +410,37 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @param {string} id This is the id of the timeline that should be initialized.
    */
   public setupTimeline(type: TimelineType, reset: boolean = true, id?: string) {
+    let timeline;
+    let transitionId;
+    let setupMethod;
+
     switch (type) {
       case TimelineType.IN:
-        if (reset) killAndClearTimeline(this.transitionInTimeline);
-        const transitionId = id === void 0 ? this.options.transitionInId : id;
-        this.setupTransitionInTimeline(
-          this.transitionInTimeline,
-          this.parentController,
-          transitionId,
-        );
+        timeline = this.transitionInTimeline;
+        transitionId = id === void 0 ? this.options.transitionInId : id;
+        setupMethod = this.setupTransitionInTimeline;
         break;
       case TimelineType.OUT:
-        if (reset) killAndClearTimeline(this.transitionOutTimeline);
-        const transitionOutId = id === void 0 ? this.options.transitionOutId : id;
-        this.setupTransitionOutTimeline(
-          this.transitionOutTimeline,
-          this.parentController,
-          transitionOutId,
-        );
+        timeline = this.transitionOutTimeline;
+        transitionId = id === void 0 ? this.options.transitionOutId : id;
+        setupMethod = this.setupTransitionOutTimeline;
         break;
       case TimelineType.LOOPING:
-        if (reset) killAndClearTimeline(this.loopingAnimationTimeline);
-        const loopId = id === void 0 ? this.options.loopId : id;
-        this.setupLoopingAnimationTimeline(
-          this.loopingAnimationTimeline,
-          this.parentController,
-          loopId,
-        );
+        timeline = this.loopingAnimationTimeline;
+        transitionId = id === void 0 ? this.options.loopId : id;
+        setupMethod = this.setupLoopingAnimationTimeline;
         break;
       default:
         throw new Error(`Unsupported timeline type: ${type}`);
+    }
+
+    if (reset || id !== transitionId) killAndClearTimeline(timeline);
+
+    if (timeline.getChildren() <= 0) {
+      setupMethod(timeline, this.parentController, transitionId);
+    } else if (this.options.debug) {
+      console.warn(`[TransitionController][timeline: ${timeline} id: ${transitionId}] Skipping setup method because 
+      the timeline already has children!`);
     }
   }
 
