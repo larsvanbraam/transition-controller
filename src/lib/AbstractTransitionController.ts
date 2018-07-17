@@ -383,7 +383,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     direction: TransitionDirection = TransitionDirection.IN,
   ): Animation {
     const componentInstance = this.getComponent(component);
-    const timelineInstance = this.getTimelineInstance(componentInstance);
+    const timelineInstance = this.getTimelineInstance(componentInstance, direction);
 
     return cloneTimeline(timelineInstance, direction).restart();
   }
@@ -398,7 +398,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
   ): number {
-    return this.getTimelineInstance(this.getComponent(component)).duration();
+    return this.getTimelineInstance(this.getComponent(component), direction).duration();
   }
 
   /**
