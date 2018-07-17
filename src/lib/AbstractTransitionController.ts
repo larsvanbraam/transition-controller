@@ -418,17 +418,17 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       case TimelineType.IN:
         timeline = this.transitionInTimeline;
         transitionId = id === void 0 ? this.options.transitionInId : id;
-        setupMethod = this.setupTransitionInTimeline;
+        setupMethod = this.setupTransitionInTimeline.bind(this);
         break;
       case TimelineType.OUT:
         timeline = this.transitionOutTimeline;
         transitionId = id === void 0 ? this.options.transitionOutId : id;
-        setupMethod = this.setupTransitionOutTimeline;
+        setupMethod = this.setupTransitionOutTimeline.bind(this);
         break;
       case TimelineType.LOOPING:
         timeline = this.loopingAnimationTimeline;
         transitionId = id === void 0 ? this.options.loopId : id;
-        setupMethod = this.setupLoopingAnimationTimeline;
+        setupMethod = this.setupLoopingAnimationTimeline.bind(this);
         break;
       default:
         throw new Error(`Unsupported timeline type: ${type}`);
