@@ -396,13 +396,17 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @public
    * @param {string | HTMLElement | T} component The selector for the component that you want to get the timeline for
    * @param {TransitionDirection} direction The direction that you want to check for
+   * @param {boolean} reset This flag determines if we reset the existing timeline or re-create it from scratch
+   * @param {boolean} id This is the id of the timeline that we are requesting
    * @returns {number} The duration of the timeline
    */
   public getTimelineDurationForComponent(
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
+    reset: boolean = false,
+    id?: string,
   ): number {
-    return this.getTimelineInstance(this.getComponent(component)).duration();
+    return this.getTimelineInstance(this.getComponent(component), direction, reset, id).duration();
   }
 
   /**
