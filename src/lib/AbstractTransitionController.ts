@@ -376,14 +376,18 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @public
    * @param {string | HTMLElement | T} component The selector for the component that you want the timeline for
    * @param {TransitionDirection} direction The direction of the timeline that you want
+   * @param {boolean} reset This flag determines if we reset the existing timeline or re-create it from scratch
+   * @param {boolean} id This is the id of the timeline that we are requesting
    * @returns { Animation } The timeline that is retrieved
    */
   public getTimeline(
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
+    reset: boolean = false,
+    id?: string,
   ): Animation {
     const componentInstance = this.getComponent(component);
-    const timelineInstance = this.getTimelineInstance(componentInstance, direction);
+    const timelineInstance = this.getTimelineInstance(componentInstance, direction, reset, id);
 
     return cloneTimeline(timelineInstance, direction).restart();
   }
@@ -398,7 +402,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     component: string | HTMLElement | T,
     direction: TransitionDirection = TransitionDirection.IN,
   ): number {
-    return this.getTimelineInstance(this.getComponent(component), direction).duration();
+    return this.getTimelineInstance(this.getComponent(component)).duration();
   }
 
   /**
@@ -511,11 +515,15 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @private
    * @param {T} component This is the component instance that will will get the timeline for
    * @param {TransitionDirection} direction This is the direction of the timeline.
+   * @param {boolean} reset This flag determines if we reset the existing timeline or re-create it from scratch
+   * @param {boolean} id This is the id of the timeline that we are requesting
    * @returns {TimelineMax} This is the timeline instance that you requested
    */
   private getTimelineInstance(
     component: T,
     direction: TransitionDirection = TransitionDirection.IN,
+    reset: boolean = false,
+    id?: string,
   ): TimelineMax {
     const transitionController = <AbstractTransitionController<T>>component[
       this.options.transitionController
@@ -524,7 +532,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     let timeline;
 
     if (direction === TransitionDirection.OUT) {
-      transitionController.setupTimeline(TimelineType.OUT);
+      transitionController.setupTimeline(TimelineType.OUT, reset, id);
       timeline = transitionController.transitionOutTimeline;
     } else {
       timeline = transitionController.transitionInTimeline;
