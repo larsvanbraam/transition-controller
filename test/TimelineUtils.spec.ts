@@ -5,11 +5,6 @@ import { TimelineMax } from 'gsap';
 import TransitionDirection from '../src/lib/enum/TransitionDirection';
 
 describe('TimelineUtils.spec', () => {
-  // killAndClearTimeline
-  // clearTimeline
-  // cloneTimeline
-
-
   let onStart = false;
   let onComplete = false;
   let onReverseStart = false;

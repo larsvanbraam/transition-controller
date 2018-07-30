@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import 'chai/register-should';
 import sinonChai from 'sinon-chai';
 import { Animation, TimelineMax } from 'gsap';
-import { render, getComponent, getApp } from './util/index.spec';
+import { render, getComponent, getApp } from './util/index';
 import { TransitionId } from '../test/util/component/ChildComponentA/ChildComponentATransitionController';
 import TimelineType from '../src/lib/enum/TimelineType';
 import TransitionDirection from '../src/lib/enum/TransitionDirection';
