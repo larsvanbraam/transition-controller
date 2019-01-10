@@ -212,18 +212,15 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
               console.info(`${this.options.name}: This block has no transition in timeline`);
             }
 
-            // Dispatch the events even though there is no time line
-            if (!this.isDisposed()) {
-              this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_IN_START));
-            }
+            // Manually trigger handleTransitionStart because the timeline is empty.
+            this.handleTransitionStart(TransitionDirection.IN);
 
-            this.isHidden = false;
-
-            if (!this.isDisposed()) {
-              this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_IN_COMPLETE));
-            }
-
-            resolve();
+            setTimeout(() => {
+              // Manually trigger handleTransitionComplete because the timeline is empty
+              this.handleTransitionComplete(TransitionDirection.IN);
+              // Add a next tick between the events otherwise the events happen simultaneously.
+              resolve();
+            }, 0);
           } else {
             // Remove the paused state from transitionIn Timeline
             this.transitionInTimeline.paused(false);
