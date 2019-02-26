@@ -1,0 +1,25 @@
+site_name: transition-controller
+site_url: https://transition-controller.larsvanbraam.nl/general/
+site_description: An abstract transition controller that can be used for transitioning elements.
+site_author: Lars van Braam
+docs_dir: docs
+site_dir: dist
+repo_url: https://github.com/larsvanbraam/transition-controller/
+edit_uri: blob/master/docs/general
+theme: readthedocs
+nav:
+    - Introduction: index.md
+    - Examples:
+        - Creating a transition controller for your project: examples/creating-a-project-transition-controller.md
+        - Creating a transition controller for your component: examples/creating-a-component-transition-controller.md
+        - Creating a transition in timeline: examples/creating-a-transition-in-timeline.md
+        - Creating a transition out timeline: examples/creating-a-transition-out-timeline.md
+        - Creating a looping timeline: examples/creating-a-looping-timeline.md
+        - Getting a timeline of a child component: examples/getting-a-timeline-of-a-child-component.md
+        - Nesting a timeline: examples/nesting-a-timeline.md
+        - Triggering the transition in: examples/triggering-the-transition-in.md
+        - Triggering the transition out: examples/triggering-the-transition-out.md
+        - Triggering the looping animation: examples/triggering-the-looping-animation.md
+        - Listening to events: examples/listening-to-events.md
+        - Re-initialising timelines: examples/re-initialising-timelines.md
+    - FAQ: faq.md
