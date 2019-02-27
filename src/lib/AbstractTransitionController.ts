@@ -443,6 +443,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
 
     if (timeline.getChildren() <= 0) {
       setupMethod(timeline, this.parentController, transitionId);
+      timeline.pause();
     } else if (this.options.debug) {
       console.warn(`[TransitionController][timeline: ${timeline} id: ${transitionId}] Skipping setup method because 
       the timeline already has children!`);
@@ -559,7 +560,6 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       onComplete: () => this.handleTransitionComplete(TransitionDirection.OUT),
     });
     this.loopingAnimationTimeline = new TimelineMax({
-      paused: true,
       repeat: -1,
     });
   }

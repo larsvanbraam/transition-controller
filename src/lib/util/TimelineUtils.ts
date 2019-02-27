@@ -13,7 +13,6 @@ export function createTimeline(options: ICreateTimelineOptions): TimelineMax {
   let lastTime = 0;
 
   const timeline = new TimelineMax({
-    paused: true,
     onUpdate: () => {
       // GreenSock does not support onReverseStart on a timeline therefore we have this little method
       // chat checks for the direction and if it's changed we handle it as if it's a reverse start
