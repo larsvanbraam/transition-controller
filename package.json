@@ -1,6 +1,6 @@
 {
   "name": "transition-controller",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "description": "An abstract transition controller that can be used for transitioning elements",
   "main": "./index.js",
   "types": "./index.d.ts",
