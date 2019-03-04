@@ -633,17 +633,17 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     this.isHidden = null;
 
     if (this.transitionOutTimeline !== null) {
-      killAndClearTimeline(this.transitionOutTimeline);
+      this.transitionOutTimeline.kill();
       this.transitionOutTimeline = null;
     }
 
     if (this.transitionInTimeline !== null) {
-      killAndClearTimeline(this.transitionInTimeline);
+      this.transitionInTimeline.kill();
       this.transitionInTimeline = null;
     }
 
     if (this.loopingAnimationTimeline) {
-      killAndClearTimeline(this.loopingAnimationTimeline);
+      this.loopingAnimationTimeline.kill();
       this.loopingAnimationTimeline = null;
     }
 
