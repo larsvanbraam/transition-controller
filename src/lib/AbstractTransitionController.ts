@@ -451,6 +451,30 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
   }
 
   /**
+   * @public
+   * @method resetTimeline
+   */
+  public resetTimeline(type: TimelineType, children: Array<string | HTMLElement | T> = []): void {
+    // Reset the children first so we can easily re-init the entire timeline.
+    children.forEach(child => {
+      const component = this.getComponent(child);
+      const transitionController = <AbstractTransitionController<T>>component[
+        this.options.transitionController
+      ];
+
+      // Check if the transition controller actually exists
+      if (!transitionController)
+        throw new Error('The TransitionController instance was not found on the component');
+
+      // Reset all the child components
+      transitionController.resetTimeline(type);
+    });
+
+    // Re-call the setup method but with the reset flag set to true so it fully re-initialises.
+    this.setupTimeline(type, true);
+  }
+
+  /**
    * This method will be used for setting up the timelines for the component
    *
    * @protected
