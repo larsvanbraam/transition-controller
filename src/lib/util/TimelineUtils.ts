@@ -1,4 +1,4 @@
-import { TweenLite, TimelineMax, Tween } from 'gsap';
+import { TweenMax, TimelineMax, Tween } from 'gsap';
 import { ICreateTimelineOptions } from '../interface/ICreateTimelineOptions';
 import TransitionDirection from '../enum/TransitionDirection';
 import isFunction from 'lodash/isFunction';
@@ -66,10 +66,11 @@ export function killAndClearTimeline(timeline: TimelineMax): void {
  * @returns {void}
  */
 export function clearTimeline(timeline: TimelineMax): void {
+  // debugger;
   timeline.getChildren().forEach(target => {
     if ((<Tween>target).target) {
       // Note: When resetting a timeline clearing just the css properties does not clear the properties like autoAlpha or scale
-      TweenLite.set((<Tween>target).target, { clearProps: 'all' });
+      TweenMax.set((<Tween>target).target, { clearProps: 'all' });
     } else {
       clearTimeline(<TimelineMax>target);
     }
