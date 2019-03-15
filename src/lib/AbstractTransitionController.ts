@@ -2,9 +2,22 @@ import { TimelineMax, Animation } from 'gsap';
 import EventDispatcher from 'seng-event';
 import TransitionEvent from './event/TransitionEvent';
 import { IAbstractTransitionControllerOptions } from './interface/IAbstractTranstitionControllerOptions';
-import { cloneTimeline, createTimeline, killAndClearTimeline } from './util/TimelineUtils';
+import { clearTimeline, cloneTimeline, createTimeline } from './util/TimelineUtils';
 import TransitionDirection from './enum/TransitionDirection';
 import TimelineType from './enum/TimelineType';
+
+/**
+ * New defined way of selecting child components
+ */
+type ComponentSelector<T> = string | HTMLElement | T;
+
+/**
+ * Helper interface for selecting children
+ */
+interface ChildComponentSelector<T> {
+  component: ComponentSelector<T>;
+  children: Array<ComponentSelector<T> | ChildComponentSelector<T>>;
+}
 
 /**
  * ### AbstractTransitionController
@@ -349,7 +362,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @param {string} id This is the id of the timeline that you want to start
    * @param {boolean} reset This means that the timeline will be re-initialized.
    */
-  public startLoopingAnimation(id: string = this.options.loopId, reset: boolean = true): void {
+  public startLoopingAnimation(id: string = this.options.loopId, reset: boolean = false): void {
     this.setupTimeline(TimelineType.LOOPING, reset, id);
     this.loopingAnimationTimeline.play();
     this.loopingAnimationStarted = true;
@@ -378,7 +391,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @returns { Animation } The timeline that is retrieved
    */
   public getTimeline(
-    component: string | HTMLElement | T,
+    component: ComponentSelector<T>,
     direction: TransitionDirection = TransitionDirection.IN,
     reset: boolean = false,
     id?: string,
@@ -398,7 +411,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @returns {number} The duration of the timeline
    */
   public getTimelineDurationForComponent(
-    component: string | HTMLElement | T,
+    component: ComponentSelector<T>,
     direction: TransitionDirection = TransitionDirection.IN,
     reset: boolean = false,
     id?: string,
@@ -439,7 +452,12 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
         throw new Error(`Unsupported timeline type: ${type}`);
     }
 
-    if (reset || id !== transitionId) killAndClearTimeline(timeline);
+    if (reset || id !== transitionId) {
+      // We need to set it to playing because otherwise the intial states will not be applied when resetting
+      timeline.paused(false);
+
+      clearTimeline(timeline);
+    }
 
     if (timeline.getChildren() <= 0) {
       setupMethod(timeline, this.parentController, transitionId);
@@ -449,25 +467,30 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       the timeline already has children!`);
     }
   }
-
   /**
    * @public
    * @method resetTimeline
    */
-  public resetTimeline(type: TimelineType, children: Array<string | HTMLElement | T> = []): void {
+  public resetTimeline(
+    type: TimelineType,
+    children: Array<ComponentSelector<T> | ChildComponentSelector<T>> = [],
+  ): void {
     // Reset the children first so we can easily re-init the entire timeline.
     children.forEach(child => {
-      const component = this.getComponent(child);
-      const transitionController = <AbstractTransitionController<T>>component[
+      // Check if the child has any more children
+      const { children, component } = child as ChildComponentSelector<T>;
+      // Retrieve the component instance
+      const componentInstance = this.getComponent(component || (child as ComponentSelector<T>));
+      // Get the transition controller so we can reset the timeline.
+      const transitionController = <AbstractTransitionController<T>>componentInstance[
         this.options.transitionController
       ];
 
-      // Check if the transition controller actually exists
       if (!transitionController)
-        throw new Error('The TransitionController instance was not found on the component');
+        throw new Error('This child component does not have a transition controller');
 
-      // Reset all the child components
-      transitionController.resetTimeline(type);
+      // Re-call the reset method for all the children.
+      transitionController.resetTimeline(type, children || []);
     });
 
     // Re-call the setup method but with the reset flag set to true so it fully re-initialises.
@@ -480,7 +503,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @protected
    */
   protected init(): void {
-    this.setupTimeline(TimelineType.IN, true, this.options.transitionInId);
+    this.setupTimeline(TimelineType.IN, false, this.options.transitionInId);
   }
 
   /**
@@ -533,7 +556,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @param {string | HTMLElement | T} component The reference to the component
    * @returns {T} The instance of the component that is requested
    */
-  protected abstract getComponent(component: string | HTMLElement | T): T;
+  protected abstract getComponent(component: ComponentSelector<T>): T;
 
   /**
    * Method that finds the correct timeline instance on the provided parent controller.
