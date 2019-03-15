@@ -1,7 +1,9 @@
 /* global hljs */
 import Vue from 'vue/dist/vue.esm';
 import TransitionEvent from '../../src/lib/event/TransitionEvent';
+import TimelineType from '../../src/lib/enum/TimelineType';
 import DummyComponent from './component/dummy-component';
+import NestedDummyComponent from './component/random-dummy-component';
 import LoopComponent from './component/loop-component';
 
 /* eslint-disable no-new */
@@ -13,6 +15,7 @@ new Vue({
     activeTab: 0,
   },
   components: {
+    NestedDummyComponent,
     DummyComponent,
     LoopComponent,
   },
@@ -38,12 +41,12 @@ new Vue({
     });
   },
   methods: {
-    handleStartClick(type) {
+    handleStartClick(type, component) {
       this.started = true;
       // Clear the events
       this.events = [];
       // Get the transition controller
-      const { transitionController } = this.$refs.dummyComponent;
+      const { transitionController } = this.$refs[component];
 
       switch (type) {
         case 'in':
@@ -68,6 +71,23 @@ new Vue({
             });
           break;
       }
+    },
+    handleReset(type, component) {
+      // Get the transition controller
+      const { transitionController } = this.$refs[component];
+
+      switch (type) {
+        case 'in':
+          transitionController.resetTimeline(TimelineType.IN, ['dummyComponent']);
+          break;
+        case 'out':
+          transitionController.resetTimeline(TimelineType.OUT, ['dummyComponent']);
+          break;
+        default:
+        // No default
+      }
+
+      //alert('Timeline has been reinitialized');
     },
     handleEvent(label, event) {
       this.events.push(

@@ -106,6 +106,16 @@
               <loop-component ref="loopComponent"/>
             </div>
           </section>
+          <section>
+            <h4 id="example-3">Reset Timeline Example</h4>
+            <p>You can reset the timelines of a component and provide configuration for child components that you also want to reset.
+              In the current example the x position is random every time you press reset transition in timeline.</p>
+            <div class="bs-component">
+              <nested-dummy-component ref="nestedDummyComponent"/>
+            </div>
+            <button :disabled="started" @click="handleStartClick('queue', 'nestedDummyComponent')" :class="['btn', 'btn-success']">Transition In + Out</button>
+            <button :disabled="started" @click="handleReset('in', 'nestedDummyComponent')" :class="['btn', 'btn-warning']">Reset transition in timeline</button>
+          </section>
         </div>
         <div class="col-lg-4">
           <section>
