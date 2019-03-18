@@ -1,5 +1,6 @@
 import ChildComponentA from './component/ChildComponentA/ChildComponentA';
 import ChildComponentB from './component/ChildComponentB/ChildComponentB';
+import ChildComponentC from './component/ChildComponentC/ChildComponentC';
 import App from './App';
 import { registerComponent } from 'muban-core';
 import initComponents from 'muban-core/lib/utils/initComponents';
@@ -13,6 +14,7 @@ export const getDocument = () => {
           <section data-component="child-component-a" data-scroll-component class="child-component-a">
 
             <button data-component="child-component-b"></button>
+            <button data-component="child-component-c"></button>
 
             <div class="js-loop-animation"></div>
 
@@ -23,8 +25,9 @@ export const getDocument = () => {
 };
 
 const componentList = [
- ChildComponentB,
  ChildComponentA,
+ ChildComponentB,
+ ChildComponentC,
  App,
 ];
 
