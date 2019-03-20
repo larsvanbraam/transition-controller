@@ -23,27 +23,43 @@ describe('#AbstractTransitionController.spec', () => {
     componentC = getComponent('child-component-c');
   });
 
-  describe('transitionOut', () => {
-    it('should transition out the component', () => {
-      return componentA.transitionController
-        .transitionIn(true)
-        .then(() => componentA.transitionController.transitionOut(true))
-        .then(() => expect(componentA.transitionController.isHidden).to.be.true);
+  describe('Properties', () => {
+    describe('parentController', () => {
+      it('should be the parent component', () => {
+        expect(componentA.transitionController.parentController).to.deep.equal(componentA);
+      });
     });
 
-    it('should transition out the component, but it is already hidden', () => {
-      return componentA.transitionController.transitionOut()
-        .then(() => expect(componentA.transitionController.isHidden).to.be.true);
+    describe('isHidden', () => {
+      it('should be a boolean', () => {
+        expect(componentA.transitionController.isHidden).to.be.a('boolean');
+      });
     });
 
-    it('should force the transition out, with a custom out timeline', done => {
-      componentA.transitionController.transitionIn();
-      setTimeout(() => {
-        componentA.transitionController
-          .transitionOut(true)
-          .then(() => expect(componentA.transitionController.isHidden).to.be.true)
-          .then(() => done());
-      }, 100);
+    describe('loopingAnimationStarted', () => {
+      it('should be a boolean', () => {
+        expect(componentA.transitionController.loopingAnimationStarted).to.be.a('boolean');
+      });
+    });
+
+    describe('transitionInTimeline', () => {
+      it('should be an instance of TimelineMax', () => {
+        expect(componentA.transitionController.transitionInTimeline).to.be.instanceof(TimelineMax);
+      });
+    });
+
+    describe('transitionOutTimeline', () => {
+      it('should be an instance of TimelineMax', () => {
+        expect(componentA.transitionController.transitionOutTimeline).to.be.instanceof(TimelineMax);
+      });
+    });
+
+    describe('loopingAnimationTimeline', () => {
+      it('should be an instance of TimelineMax', () => {
+        expect(componentA.transitionController.loopingAnimationTimeline).to.be.instanceof(
+          TimelineMax,
+        );
+      });
     });
   });
 
@@ -90,10 +106,73 @@ describe('#AbstractTransitionController.spec', () => {
       });
     });
 
+    it('should force the transition in wile a current transition in is already running.', done => {
+      componentA.transitionController.transitionIn();
+      setTimeout(() => {
+        componentA.transitionController
+          .transitionIn(true)
+          .then(() => expect(componentA.transitionController.isHidden).to.be.false)
+          .then(() => done());
+      }, 100);
+    });
+
     it('should transition in the component but with no timeline set', () => {
       return componentC.transitionController
         .transitionIn()
         .then(() => expect(componentC.transitionController.isHidden).to.be.false);
+    });
+
+    it('should transition in the component, but it is already visible', () => {
+      return componentA.transitionController
+        .transitionIn()
+        .then(() => componentA.transitionController.transitionIn())
+        .then(() => expect(componentA.transitionController.isHidden).to.be.false);
+    });
+  });
+
+  describe('transitionOut', () => {
+    it('should transition out the component', () => {
+      return componentC.transitionController
+        .transitionIn()
+        .then(() => componentC.transitionController.transitionOut())
+        .then(() => expect(componentA.transitionController.isHidden).to.be.true);
+    });
+
+    it('should transition out the component, but it is already hidden', () => {
+      return componentA.transitionController
+        .transitionOut()
+        .then(() => expect(componentA.transitionController.isHidden).to.be.true);
+    });
+
+    it('should not force the transition out, with a custom out timeline', done => {
+      componentA.transitionController.transitionIn();
+      setTimeout(() => {
+        componentA.transitionController
+          .transitionOut()
+          .then(() => expect(componentA.transitionController.isHidden).to.be.true)
+          .then(() => done());
+      }, 100);
+    });
+
+    it('should force the transition out, with a custom out timeline', done => {
+      componentA.transitionController.transitionIn();
+      setTimeout(() => {
+        componentA.transitionController
+          .transitionOut(true)
+          .then(() => expect(componentA.transitionController.isHidden).to.be.true)
+          .then(() => done());
+      }, 100);
+    });
+
+    it('should force the transition out wile a current transition out is already running.', done => {
+      componentA.transitionController.transitionIn().then(() => {
+        componentA.transitionController.transitionOut().catch(() => done());
+        setTimeout(() => {
+          componentA.transitionController
+            .transitionOut(true)
+            .then(() => expect(componentA.transitionController.isHidden).to.be.true)
+        }, 100);
+      })
     });
   });
 
@@ -274,51 +353,13 @@ describe('#AbstractTransitionController.spec', () => {
     });
   });
 
-  describe('parentController', () => {
-    it('should be the parent component', () => {
-      expect(componentA.transitionController.parentController).to.deep.equal(componentA);
-    });
-  });
-
-  describe('isHidden', () => {
-    it('should be a boolean', () => {
-      expect(componentA.transitionController.isHidden).to.be.a('boolean');
-    });
-  });
-
-  describe('loopingAnimationStarted', () => {
-    it('should be a boolean', () => {
-      expect(componentA.transitionController.loopingAnimationStarted).to.be.a('boolean');
-    });
-  });
-
-  describe('transitionInTimeline', () => {
-    it('should be an instance of TimelineMax', () => {
-      expect(componentA.transitionController.transitionInTimeline).to.be.instanceof(TimelineMax);
-    });
-  });
-
-  describe('transitionOutTimeline', () => {
-    it('should be an instance of TimelineMax', () => {
-      expect(componentA.transitionController.transitionOutTimeline).to.be.instanceof(TimelineMax);
-    });
-  });
-
-  describe('loopingAnimationTimeline', () => {
-    it('should be an instance of TimelineMax', () => {
-      expect(componentA.transitionController.loopingAnimationTimeline).to.be.instanceof(
-        TimelineMax,
-      );
-    });
-  });
-
   describe('clean', () => {
     it('should clean the component', () => {
       expect(componentA.transitionController.clean()).to.be.undefined;
     });
   });
 
-  describe('Dispose', () => {
+  describe('dispose', () => {
     it('should dispose the component', () => {
       expect(componentA.transitionController.dispose()).to.be.undefined;
     });
