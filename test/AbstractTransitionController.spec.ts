@@ -31,6 +31,11 @@ describe('#AbstractTransitionController.spec', () => {
         .then(() => expect(componentA.transitionController.isHidden).to.be.true);
     });
 
+    it('should transition out the component, but it is already hidden', () => {
+      return componentA.transitionController.transitionOut()
+        .then(() => expect(componentA.transitionController.isHidden).to.be.true);
+    });
+
     it('should force the transition out, with a custom out timeline', done => {
       componentA.transitionController.transitionIn();
       setTimeout(() => {
@@ -49,7 +54,7 @@ describe('#AbstractTransitionController.spec', () => {
         .then(() => expect(componentA.transitionController.isHidden).to.be.false);
     });
 
-    it('should force the transition in, with a custom out timeline', done => {
+    it('should force the transition in wile the transition out is still running.', done => {
       componentA.transitionController.transitionIn().then(() => {
         componentA.transitionController.transitionOut();
         return setTimeout(() => {
@@ -61,7 +66,7 @@ describe('#AbstractTransitionController.spec', () => {
       });
     });
 
-    it('should force the transition in, with a custom out timeline', done => {
+    it('should not force the transition in wile the transition out is still running.', done => {
       componentA.transitionController.transitionIn().then(() => {
         componentA.transitionController.transitionOut();
         return setTimeout(() => {
@@ -73,7 +78,7 @@ describe('#AbstractTransitionController.spec', () => {
       });
     });
 
-    it('should force the transition in, without a custom out timeline', done => {
+    it('should force the transition in wile the custom transition out is still running', done => {
       componentB.transitionController.transitionIn().then(() => {
         componentB.transitionController.transitionOut();
         return setTimeout(() => {
@@ -147,6 +152,10 @@ describe('#AbstractTransitionController.spec', () => {
     it('should setup out timeline', () => {
       expect(componentA.transitionController.setupTimeline(TimelineType.OUT, false)).to.be
         .undefined;
+    });
+
+    it('should try to setup a unknown timeline and throw an error', () => {
+      expect(() => componentA.transitionController.setupTimeline()).to.throw(Error);
     });
   });
 
@@ -312,6 +321,18 @@ describe('#AbstractTransitionController.spec', () => {
   describe('Dispose', () => {
     it('should dispose the component', () => {
       expect(componentA.transitionController.dispose()).to.be.undefined;
+    });
+
+    it('should dispose the component while the transition out is still running', done => {
+      componentA.transitionController.transitionIn().then(() => {
+        componentA.transitionController.transitionOut().then(() => {
+          expect(componentA.transitionController.dispose()).to.be.undefined;
+          done();
+        });
+        setTimeout(() => {
+          componentA.transitionController.dispose();
+        }, 100);
+      });
     });
   });
 });

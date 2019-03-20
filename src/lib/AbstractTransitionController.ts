@@ -177,7 +177,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
         }
         this.handleTransitionComplete(TransitionDirection.OUT);
 
-        /* istanbul ignore if  */
+        /* istanbul ignore if */
         if (this.options.debug) {
           console.info(`${this.options.name} Interrupted the transition out!`);
         }
@@ -189,7 +189,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     return oldTransitionPromise.then(() => {
       // Component is already transitioning out
       if (this.transitionInPromise !== null && forceTransition) {
-        /* istanbul ignore if  */
+        /* istanbul ignore if */
         if (this.options.debug) {
           console.warn(`[TransitionController][${
             this.options.name
@@ -239,7 +239,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       }
 
       if (this.transitionInPromise === null) {
-        /* istanbul ignore if  */
+        /* istanbul ignore if */
         if (this.options.debug) {
           console.warn(`[TransitionController][${
             this.options.name
@@ -285,6 +285,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
         this.transitionInTimeline.kill();
         this.handleTransitionComplete(TransitionDirection.IN);
 
+        /* istanbul ignore if */
         if (this.options.debug) {
           console.warn(`${this.options.name} Interrupted the transition in!`);
         }
@@ -296,6 +297,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     return oldTransitionPromise.then(() => {
       // Component is already transitioning out
       if (this._transitionOutPromise !== null && forceTransition) {
+        /* istanbul ignore if */
         if (this.options.debug) {
           console.warn(`[TransitionController][${
             this.options.name
@@ -335,6 +337,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       }
 
       if (this._transitionOutPromise === null) {
+        /* istanbul ignore if */
         if (this.options.debug) {
           console.warn(`[TransitionController][${
             this.options.name
@@ -448,6 +451,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
 
     if (reset || id !== transitionId) killAndClearTimeline(timeline);
 
+    /* istanbul ignore else */
     if (timeline.getChildren() <= 0) {
       setupMethod(timeline, this.parentController, transitionId);
     } else if (this.options.debug) {
