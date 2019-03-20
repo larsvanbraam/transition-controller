@@ -1,6 +1,7 @@
 import { TweenLite, TimelineMax, Tween } from 'gsap';
 import { ICreateTimelineOptions } from '../interface/ICreateTimelineOptions';
 import TransitionDirection from '../enum/TransitionDirection';
+import isFunction from 'lodash/isFunction';
 
 /**
  * The create timeline method creates a new TimelineLite or TimelineMax timeline
@@ -13,14 +14,13 @@ export function createTimeline(options: ICreateTimelineOptions): TimelineMax {
   let lastTime = 0;
 
   const timeline = new TimelineMax({
-    paused: true,
     onUpdate: () => {
       // GreenSock does not support onReverseStart on a timeline therefore we have this little method
       // chat checks for the direction and if it's changed we handle it as if it's a reverse start
       const newTime = timeline.time();
       if ((forward && newTime < lastTime) || (!forward && newTime > lastTime)) {
         forward = !forward;
-        if (!forward && options.onReverseStart !== null) {
+        if (!forward && isFunction(options.onReverseStart)) {
           options.onReverseStart();
         }
       }
@@ -30,15 +30,15 @@ export function createTimeline(options: ICreateTimelineOptions): TimelineMax {
       // Reset the last time when we restart the timeline
       lastTime = 0;
       // Trigger the callback if needed
-      if (options.onStart) options.onStart();
+      if (isFunction(options.onStart)) options.onStart();
     },
-    onComplete: options.onComplete !== null ? options.onComplete : null,
+    onComplete: isFunction(options.onComplete) ? options.onComplete : null,
     onReverseComplete: () => {
       // When the transition out is completed we have to reset the last
       // time otherwise the transition will no longer work.
       lastTime = 0;
       // Trigger the callback if needed
-      if (options.onReverseComplete !== null) options.onReverseComplete();
+      if (isFunction(options.onReverseComplete)) options.onReverseComplete();
     },
   });
 

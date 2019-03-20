@@ -215,18 +215,15 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
               console.info(`${this.options.name}: This block has no transition in timeline`);
             }
 
-            // Dispatch the events even though there is no time line
-            if (!this.isDisposed()) {
-              this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_IN_START));
-            }
+            // Manually trigger handleTransitionStart because the timeline is empty.
+            this.handleTransitionStart(TransitionDirection.IN);
 
-            this.isHidden = false;
-
-            if (!this.isDisposed()) {
-              this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_IN_COMPLETE));
-            }
-
-            resolve();
+            setTimeout(() => {
+              // Manually trigger handleTransitionComplete because the timeline is empty
+              this.handleTransitionComplete(TransitionDirection.IN);
+              // Add a next tick between the events otherwise the events happen simultaneously.
+              resolve();
+            }, 0);
           } else {
             // Remove the paused state from transitionIn Timeline
             this.transitionInTimeline.paused(false);
@@ -454,6 +451,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     /* istanbul ignore else */
     if (timeline.getChildren() <= 0) {
       setupMethod(timeline, this.parentController, transitionId);
+      timeline.pause();
     } else if (this.options.debug) {
       console.warn(`[TransitionController][timeline: ${timeline} id: ${transitionId}] Skipping setup method because 
       the timeline already has children!`);
@@ -570,7 +568,6 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       onComplete: () => this.handleTransitionComplete(TransitionDirection.OUT),
     });
     this.loopingAnimationTimeline = new TimelineMax({
-      paused: true,
       repeat: -1,
     });
   }
@@ -644,17 +641,17 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     this.isHidden = null;
 
     if (this.transitionOutTimeline !== null) {
-      killAndClearTimeline(this.transitionOutTimeline);
+      this.transitionOutTimeline.kill();
       this.transitionOutTimeline = null;
     }
 
     if (this.transitionInTimeline !== null) {
-      killAndClearTimeline(this.transitionInTimeline);
+      this.transitionInTimeline.kill();
       this.transitionInTimeline = null;
     }
 
     if (this.loopingAnimationTimeline) {
-      killAndClearTimeline(this.loopingAnimationTimeline);
+      this.loopingAnimationTimeline.kill();
       this.loopingAnimationTimeline = null;
     }
 

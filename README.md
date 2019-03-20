@@ -18,12 +18,9 @@ npm i -S transition-controller
 
 ## Documentation
 
-### GitBook
-- [General documentation](https://larsvanbraam.gitbook.io/transition-controller/)
-
-### TypeDoc
-- [Latest TypeDoc](https://larsvanbraam.github.io/transition-controller/docs/)
-- [Older TypeDocs](https://transition-controller.larsvanbraam.nl)
+- [📗 General documentation](https://transition-controller.larsvanbraam.nl/mkdocs/)
+- [📘 TypeDoc documentation](https://transition-controller.larsvanbraam.nl/typedoc/)
+- [📚 All documentation](https://transition-controller.larsvanbraam.nl)
 
 ## Example
 I've included an example setup where you can see the transition controller in action, to run the project follow these steps:
