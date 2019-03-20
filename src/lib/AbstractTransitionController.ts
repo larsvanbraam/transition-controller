@@ -494,11 +494,10 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
         this.options.transitionController
       ];
 
-      if (!transitionController)
-        throw new Error('This child component does not have a transition controller');
-
       // Re-call the reset method for all the children.
-      transitionController.resetTimeline(type, children || []);
+      if (transitionController) {
+        transitionController.resetTimeline(type, children || []);
+      }
     });
 
     // Re-call the setup method but with the reset flag set to true so it fully re-initialises.
