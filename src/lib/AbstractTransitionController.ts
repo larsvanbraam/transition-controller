@@ -450,8 +450,11 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
 
     /* istanbul ignore else */
     if (timeline.getChildren() <= 0) {
+      // Make sure the timeline is not paused otherwise the styles will not be applied.
+      timeline.paused(false);
       setupMethod(timeline, this.parentController, transitionId);
-      timeline.pause();
+      // Set the timeline back to paused so it doesn't play
+      timeline.paused(true);
     } else if (this.options.debug) {
       console.warn(`[TransitionController][timeline: ${timeline} id: ${transitionId}] Skipping setup method because 
       the timeline already has children!`);
