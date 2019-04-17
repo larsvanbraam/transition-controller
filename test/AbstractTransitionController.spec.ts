@@ -170,9 +170,9 @@ describe('#AbstractTransitionController.spec', () => {
         setTimeout(() => {
           componentA.transitionController
             .transitionOut(true)
-            .then(() => expect(componentA.transitionController.isHidden).to.be.true)
+            .then(() => expect(componentA.transitionController.isHidden).to.be.true);
         }, 100);
-      })
+      });
     });
   });
 
@@ -185,6 +185,12 @@ describe('#AbstractTransitionController.spec', () => {
       expect(componentA.transitionController.startLoopingAnimation(label, reset)).to.be.undefined;
       expect(spy).to.be.calledWithExactly(TimelineType.LOOPING, reset, label);
       spy.restore();
+    });
+  });
+
+  describe('stopLoopingAnimation', () => {
+    it('should stop looping animation', () => {
+      expect(componentA.transitionController.stopLoopingAnimation()).to.be.undefined;
     });
   });
 
@@ -238,9 +244,18 @@ describe('#AbstractTransitionController.spec', () => {
     });
   });
 
-  describe('stopLoopingAnimation', () => {
-    it('should stop looping animation', () => {
-      expect(componentA.transitionController.stopLoopingAnimation()).to.be.undefined;
+  describe('resetTimeline', () => {
+    it('should reset the transition in timeline', () => {
+      expect(componentA.transitionController.resetTimeline(TimelineType.IN)).to.be.undefined;
+    });
+
+    it('should reset the transition in timeline, including the child components', () => {
+      expect(
+        componentA.transitionController.resetTimeline(TimelineType.IN, [
+          '[data-component="child-component-b"]',
+          '[data-component="child-component-c"]',
+        ]),
+      ).to.be.undefined;
     });
   });
 

@@ -3,7 +3,7 @@ import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
 
 export default {
   name: 'DummyComponent',
-  template: `<div class="panel panel-info">
+  template: `<div class="panel panel-info" data-name="dummyComponent">
                 <div class="panel-heading">
                   <h3 class="panel-title">DummyComponent</h3>
                 </div>

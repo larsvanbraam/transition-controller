@@ -2,7 +2,7 @@ import LoopComponentTransitionController, {TransitionId} from './LoopComponentTr
 
 export default {
   name: 'LoopComponent',
-  template: `<div>
+  template: `<div data-name="loopComponent">
     <section>
       <button ref="button" @click="handleButtonClick" class="btn btn-primary btn-lg">Large button</button>
     </section>
@@ -25,7 +25,7 @@ export default {
       alert('Nothing here!');
     },
     handleStartClick(loop) {
-      this.transitionController.startLoopingAnimation(loop);
+      this.transitionController.startLoopingAnimation(loop, true);
     },
     handleStopClick() {
       this.transitionController.stopLoopingAnimation();
