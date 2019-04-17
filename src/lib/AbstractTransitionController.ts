@@ -9,12 +9,12 @@ import TimelineType from './enum/TimelineType';
 /**
  * New defined way of selecting child components
  */
-type ComponentSelector<T> = string | HTMLElement | T;
+export type ComponentSelector<T> = string | HTMLElement | T;
 
 /**
  * Helper interface for selecting children
  */
-interface ChildComponentSelector<T> {
+export interface ChildComponentSelector<T> {
   component: ComponentSelector<T>;
   children: Array<ComponentSelector<T> | ChildComponentSelector<T>>;
 }
