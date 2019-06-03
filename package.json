@@ -116,7 +116,7 @@
     "@babel/runtime": "^7.3.4",
     "@types/gsap": "^1.19.2",
     "lodash": "^4.17.11",
-    "seng-event": "^2.0.0"
+    "seng-event": "^2.0.1"
   },
   "peerDependencies": {
     "gsap": "^2.1.1"
