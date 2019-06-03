@@ -1,5 +1,4 @@
 import { AbstractEvent } from 'seng-event';
-import { generateEventTypes, EVENT_TYPE_PLACEHOLDER } from 'seng-event/lib/util/eventTypeUtils';
 
 /**
  * ### TransitionEvent
@@ -7,33 +6,12 @@ import { generateEventTypes, EVENT_TYPE_PLACEHOLDER } from 'seng-event/lib/util/
  * certain events. The following events can be listened to.
  */
 class TransitionEvent extends AbstractEvent {
-  /**
-   * The transition in start event is dispatched when the transition in starts
-   *
-   * @public
-   */
-  public static TRANSITION_IN_START: string = EVENT_TYPE_PLACEHOLDER;
-
-  /**
-   * The transition in complete event is dispatched when the transition in completes
-   *
-   * @public
-   */
-  public static TRANSITION_IN_COMPLETE: string = EVENT_TYPE_PLACEHOLDER;
-
-  /**
-   * The transition out start event is dispatched when the transition out starts
-   *
-   * @public
-   */
-  public static TRANSITION_OUT_START: string = EVENT_TYPE_PLACEHOLDER;
-
-  /**
-   * The transition out complete event is dispatched when the transition out completes
-   *
-   * @public
-   */
-  public static TRANSITION_OUT_COMPLETE: string = EVENT_TYPE_PLACEHOLDER;
+  public static types = {
+    TRANSITION_IN_START: 'TRANSITION_IN_START',
+    TRANSITION_IN_COMPLETE: 'TRANSITION_IN_COMPLETE',
+    TRANSITION_OUT_START: 'TRANSITION_OUT_START',
+    TRANSITION_OUT_COMPLETE: 'TRANSITION_OUT_COMPLETE',
+  };
 
   /**
    * The clone method returns a cloned instance of the original event.
@@ -41,10 +19,8 @@ class TransitionEvent extends AbstractEvent {
    * @public
    */
   public clone(): TransitionEvent {
-    return new TransitionEvent(this.type, this.bubbles, this.cancelable);
+    return new TransitionEvent(this.type);
   }
 }
-
-generateEventTypes({ TransitionEvent });
 
 export default TransitionEvent;

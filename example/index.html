@@ -95,9 +95,9 @@
             <div class="bs-component">
               <dummy-component ref="dummyComponent"/>
             </div>
-            <button :disabled="started" @click="handleStartClick('queue')" :class="['btn', 'btn-success']">Transition In + Out</button>
-            <button :disabled="started" @click="handleStartClick('in')" :class="['btn', 'btn-success']">Transition In</button>
-            <button :disabled="started" @click="handleStartClick('out')" :class="['btn', 'btn-success']" >Transition Out</button>
+            <button :disabled="started" @click="handleStartClick('queue', 'dummyComponent')" :class="['btn', 'btn-success']">Transition In + Out</button>
+            <button :disabled="started" @click="handleStartClick('in', 'dummyComponent')" :class="['btn', 'btn-success']">Transition In</button>
+            <button :disabled="started" @click="handleStartClick('out', 'dummyComponent')" :class="['btn', 'btn-success']" >Transition Out</button>
           </section>
           <section>
             <h4 id="example-2">Looping animation example</h4>
