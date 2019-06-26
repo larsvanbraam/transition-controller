@@ -8,7 +8,7 @@ import { TransitionEvent } from 'transition-controller';
 
 ...
 const transitionController = new FooTransitionController(this);
-transitionController.addEventListener(TransitionEvent.TRANSITION_IN_START, () => {
+transitionController.addEventListener(TransitionEvent.types.TRANSITION_IN_START, () => {
 	console.log('Transition in started');
 });
 transitionController.transitionIn();
@@ -23,7 +23,7 @@ import { TransitionEvent } from 'transition-controller';
 
 ...
 const transitionController = new FooTransitionController(this);
-transitionController.addEventListener(TransitionEvent.TRANSITION_IN_COMPLETE, () => {
+transitionController.addEventListener(TransitionEvent.types.TRANSITION_IN_COMPLETE, () => {
 	console.log('Transition in complete');
 });
 transitionController.transitionIn();
@@ -38,7 +38,7 @@ import { TransitionEvent } from 'transition-controller';
 
 ...
 const transitionController = new FooTransitionController(this);
-transitionController.addEventListener(TransitionEvent.TRANSITION_OUT_START, () => {
+transitionController.addEventListener(TransitionEvent.types.TRANSITION_OUT_START, () => {
 	console.log('Transition out start');
 });
 transitionController.transitionOut();
@@ -53,7 +53,7 @@ import { TransitionEvent } from 'transition-controller';
 
 ...
 const transitionController = new FooTransitionController(this);
-transitionController.addEventListener(TransitionEvent.TRANSITION_OUT_COMPLETE, () => {
+transitionController.addEventListener(TransitionEvent.types.TRANSITION_OUT_COMPLETE, () => {
 	console.log('Transition out complete);
 });
 transitionController.transitionOut();
