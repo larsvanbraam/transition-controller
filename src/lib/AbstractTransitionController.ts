@@ -25,7 +25,9 @@ export interface ChildComponentSelector<T> {
  *
  * @param T This param defines the type of the parent controller, this is of course framework specific.
  */
-export default abstract class AbstractTransitionController<T> extends EventDispatcher {
+export default abstract class AbstractTransitionController<T> extends EventDispatcher<
+  TransitionEvent
+> {
   /**
    * @private
    * @static counter
@@ -631,13 +633,13 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     switch (direction) {
       case TransitionDirection.IN:
         if (!this.isDisposed()) {
-          this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_IN_START));
+          this.dispatchEvent(new TransitionEvent(TransitionEvent.types.TRANSITION_IN_START));
         }
         this.isHidden = false;
         break;
       case TransitionDirection.OUT:
         if (!this.isDisposed()) {
-          this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_OUT_START));
+          this.dispatchEvent(new TransitionEvent(TransitionEvent.types.TRANSITION_OUT_START));
         }
         this.isHidden = true;
         break;
@@ -662,7 +664,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
           this.transitionInResolveMethod = null;
         }
         if (!this.isDisposed()) {
-          this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_IN_COMPLETE));
+          this.dispatchEvent(new TransitionEvent(TransitionEvent.types.TRANSITION_IN_COMPLETE));
         }
         break;
       case TransitionDirection.OUT: {
@@ -673,7 +675,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
         }
 
         if (!this.isDisposed()) {
-          this.dispatchEvent(new TransitionEvent(TransitionEvent.TRANSITION_OUT_COMPLETE));
+          this.dispatchEvent(new TransitionEvent(TransitionEvent.types.TRANSITION_OUT_COMPLETE));
         }
         break;
       }

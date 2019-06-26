@@ -26,10 +26,10 @@ new Vue({
     });
     // Define which events will be logged
     const events = [
-      TransitionEvent.TRANSITION_IN_START,
-      TransitionEvent.TRANSITION_IN_COMPLETE,
-      TransitionEvent.TRANSITION_OUT_START,
-      TransitionEvent.TRANSITION_OUT_COMPLETE,
+      TransitionEvent.types.TRANSITION_IN_START,
+      TransitionEvent.types.TRANSITION_IN_COMPLETE,
+      TransitionEvent.types.TRANSITION_OUT_START,
+      TransitionEvent.types.TRANSITION_OUT_COMPLETE,
     ];
     // Bind the events
     this.$nextTick(() => {

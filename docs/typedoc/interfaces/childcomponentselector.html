@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TransitionDirection | VueTransitionComponent</title>
+	<title>ChildComponentSelector | VueTransitionComponent</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="transitiondirection.html">TransitionDirection</a>
+					<a href="childcomponentselector.html">ChildComponentSelector</a>
 				</li>
 			</ul>
-			<h1>Enumeration TransitionDirection</h1>
+			<h1>Interface ChildComponentSelector&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -67,55 +67,61 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A transition can go into predefined directions, this enum defines those directions.</p>
+						<p>Helper interface for selecting children</p>
 					</div>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ChildComponentSelector</span>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="transitiondirection.html#in" class="tsd-kind-icon">IN</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="transitiondirection.html#out" class="tsd-kind-icon">OUT</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="childcomponentselector.html#children" class="tsd-kind-icon">children</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="childcomponentselector.html#component" class="tsd-kind-icon">component</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="in" class="tsd-anchor"></a>
-					<h3>IN</h3>
-					<div class="tsd-signature tsd-kind-icon">IN<span class="tsd-signature-symbol">:</span> </div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="children" class="tsd-anchor"></a>
+					<h3>children</h3>
+					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#componentselector" class="tsd-signature-type">ComponentSelector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="childcomponentselector.html" class="tsd-signature-type">ChildComponentSelector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/402a1b3/src/lib/enum/TransitionDirection.ts#L8">enum/TransitionDirection.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/402a1b3/src/lib/AbstractTransitionController.ts#L19">AbstractTransitionController.ts:19</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The IN direction of the transition.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="out" class="tsd-anchor"></a>
-					<h3>OUT</h3>
-					<div class="tsd-signature tsd-kind-icon">OUT<span class="tsd-signature-symbol">:</span> </div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="component" class="tsd-anchor"></a>
+					<h3>component</h3>
+					<div class="tsd-signature tsd-kind-icon">component<span class="tsd-signature-symbol">:</span> <a href="../index.html#componentselector" class="tsd-signature-type">ComponentSelector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/402a1b3/src/lib/enum/TransitionDirection.ts#L12">enum/TransitionDirection.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/larsvanbraam/transition-controller/blob/402a1b3/src/lib/AbstractTransitionController.ts#L18">AbstractTransitionController.ts:18</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The OUT direction of the transition.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -130,37 +136,37 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
-						<a href="timelinetype.html" class="tsd-kind-icon">Timeline<wbr>Type</a>
+						<a href="../enums/timelinetype.html" class="tsd-kind-icon">Timeline<wbr>Type</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-enum">
-						<a href="transitiondirection.html" class="tsd-kind-icon">Transition<wbr>Direction</a>
-						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="transitiondirection.html#in" class="tsd-kind-icon">IN</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="transitiondirection.html#out" class="tsd-kind-icon">OUT</a>
-							</li>
-						</ul>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/transitiondirection.html" class="tsd-kind-icon">Transition<wbr>Direction</a>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="../classes/abstracttransitioncontroller.html" class="tsd-kind-icon">Abstract<wbr>Transition<wbr>Controller</a>
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="../classes/transitionevent.html" class="tsd-kind-icon">Transition<wbr>Event</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="../interfaces/childcomponentselector.html" class="tsd-kind-icon">Child<wbr>Component<wbr>Selector</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
+						<a href="childcomponentselector.html" class="tsd-kind-icon">Child<wbr>Component<wbr>Selector</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="childcomponentselector.html#children" class="tsd-kind-icon">children</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="childcomponentselector.html#component" class="tsd-kind-icon">component</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="iabstracttransitioncontrolleroptions.html" class="tsd-kind-icon">IAbstract<wbr>Transition<wbr>Controller<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/iabstracttransitioncontrolleroptions.html" class="tsd-kind-icon">IAbstract<wbr>Transition<wbr>Controller<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/icreatetimelineoptions.html" class="tsd-kind-icon">ICreate<wbr>Timeline<wbr>Options</a>
+						<a href="icreatetimelineoptions.html" class="tsd-kind-icon">ICreate<wbr>Timeline<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="../index.html#componentselector" class="tsd-kind-icon">Component<wbr>Selector</a>
