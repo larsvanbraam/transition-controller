@@ -28,6 +28,7 @@ There are two differences though:
 ...
 ```
 
-## Multiple transition in timelines
-Like the transition in timeline the transition out timeline can have multiple timelines. This works the same way, so view that section on how to do it! The only difference for transition out timelines is that they are not initialised until they are actually required.
-So when you are about to leave the page and trigger the transitionOut method that is when the timeline get's initialised. This gives you the freedom to create different out animations for your component.
+## Multiple timelines
+Like the transitionInTimeline the transitionOutTimeline can have multiple timelines. This works the same way, so view the `creating-a-transition-in-timeline` page on how to do it! 
+
+***Note:** TransitionOutTimelines are not initialised until they are actually required. See the page on `re-initialising-timelines` to see some examples on re-initialising the transition out timeline!*  

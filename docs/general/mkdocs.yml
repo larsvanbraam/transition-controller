@@ -15,11 +15,12 @@ nav:
         - Creating a transition in timeline: examples/creating-a-transition-in-timeline.md
         - Creating a transition out timeline: examples/creating-a-transition-out-timeline.md
         - Creating a looping timeline: examples/creating-a-looping-timeline.md
+        - Re-initialising timelines: examples/re-initialising-timelines.md
+        - Reset a timeline: examples/reset-a-timeline.md
         - Getting a timeline of a child component: examples/getting-a-timeline-of-a-child-component.md
         - Nesting a timeline: examples/nesting-a-timeline.md
         - Triggering the transition in: examples/triggering-the-transition-in.md
         - Triggering the transition out: examples/triggering-the-transition-out.md
         - Triggering the looping animation: examples/triggering-the-looping-animation.md
         - Listening to events: examples/listening-to-events.md
-        - Re-initialising timelines: examples/re-initialising-timelines.md
     - FAQ: faq.md
