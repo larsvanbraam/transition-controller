@@ -1,5 +1,4 @@
 [![Travis](https://img.shields.io/travis/larsvanbraam/transition-controller.svg?maxAge=2592000)](https://travis-ci.org/larsvanbraam/transition-controller)
-[![Code Climate](https://img.shields.io/codeclimate/github/larsvanbraam/transition-controller.svg?maxAge=2592000)](https://codeclimate.com/github/larsvanbraam/transition-controller)
 [![npm](https://img.shields.io/npm/dm/transition-controller.svg?maxAge=2592000)](https://www.npmjs.com/package/transition-controller)
 [![GitHub issues](https://img.shields.io/github/issues/larsvanbraam/transition-controller.svg?style=flat-square)](https://github.com/larsvanbraam/transition-controller/issues)
 
