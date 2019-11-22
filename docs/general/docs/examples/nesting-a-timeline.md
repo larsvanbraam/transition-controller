@@ -6,11 +6,11 @@ GreenSock provides the option to add a timeline inside of another timeline. When
   /**
    * Use this method to setup your transition in timeline
    * @public
-   * @param {TimelineLite | TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {T} parent The reference to your parent
    * @param {string} id The id of your timeline
    */
-  protected setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent:T, id:string): void {
+  protected setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
     timeline.add(this.getTimeline('BarComponent'));
     timeline.add(this.getTimeline('BarComponent'), '-=0.5');
   }

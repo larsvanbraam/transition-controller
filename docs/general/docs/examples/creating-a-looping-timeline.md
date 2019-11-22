@@ -7,11 +7,11 @@ Creating a timeline for your component is just a matter of adding animations to 
    * Use this method to setup your looping timeline
    *
    * @public
-   * @param {TimelineLite | TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {T} parent The reference to your parent
    * @param {string} id The id of your timeline
    */
-  protected setupLoopingAnimationTimeline(timeline: TimelineMax, parent:T, id:string): void {
+  protected setupLoopingAnimationTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
 	timeline.to(
 		parent.$el,
 		1,

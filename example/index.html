@@ -172,7 +172,7 @@ export default abstract class AbstractVueTransitionController extends AbstractTr
     <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 3}]">
       <h4>dummy-component/DummyComponentTransitionController.ts</h4>
       <p>The example uses multiple timelines per component, this is not something that is required. If no transitionIn/transitionOutId is provided the id argument can be ignored!</p>
-      <pre class="typescript">import { TimelineLite, TimelineMax, Elastic } from 'gsap';
+      <pre class="typescript">import { Elastic } from 'gsap/all';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 import { TransitionDirection } from 'transition-controller';
 
@@ -191,11 +191,11 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
 /**
    * @public
    * @method setupTransitionInTimeline
-   * @param {TimelineLite | TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {Vue} parent
    * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {
+  public setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string ): void {
     switch (id) {
       case TransitionId[TransitionDirection.IN].RIGHT_TO_LEFT:
         timeline.fromTo(
@@ -236,11 +236,11 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
   /**
    * @public
    * @method setupTransitionOutTimeline
-   * @param { TimelineMax } timeline
+   * @param { GSAPStatic.Timeline } timeline
    * @param { Vue } parent
    * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {
+  public setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string ): void {
     switch (id) {
       case TransitionId[TransitionDirection.OUT].TO_LEFT:
         timeline.to(parent.$el, 1, {
@@ -265,12 +265,12 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
   /**
    * @public
    * @method setupLoopingAnimationTimeline
-   * @param {TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {Vue} parent
    * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline: TimelineLite | TimelineMax, parent: Vue,  id: string): void {}
+  public setupLoopingAnimationTimeline(timeline: GSAPStatic.Timeline, parent: Vue,  id: string): void {}
 }
 </pre>
 
@@ -320,7 +320,7 @@ new Vue({
     <div :class="['tab-pane', 'fade', 'in', {'active': activeTab === 4}]">
       <h3>Looping animation Example</h3>
       <h4>loop-component/LoopComponentTransitionController.ts</h4>
-      <pre class="typescript">import { TimelineLite, TimelineMax, Elastic } from 'gsap';
+      <pre class="typescript">import { Elastic } from 'gsap/all';
 import Vue from 'vue';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 
@@ -335,30 +335,30 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
   /**
    * @public
    * @method setupTransitionInTimeline
-   * @param {TimelineLite | TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {Vue} parent
    * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {}
+  public setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string ): void {}
 
   /**
    * @public
    * @method setupTransitionOutTimeline
-   * @param { TimelineMax } timeline
+   * @param { GSAPStatic.Timeline } timeline
    * @param { Vue } parent
    * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax, parent: Vue, id: string ): void {}
+  public setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string ): void {}
 
   /**
    * @public
    * @method setupLoopingAnimationTimeline
-   * @param {TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {Vue} parent
    * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline: TimelineLite | TimelineMax, parent: Vue,  id: string): void {
+  public setupLoopingAnimationTimeline(timeline: GSAPStatic.Timeline, parent: Vue,  id: string): void {
     const { button } = parent.$refs;
 
     switch (id) {

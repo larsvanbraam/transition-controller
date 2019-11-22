@@ -1,4 +1,3 @@
-import { TimelineMax } from 'gsap';
 import CustomTransitionController from './component/CustomTransitionController';
 import App from './App';
 
@@ -8,8 +7,8 @@ class AppTransitionController extends CustomTransitionController<App> {
    * @method setupTransitionInTimeline
    * @description Use this method to setup your transition in timeline
    * */
-  protected setupTransitionInTimeline(timeline: TimelineMax, parent: App): void {
-    timeline.fromTo(parent.element, 0.2, { opacity: 0, }, { opacity: 1});
+  protected setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent: App): void {
+    timeline.fromTo(parent.element, { opacity: 0, }, { opacity: 1, duration: 0.2 });
   }
 
   /**
@@ -17,8 +16,8 @@ class AppTransitionController extends CustomTransitionController<App> {
    * @method setupTransitionOutTimeline
    * @description Use this method to setup your transition out timeline
    * */
-  protected setupTransitionOutTimeline(timeline: TimelineMax, parent: App): void {
-    timeline.to(parent.element, 1, { opacity: 0});
+  protected setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent: App): void {
+    timeline.to(parent.element, { opacity: 0, duration: 1 });
   }
 
   /**

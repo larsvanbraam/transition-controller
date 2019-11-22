@@ -7,16 +7,15 @@ Before you can start to use the abstractTransitionController you first need to c
 **Example**
 ```javascript
 import AbstractTransitionController, { TransitionDirection } from 'transition-controller';
-import { TimelineLite, TimelineMax } from 'gsap';
 
 abstract class AbstractDummyTransitionController extends AbstractTransitionController<T> {
  /**
    * @protected
    * @method getComponent
    * @param {string | HTMLElement | T} component
-   * @returns {TimelineLite |TimelineMax}
+   * @returns {GSAPStatic.Timeline}
    */
-  protected getComponent(component: string | HTMLElement | T, direction: TransitionDirection,): TimelineLite | TimelineMax {
+  protected getComponent(component: string | HTMLElement | T, direction: TransitionDirection,): GSAPStatic.Timeline {
     const instance:T;
 
     // Add code that finds the instance based on the 3 provided types

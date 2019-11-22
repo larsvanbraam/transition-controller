@@ -1,4 +1,4 @@
-import { TimelineMax, Animation } from 'gsap';
+import { gsap } from 'gsap';
 import EventDispatcher from 'seng-event';
 import TransitionEvent from './event/TransitionEvent';
 import { IAbstractTransitionControllerOptions } from './interface/IAbstractTranstitionControllerOptions';
@@ -68,7 +68,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    *
    * @public
    */
-  public transitionInTimeline: TimelineMax;
+  public transitionInTimeline: GSAPStatic.Timeline;
 
   /**
    * The transitionOutTimeline property is the timeline that is used for the out
@@ -76,7 +76,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    *
    * @public
    */
-  public transitionOutTimeline: TimelineMax;
+  public transitionOutTimeline: GSAPStatic.Timeline;
 
   /**
    * The loopingAnimationTimeline property is the timeline that is used for the looping
@@ -84,7 +84,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    *
    * @public
    */
-  public loopingAnimationTimeline: TimelineMax;
+  public loopingAnimationTimeline: GSAPStatic.Timeline;
 
   /**
    * The resolve method used for resolving the transition in promise.
@@ -206,9 +206,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       if (this.transitionInPromise !== null && forceTransition) {
         /* istanbul ignore if */
         if (this.options.debug) {
-          console.warn(`[TransitionController][${
-            this.options.name
-          }] Already transitioning in, so rejecting the original 
+          console.warn(`[TransitionController][${this.options.name}] Already transitioning in, so rejecting the original 
           transitionIn promise to clear any queued animations. We finish the current animation and return a resolved 
           promise right away`);
         }
@@ -253,9 +251,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       if (this.transitionInPromise === null) {
         /* istanbul ignore if */
         if (this.options.debug) {
-          console.warn(`[TransitionController][${
-            this.options.name
-          }] Transition in triggered when it's already 
+          console.warn(`[TransitionController][${this.options.name}] Transition in triggered when it's already 
           visible, so we will do nothing and return a resolved promise!`);
         }
         return Promise.resolve();
@@ -311,9 +307,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       if (this._transitionOutPromise !== null && forceTransition) {
         /* istanbul ignore if */
         if (this.options.debug) {
-          console.warn(`[TransitionController][${
-            this.options.name
-          }] Already transitioning out, so rejecting the 
+          console.warn(`[TransitionController][${this.options.name}] Already transitioning out, so rejecting the 
           original transitionOut promise to clear any queued animations. We finish the current animation and return 
           a resolved promise right away`);
         }
@@ -351,9 +345,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       if (this._transitionOutPromise === null) {
         /* istanbul ignore if */
         if (this.options.debug) {
-          console.warn(`[TransitionController][${
-            this.options.name
-          }] Transition out triggered when it's already hidden, 
+          console.warn(`[TransitionController][${this.options.name}] Transition out triggered when it's already hidden, 
           so we will do nothing and return a resolved promise!`);
         }
 
@@ -404,7 +396,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     direction: TransitionDirection = TransitionDirection.IN,
     reset: boolean = false,
     id?: string,
-  ): Animation {
+  ): GSAPStatic.Timeline {
     const componentInstance = this.getComponent(component);
     const timelineInstance = this.getTimelineInstance(componentInstance, direction, reset, id);
 
@@ -495,9 +487,9 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       // Retrieve the component instance
       const componentInstance = this.getComponent(component || (child as ComponentSelector<T>));
       // Get the transition controller so we can reset the timeline.
-      const transitionController = <AbstractTransitionController<T>>componentInstance[
-        this.options.transitionController
-      ];
+      const transitionController = <AbstractTransitionController<T>>(
+        componentInstance[this.options.transitionController]
+      );
 
       // Re-call the reset method for all the children.
       if (transitionController) {
@@ -523,34 +515,42 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * the animations that are required for the transition out to done.
    *
    * @protected
-   * @param {TimelineMax} timeline The reference to the transition out timeline
+   * @param {GSAPStatic.Timeline} timeline The reference to the transition out timeline
    * @param {T} parent The reference to the parent instance
    * @param {string} id The id of the transition out timeline that should be initialized
    * @param {boolean} reset When this flag is set to true the old timeline will be cleared before calling the method
    */
-  protected abstract setupTransitionOutTimeline(timeline: TimelineMax, parent: T, id: string): void;
+  protected abstract setupTransitionOutTimeline(
+    timeline: GSAPStatic.Timeline,
+    parent: T,
+    id: string,
+  ): void;
 
   /**
    * This method is actually set's up the transition in timeline. it should contain all
    * the animations that are required for the transition in to done.
    *
    * @protected
-   * @param {TimelineMax} timeline The reference to the transition in timeline
+   * @param {GSAPStatic.Timeline} timeline The reference to the transition in timeline
    * @param {T} parent The reference to the parent instance
    * @param {string} id The id of the transition in timeline that should be initialized
    */
-  protected abstract setupTransitionInTimeline(timeline: TimelineMax, parent: T, id: string): void;
+  protected abstract setupTransitionInTimeline(
+    timeline: GSAPStatic.Timeline,
+    parent: T,
+    id: string,
+  ): void;
   /**
    * This method is actually set's up the looping timeline. it should contain all
    * the animations that are required for looping.
    *
    * @protected
-   * @param {TimelineMax} timeline The reference to the looping timeline
+   * @param {GSAPStatic.Timeline} timeline The reference to the looping timeline
    * @param {T} parent The reference to the parent instance
    * @param {string} id The id of the looping animation that should be initialized
    */
   protected abstract setupLoopingAnimationTimeline(
-    timeline: TimelineMax,
+    timeline: GSAPStatic.Timeline,
     parent: T,
     id: string,
   ): void;
@@ -578,17 +578,17 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @param {TransitionDirection} direction This is the direction of the timeline.
    * @param {boolean} reset This flag determines if we reset the existing timeline or re-create it from scratch
    * @param {boolean} id This is the id of the timeline that we are requesting
-   * @returns {TimelineMax} This is the timeline instance that you requested
+   * @returns {GSAPStatic.Timeline} This is the timeline instance that you requested
    */
   private getTimelineInstance(
     component: T,
     direction: TransitionDirection = TransitionDirection.IN,
     reset: boolean = false,
     id?: string,
-  ): TimelineMax {
-    const transitionController = <AbstractTransitionController<T>>component[
-      this.options.transitionController
-    ];
+  ): GSAPStatic.Timeline {
+    const transitionController = <AbstractTransitionController<T>>(
+      component[this.options.transitionController]
+    );
 
     let timeline;
 
@@ -618,7 +618,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       onStart: () => this.handleTransitionStart(TransitionDirection.OUT),
       onComplete: () => this.handleTransitionComplete(TransitionDirection.OUT),
     });
-    this.loopingAnimationTimeline = new TimelineMax({
+    this.loopingAnimationTimeline = gsap.timeline({
       repeat: -1,
     });
   }

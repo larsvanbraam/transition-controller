@@ -18,9 +18,4 @@ export interface ICreateTimelineOptions {
    * This should be the callback method that is triggered when the timeline out completes
    */
   onReverseComplete?: () => void;
-
-  /**
-   * Flag that defines if we should use timeline max for the timelines
-   */
-  useTimelineMax?: boolean;
 }

@@ -1,4 +1,4 @@
-import { Elastic, TimelineMax } from 'gsap';
+import { Elastic } from 'gsap/all';
 import Vue from 'vue';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
@@ -18,14 +18,13 @@ export default class RandomDummyComponentTransitionController extends AbstractVu
   /**
    * @public
    * @method setupTransitionInTimeline
-   * @param {TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {Vue} parent
    * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: TimelineMax, parent: Vue, id: string): void {
+  public setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string): void {
     timeline.fromTo(
       parent.$el,
-      1,
       {
         x: window.innerWidth * 0.25 * Math.random(),
         autoAlpha: 1,
@@ -36,6 +35,7 @@ export default class RandomDummyComponentTransitionController extends AbstractVu
         autoAlpha: 1,
         scale: 1,
         ease: Elastic.easeOut,
+        duration: 1,
       },
     );
     timeline.add(this.getTimeline('dummyComponent', TransitionDirection.IN));
@@ -44,14 +44,15 @@ export default class RandomDummyComponentTransitionController extends AbstractVu
   /**
    * @public
    * @method setupTransitionOutTimeline
-   * @param { TimelineMax } timeline
+   * @param { GSAPStatic.Timeline } timeline
    * @param { Vue } parent
    * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: TimelineMax, parent: Vue, id: string): void {
-    timeline.to(parent.$el, 1, {
+  public setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string): void {
+    timeline.to(parent.$el, {
       autoAlpha: 0,
       scale: 2,
+      duration: 1,
     });
     timeline.add(this.getTimeline('dummyComponent', TransitionDirection.OUT));
   }
@@ -59,10 +60,10 @@ export default class RandomDummyComponentTransitionController extends AbstractVu
   /**
    * @public
    * @method setupLoopingAnimationTimeline
-   * @param {TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {Vue} parent
    * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline: TimelineMax, parent: Vue, id: string): void {}
+  public setupLoopingAnimationTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string): void {}
 }

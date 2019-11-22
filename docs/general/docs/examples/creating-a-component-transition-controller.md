@@ -3,18 +3,17 @@ After you’ve created an abstract transition controller for your specific frame
 **Example**
 ```javascript
 import { AbstractTransitionController } from 'vue-transition-component';
-import { TimelineLite, TimelineMax } from 'gsap';
 
 export default class FooTransitionController extends AbstractTransitionController {
   /**
    * Use this method to setup your transition in timeline
    *
    * @public
-   * @param {TimelineLite | TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {T} parent The reference to your parent
    * @param {string} id The id of your timeline
    */
-  protected setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent:T, id:string): void {
+  protected setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
 
   }
 
@@ -22,23 +21,23 @@ export default class FooTransitionController extends AbstractTransitionControlle
    * Use this method to setup your transition out timeline
    *
    * @public
-   * @param {TimelineLite | TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {T} parent The reference to your parent
    * @param {string} id The id of your timeline
    */
-  protected setupTransitionOutTimeline(timeline: TimelineLite | TimelineMax, parent:T, id:string): void {
+  protected setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
 
   }
 
   /**
    * @public
    * @method setupLoopingAnimationTimeline
-   * @param {TimelineMax} timeline
+   * @param {GSAPStatic.Timeline} timeline
    * @param {T} parent The reference to your parent
    * @param {string} id The id of your timeline
    * @description Use this method to setup your looping timeline
    */
-  protected setupLoopingAnimationTimeline(timeline: TimelineMax, parent:T, id:string): void {
+  protected setupLoopingAnimationTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
 
   }
 }

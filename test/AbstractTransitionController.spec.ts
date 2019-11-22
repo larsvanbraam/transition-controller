@@ -132,9 +132,9 @@ describe('#AbstractTransitionController.spec', () => {
 
   describe('transitionOut', () => {
     it('should transition out the component', () => {
-      return componentC.transitionController
+      return componentA.transitionController
         .transitionIn()
-        .then(() => componentC.transitionController.transitionOut())
+        .then(() => componentA.transitionController.transitionOut())
         .then(() => expect(componentA.transitionController.isHidden).to.be.true);
     });
 

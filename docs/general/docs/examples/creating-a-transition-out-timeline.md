@@ -11,12 +11,12 @@ There are two differences though:
 /**
  * Use this method to setup your transition out timeline
  * @public
- * @param {TimelineLite | TimelineMax} timeline
+ * @param {GSAPStatic.Timeline} timeline
  * @param {T} parent The reference to your parent
  * @param {string} id The id of your timeline
  * @description
  */
-  protected setupTransitionOutTimeline(timeline: TimelineMax, parent:T, id:string): void {
+  protected setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
 	  timeline.to(
 		  parent.$el,
 		  1,

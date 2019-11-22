@@ -8,11 +8,11 @@ Creating a timeline for your component is just a matter of adding animations to 
  *
  * @public
  * @method setupTransitionInTimeline
- * @param {TimelineLite | TimelineMax} timeline
+ * @param {GSAPStatic.Timeline} timeline
  * @param {T} parent The reference to your parent
  * @param {string} id The id of your timeline
  */
-  protected setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent:T, id:string): void {
+  protected setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
 	  timeline.from(
 		  parent.$el,
 		  1,
@@ -40,11 +40,11 @@ Defining multiple transitions can be as simple as putting a switch statement on 
  *
  * @public
  * @method setupTransitionInTimeline
- * @param {TimelineLite | TimelineMax} timeline
+ * @param {GSAPStatic.Timeline} timeline
  * @param {T} parent The reference to your parent
  * @param {string} id The id of your timeline
  */
-  protected setupTransitionInTimeline(timeline: TimelineLite | TimelineMax, parent:T, id:string): void {
+  protected setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent:T, id:string): void {
     switch(id) {     
       case 'transition-id-2'
         timeline.from(parent.$el, 1, { xPercent: -100 }) 
