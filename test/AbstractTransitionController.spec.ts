@@ -1,12 +1,13 @@
 import chai, { expect } from 'chai';
+import gsap from 'gsap';
 import sinon from 'sinon';
 import 'chai/register-should';
 import sinonChai from 'sinon-chai';
-import { Animation, TimelineMax } from 'gsap';
 import { render, getComponent, getApp } from './util/index';
 import { TransitionId } from '../test/util/component/ChildComponentA/ChildComponentATransitionController';
 import TimelineType from '../src/lib/enum/TimelineType';
 import TransitionDirection from '../src/lib/enum/TransitionDirection';
+
 chai.use(sinonChai);
 
 describe('#AbstractTransitionController.spec', () => {
@@ -43,21 +44,21 @@ describe('#AbstractTransitionController.spec', () => {
     });
 
     describe('transitionInTimeline', () => {
-      it('should be an instance of TimelineMax', () => {
-        expect(componentA.transitionController.transitionInTimeline).to.be.instanceof(TimelineMax);
+      it('should be an instance of gsap.core.Timeline', () => {
+        expect(componentA.transitionController.transitionInTimeline).to.be.instanceof(gsap.core.Timeline);
       });
     });
 
     describe('transitionOutTimeline', () => {
-      it('should be an instance of TimelineMax', () => {
-        expect(componentA.transitionController.transitionOutTimeline).to.be.instanceof(TimelineMax);
+      it('should be an instance of gsap.core.Timeline', () => {
+        expect(componentA.transitionController.transitionOutTimeline).to.be.instanceof(gsap.core.Timeline);
       });
     });
 
     describe('loopingAnimationTimeline', () => {
-      it('should be an instance of TimelineMax', () => {
+      it('should be an instance of gsap.core.Timeline', () => {
         expect(componentA.transitionController.loopingAnimationTimeline).to.be.instanceof(
-          TimelineMax,
+          gsap.core.Timeline,
         );
       });
     });
@@ -333,7 +334,7 @@ describe('#AbstractTransitionController.spec', () => {
           reset,
           labelOUT,
         ),
-      ).to.be.instanceOf(TimelineMax);
+      ).to.be.instanceOf(gsap.core.Timeline);
     });
   });
 
@@ -341,16 +342,16 @@ describe('#AbstractTransitionController.spec', () => {
     it('should try to getTimeline by string', () => {
       expect(
         app.transitionController.getTimeline('[data-component="child-component-a"]'),
-      ).to.be.instanceOf(TimelineMax);
+      ).to.be.instanceOf(gsap.core.Timeline);
     });
 
     it('should try to getTimeline by Component', () => {
-      expect(componentA.transitionController.getTimeline(componentA)).to.be.instanceOf(TimelineMax);
+      expect(componentA.transitionController.getTimeline(componentA)).to.be.instanceOf(gsap.core.Timeline);
     });
 
     it('should try to getTimeline by Element', () => {
       expect(componentA.transitionController.getTimeline(componentA.element)).to.be.instanceOf(
-        TimelineMax,
+        gsap.core.Timeline,
       );
     });
 
@@ -362,7 +363,7 @@ describe('#AbstractTransitionController.spec', () => {
       const spy = sinon.spy(componentA.transitionController, 'getTimelineInstance');
       expect(
         componentA.transitionController.getTimeline(componentA, direction, reset, label),
-      ).to.be.instanceOf(TimelineMax);
+      ).to.be.instanceOf(gsap.core.Timeline);
       expect(spy).to.be.calledWithExactly(componentA, direction, reset, label);
       spy.restore();
     });

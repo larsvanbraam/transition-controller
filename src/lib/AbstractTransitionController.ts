@@ -1,4 +1,4 @@
-import { gsap } from 'gsap';
+import gsap from 'gsap';
 import EventDispatcher from 'seng-event';
 import TransitionEvent from './event/TransitionEvent';
 import { IAbstractTransitionControllerOptions } from './interface/IAbstractTranstitionControllerOptions';
@@ -68,7 +68,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    *
    * @public
    */
-  public transitionInTimeline: GSAPStatic.Timeline;
+  public transitionInTimeline: gsap.core.Timeline;
 
   /**
    * The transitionOutTimeline property is the timeline that is used for the out
@@ -76,7 +76,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    *
    * @public
    */
-  public transitionOutTimeline: GSAPStatic.Timeline;
+  public transitionOutTimeline: gsap.core.Timeline;
 
   /**
    * The loopingAnimationTimeline property is the timeline that is used for the looping
@@ -84,7 +84,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    *
    * @public
    */
-  public loopingAnimationTimeline: GSAPStatic.Timeline;
+  public loopingAnimationTimeline: gsap.core.Timeline;
 
   /**
    * The resolve method used for resolving the transition in promise.
@@ -263,7 +263,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
 
   /**
 
-  /**
+   /**
    * The transitionOut method will look if the transitionOutTimeline has any
    * animations added to it. If no animations were added it will reverse the
    * transitionInTimeline. Otherwise it will restart the transitionOutTimeline.
@@ -396,7 +396,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     direction: TransitionDirection = TransitionDirection.IN,
     reset: boolean = false,
     id?: string,
-  ): GSAPStatic.Timeline {
+  ): gsap.core.Timeline {
     const componentInstance = this.getComponent(component);
     const timelineInstance = this.getTimelineInstance(componentInstance, direction, reset, id);
 
@@ -472,6 +472,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
       the timeline already has children!`);
     }
   }
+
   /**
    * @public
    * @method resetTimeline
@@ -521,7 +522,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @param {boolean} reset When this flag is set to true the old timeline will be cleared before calling the method
    */
   protected abstract setupTransitionOutTimeline(
-    timeline: GSAPStatic.Timeline,
+    timeline: gsap.core.Timeline,
     parent: T,
     id: string,
   ): void;
@@ -536,10 +537,11 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @param {string} id The id of the transition in timeline that should be initialized
    */
   protected abstract setupTransitionInTimeline(
-    timeline: GSAPStatic.Timeline,
+    timeline: gsap.core.Timeline,
     parent: T,
     id: string,
   ): void;
+
   /**
    * This method is actually set's up the looping timeline. it should contain all
    * the animations that are required for looping.
@@ -550,7 +552,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
    * @param {string} id The id of the looping animation that should be initialized
    */
   protected abstract setupLoopingAnimationTimeline(
-    timeline: GSAPStatic.Timeline,
+    timeline: gsap.core.Timeline,
     parent: T,
     id: string,
   ): void;
@@ -585,7 +587,7 @@ export default abstract class AbstractTransitionController<T> extends EventDispa
     direction: TransitionDirection = TransitionDirection.IN,
     reset: boolean = false,
     id?: string,
-  ): GSAPStatic.Timeline {
+  ): gsap.core.Timeline {
     const transitionController = <AbstractTransitionController<T>>(
       component[this.options.transitionController]
     );

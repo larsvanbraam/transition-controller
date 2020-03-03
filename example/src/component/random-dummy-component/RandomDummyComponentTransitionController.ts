@@ -1,4 +1,4 @@
-import { Elastic } from 'gsap/all';
+import { Elastic } from 'gsap';
 import Vue from 'vue';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
@@ -22,7 +22,7 @@ export default class RandomDummyComponentTransitionController extends AbstractVu
    * @param {Vue} parent
    * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string): void {
+  public setupTransitionInTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
     timeline.fromTo(
       parent.$el,
       {
@@ -48,7 +48,7 @@ export default class RandomDummyComponentTransitionController extends AbstractVu
    * @param { Vue } parent
    * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string): void {
+  public setupTransitionOutTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
     timeline.to(parent.$el, {
       autoAlpha: 0,
       scale: 2,
@@ -65,5 +65,5 @@ export default class RandomDummyComponentTransitionController extends AbstractVu
    * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string): void {}
+  public setupLoopingAnimationTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {}
 }

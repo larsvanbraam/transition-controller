@@ -9,7 +9,7 @@ import isFunction from 'lodash/isFunction';
  * @param {ICreateTimelineOptions} options
  * @returns {GSAPStatic.Timeline}
  */
-export function createTimeline(options: ICreateTimelineOptions): GSAPStatic.Timeline {
+export function createTimeline(options: ICreateTimelineOptions): gsap.core.Timeline {
   let forward = true;
   let lastTime = 0;
 
@@ -31,7 +31,9 @@ export function createTimeline(options: ICreateTimelineOptions): GSAPStatic.Time
       // Reset the last time when we restart the timeline
       lastTime = 0;
       // Trigger the callback if needed
-      if (isFunction(options.onStart)) options.onStart();
+      if (isFunction(options.onStart)) {
+        options.onStart();
+      }
     },
     onComplete: isFunction(options.onComplete) ? options.onComplete : null,
     onReverseComplete: () => {
@@ -39,7 +41,9 @@ export function createTimeline(options: ICreateTimelineOptions): GSAPStatic.Time
       // time otherwise the transition will no longer work.
       lastTime = 0;
       // Trigger the callback if needed
-      if (isFunction(options.onReverseComplete)) options.onReverseComplete();
+      if (isFunction(options.onReverseComplete)) {
+        options.onReverseComplete();
+      }
     },
   });
 
@@ -54,7 +58,7 @@ export function createTimeline(options: ICreateTimelineOptions): GSAPStatic.Time
  * @param {GSAPStatic.Timeline} timeline
  * @returns {void}
  */
-export function killAndClearTimeline(timeline: GSAPStatic.Timeline): void {
+export function killAndClearTimeline(timeline: gsap.core.Timeline): void {
   clearTimeline(timeline);
   timeline.kill();
 }
@@ -66,17 +70,17 @@ export function killAndClearTimeline(timeline: GSAPStatic.Timeline): void {
  * @param {GSAPStatic.Timeline} timeline
  * @returns {void}
  */
-export function clearTimeline(timeline: GSAPStatic.Timeline | GSAPStatic.Tween): void {
-  if (timeline && (<GSAPStatic.Timeline>timeline).getChildren) {
-    (<GSAPStatic.Timeline>timeline).getChildren().forEach(target => {
-      if ((<any>target).targets) {
+export function clearTimeline(timeline: gsap.core.Timeline | gsap.core.Tween): void {
+  if (timeline && (<gsap.core.Timeline>timeline).getChildren) {
+    (<gsap.core.Timeline>timeline).getChildren().forEach(target => {
+      if (target.targets) {
         // Note: When resetting a timeline clearing just the css properties does not clear the properties like autoAlpha or scale
         gsap.set((<any>target).targets(), { clearProps: 'all' });
       } else {
-        clearTimeline(<GSAPStatic.Timeline>target);
+        clearTimeline(<gsap.core.Timeline>target);
       }
     });
-    (<GSAPStatic.Timeline>timeline).clear(true);
+    (<gsap.core.Timeline>timeline).clear(true);
   } else {
     gsap.set((<any>timeline).targets(), { clearProps: 'all' });
   }
@@ -93,11 +97,11 @@ export function clearTimeline(timeline: GSAPStatic.Timeline | GSAPStatic.Tween):
  * @returns {GSAPStatic.Timeline}
  */
 export function cloneTimeline(
-  source: GSAPStatic.Timeline,
+  source: gsap.core.Timeline,
   direction: TransitionDirection,
-): GSAPStatic.Timeline {
+): gsap.core.Timeline {
   const children = source.getChildren(false);
-  const timeline = gsap.timeline((<any>source).vars); // TODO: used to have source.vars added here. Not sure what data this is
+  const timeline = gsap.timeline(source.vars);
 
   const parseChild = (child, timeline) => {
     if (child.getChildren) {

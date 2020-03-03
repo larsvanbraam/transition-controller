@@ -1,4 +1,4 @@
-import { Elastic } from 'gsap/all';
+import { Elastic } from 'gsap';
 import Vue from 'vue';
 import AbstractVueTransitionController from '../AbstractVueTransitionController';
 import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
@@ -18,7 +18,7 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param {Vue} parent
    * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string ): void {
+  public setupTransitionInTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
   }
 
   /**
@@ -28,7 +28,7 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param { Vue } parent
    * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent: Vue, id: string ): void {
+  public setupTransitionOutTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
   }
 
   /**
@@ -39,21 +39,21 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline: GSAPStatic.Timeline, parent: Vue,  id: string): void {
+  public setupLoopingAnimationTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
 
     const { button } = parent.$refs;
 
     switch (id) {
       case TransitionId.LOOP_1:
-        timeline.fromTo(button, {rotation: 0}, {rotation: 360, ease: Elastic.easeOut, duration: 2 });
+        timeline.fromTo(button, { rotation: 0 }, { rotation: 360, ease: Elastic.easeOut, duration: 2 });
         break;
       case TransitionId.LOOP_2:
-        timeline.fromTo(button, {yPercent: 0}, {yPercent: 100, ease: Elastic.easeInOut, duration: 1 });
-        timeline.fromTo(button, {yPercent: 100}, {yPercent: 0, ease: Elastic.easeInOut, duration: 1 });
+        timeline.fromTo(button, { yPercent: 0 }, { yPercent: 100, ease: Elastic.easeInOut, duration: 1 });
+        timeline.fromTo(button, { yPercent: 100 }, { yPercent: 0, ease: Elastic.easeInOut, duration: 1 });
         break;
       default:
-        timeline.fromTo(button, {xPercent: 0}, {xPercent: 100, ease: Elastic.easeInOut, duration: 1 });
-        timeline.fromTo(button, {xPercent: 100}, {xPercent: 0, ease: Elastic.easeInOut, duration: 1 });
+        timeline.fromTo(button, { xPercent: 0 }, { xPercent: 100, ease: Elastic.easeInOut, duration: 1 });
+        timeline.fromTo(button, { xPercent: 100 }, { xPercent: 0, ease: Elastic.easeInOut, duration: 1 });
         break;
     }
   }

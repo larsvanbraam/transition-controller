@@ -7,7 +7,7 @@ class ChildComponentCTransitionController extends CustomTransitionController<Chi
    * @method setupTransitionInTimeline
    * @description Use this method to setup your transition in timeline
    * */
-  protected setupTransitionInTimeline(timeline: GSAPStatic.Timeline, parent: ChildComponentC): void {
+  protected setupTransitionInTimeline(timeline: gsap.core.Timeline, parent: ChildComponentC): void {
   }
 
   /**
@@ -15,7 +15,7 @@ class ChildComponentCTransitionController extends CustomTransitionController<Chi
    * @method setupTransitionOutTimeline
    * @description Use this method to setup your transition out timeline
    * */
-  protected setupTransitionOutTimeline(timeline: GSAPStatic.Timeline, parent: ChildComponentC): void {
+  protected setupTransitionOutTimeline(timeline: gsap.core.Timeline, parent: ChildComponentC): void {
   }
 
   /**
@@ -23,7 +23,7 @@ class ChildComponentCTransitionController extends CustomTransitionController<Chi
    * @method setupLoopingAnimationTimeline
    * @description Use this method to setup your looping animation timeline
    * */
-  protected setupLoopingAnimationTimeline(): void {
+  protected setupLoopingAnimationTimeline(timeline: gsap.core.Timeline, parent: ChildComponentC): void {
 
   }
 }
