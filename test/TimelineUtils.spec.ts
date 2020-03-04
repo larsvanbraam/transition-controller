@@ -6,7 +6,7 @@ import {
   clearTimeline,
   cloneTimeline,
 } from '../src/lib/util/TimelineUtils';
-import gsap from 'gsap';
+import { TimelineMax } from 'gsap';
 import TransitionDirection from '../src/lib/enum/TransitionDirection';
 
 describe('TimelineUtils.spec', () => {
@@ -46,8 +46,8 @@ describe('TimelineUtils.spec', () => {
       timeline.to({ test: 0 }, demoDuration, { test: 10 });
     });
 
-    it('should return a gsap.core.Timeline', () => {
-      expect(timeline).to.be.instanceOf(gsap.core.Timeline);
+    it('should return a TimelineMax', () => {
+      expect(timeline).to.be.instanceOf(TimelineMax);
     });
 
     it('should give onStart/onComplete callback', done => {
@@ -93,16 +93,16 @@ describe('TimelineUtils.spec', () => {
     it('should clone the timeline', () => {
       timeline.add(
         cloneTimeline(
-          timeline.add(cloneTimeline(timeline, TransitionDirection.IN)) as gsap.core.Timeline,
+          timeline.add(cloneTimeline(timeline, TransitionDirection.IN)) as TimelineMax,
           TransitionDirection.IN,
         ),
       );
-      expect(cloneTimeline(timeline, TransitionDirection.IN)).to.be.instanceOf(gsap.core.Timeline);
+      expect(cloneTimeline(timeline, TransitionDirection.IN)).to.be.instanceOf(TimelineMax);
     });
 
     it('should clone the timeline with a to animation', () => {
       timeline.to({ test: 0 }, demoDuration, { test: 10 });
-      expect(cloneTimeline(timeline, TransitionDirection.IN)).to.be.instanceOf(gsap.core.Timeline);
+      expect(cloneTimeline(timeline, TransitionDirection.IN)).to.be.instanceOf(TimelineMax);
     });
 
     it('should try to clone the timeline but fail due to using fromTo in a nested transitionOut timeline', () => {

@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+import gsap, { TimelineMax, TweenMax } from 'gsap';
 import { ICreateTimelineOptions } from '../interface/ICreateTimelineOptions';
 import TransitionDirection from '../enum/TransitionDirection';
 import isFunction from 'lodash/isFunction';
@@ -7,9 +7,9 @@ import isFunction from 'lodash/isFunction';
  * The create timeline method creates a new Timeline
  *
  * @param {ICreateTimelineOptions} options
- * @returns {GSAPStatic.Timeline}
+ * @returns {TimelineMax}
  */
-export function createTimeline(options: ICreateTimelineOptions): gsap.core.Timeline {
+export function createTimeline(options: ICreateTimelineOptions): TimelineMax {
   let forward = true;
   let lastTime = 0;
 
@@ -58,7 +58,7 @@ export function createTimeline(options: ICreateTimelineOptions): gsap.core.Timel
  * @param {GSAPStatic.Timeline} timeline
  * @returns {void}
  */
-export function killAndClearTimeline(timeline: gsap.core.Timeline): void {
+export function killAndClearTimeline(timeline: TimelineMax): void {
   clearTimeline(timeline);
   timeline.kill();
 }
@@ -70,17 +70,17 @@ export function killAndClearTimeline(timeline: gsap.core.Timeline): void {
  * @param {GSAPStatic.Timeline} timeline
  * @returns {void}
  */
-export function clearTimeline(timeline: gsap.core.Timeline | gsap.core.Tween): void {
-  if (timeline && (<gsap.core.Timeline>timeline).getChildren) {
-    (<gsap.core.Timeline>timeline).getChildren().forEach(target => {
+export function clearTimeline(timeline: TimelineMax | TweenMax): void {
+  if (timeline && (<TimelineMax>timeline).getChildren) {
+    (<TimelineMax>timeline).getChildren().forEach(target => {
       if (target.targets) {
         // Note: When resetting a timeline clearing just the css properties does not clear the properties like autoAlpha or scale
         gsap.set((<any>target).targets(), { clearProps: 'all' });
       } else {
-        clearTimeline(<gsap.core.Timeline>target);
+        clearTimeline(<TimelineMax>target);
       }
     });
-    (<gsap.core.Timeline>timeline).clear(true);
+    (<TimelineMax>timeline).clear(true);
   } else {
     gsap.set((<any>timeline).targets(), { clearProps: 'all' });
   }
@@ -92,14 +92,11 @@ export function clearTimeline(timeline: gsap.core.Timeline | gsap.core.Tween): v
  *  this is the method you are looking for. It will create a new Timeline and
  *  re-add all the original animations and event listeners.
  *
- * @param {GSAPStatic.Timeline} source
+ * @param {TimelineMax} source
  * @param {TransitionDirection} direction
- * @returns {GSAPStatic.Timeline}
+ * @returns {TimelineMax}
  */
-export function cloneTimeline(
-  source: gsap.core.Timeline,
-  direction: TransitionDirection,
-): gsap.core.Timeline {
+export function cloneTimeline(source: TimelineMax, direction: TransitionDirection): TimelineMax {
   const children = source.getChildren(false);
   const timeline = gsap.timeline(source.vars);
 

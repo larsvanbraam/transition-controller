@@ -1,3 +1,4 @@
+import { TimelineMax } from 'gsap';
 import CustomTransitionController from '../CustomTransitionController';
 import ChildComponentA from './ChildComponentA';
 import TransitionDirection from '../../../../src/lib/enum/TransitionDirection';
@@ -20,7 +21,7 @@ class ChildComponentATransitionController extends CustomTransitionController<Chi
    * @method setupTransitionInTimeline
    * @description Use this method to setup your transition in timeline
    * */
-  protected setupTransitionInTimeline(timeline: gsap.core.Timeline, parent: ChildComponentA, id: string): void {
+  protected setupTransitionInTimeline(timeline: TimelineMax, parent: ChildComponentA, id: string): void {
     switch (id) {
       case TransitionId[TransitionDirection.IN].TRANSITION_ID_1:
         timeline.fromTo(parent.element, { opacity: 0, }, { opacity: 1, duration: 0.2 });
@@ -39,7 +40,7 @@ class ChildComponentATransitionController extends CustomTransitionController<Chi
    * @method setupTransitionOutTimeline
    * @description Use this method to setup your transition out timeline
    * */
-  protected setupTransitionOutTimeline(timeline: gsap.core.Timeline, parent: ChildComponentA, id: string): void {
+  protected setupTransitionOutTimeline(timeline: TimelineMax, parent: ChildComponentA, id: string): void {
     switch (id) {
       case TransitionId[TransitionDirection.OUT].TRANSITION_ID_1:
         timeline.to(parent.element, { opacity: 0, duration: 0.2 });
@@ -58,7 +59,7 @@ class ChildComponentATransitionController extends CustomTransitionController<Chi
    * @method setupLoopingAnimationTimeline
    * @description Use this method to setup your looping animation timeline
    * */
-  protected setupLoopingAnimationTimeline(timeline: gsap.core.Timeline, parent: ChildComponentA,  id: string): void {
+  protected setupLoopingAnimationTimeline(timeline: TimelineMax, parent: ChildComponentA,  id: string): void {
     switch (id) {
       case TransitionId.LOOP_1:
         timeline.fromTo(parent.element, { opacity: 0, }, { opacity: 1, duration: 0.2 });

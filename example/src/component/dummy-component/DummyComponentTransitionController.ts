@@ -22,7 +22,7 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param {Vue} parent
    * @param {string} id
    */
-  public setupTransitionInTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
+  public setupTransitionInTimeline(timeline: TimelineMax, parent: Vue, id: string): void {
     switch (id) {
       case TransitionId[TransitionDirection.IN].RIGHT_TO_LEFT:
         timeline.fromTo(
@@ -67,7 +67,7 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param { Vue } parent
    * @param { string } id
    */
-  public setupTransitionOutTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
+  public setupTransitionOutTimeline(timeline: TimelineMax, parent: Vue, id: string): void {
     switch (id) {
       case TransitionId[TransitionDirection.OUT].TO_LEFT:
         timeline.to(parent.$el, {
@@ -99,6 +99,6 @@ export default class DummyComponentTransitionController extends AbstractVueTrans
    * @param {string} id
    * @description overwrite this method in the parent class
    * */
-  public setupLoopingAnimationTimeline(timeline: gsap.core.Timeline, parent: Vue, id: string): void {
+  public setupLoopingAnimationTimeline(timeline: TimelineMax, parent: Vue, id: string): void {
   }
 }

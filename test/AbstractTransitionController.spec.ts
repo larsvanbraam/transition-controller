@@ -1,5 +1,5 @@
 import chai, { expect } from 'chai';
-import gsap from 'gsap';
+import { TimelineMax } from 'gsap';
 import sinon from 'sinon';
 import 'chai/register-should';
 import sinonChai from 'sinon-chai';
@@ -44,21 +44,21 @@ describe('#AbstractTransitionController.spec', () => {
     });
 
     describe('transitionInTimeline', () => {
-      it('should be an instance of gsap.core.Timeline', () => {
-        expect(componentA.transitionController.transitionInTimeline).to.be.instanceof(gsap.core.Timeline);
+      it('should be an instance of TimelineMax', () => {
+        expect(componentA.transitionController.transitionInTimeline).to.be.instanceof(TimelineMax);
       });
     });
 
     describe('transitionOutTimeline', () => {
-      it('should be an instance of gsap.core.Timeline', () => {
-        expect(componentA.transitionController.transitionOutTimeline).to.be.instanceof(gsap.core.Timeline);
+      it('should be an instance of TimelineMax', () => {
+        expect(componentA.transitionController.transitionOutTimeline).to.be.instanceof(TimelineMax);
       });
     });
 
     describe('loopingAnimationTimeline', () => {
-      it('should be an instance of gsap.core.Timeline', () => {
+      it('should be an instance of TimelineMax', () => {
         expect(componentA.transitionController.loopingAnimationTimeline).to.be.instanceof(
-          gsap.core.Timeline,
+          TimelineMax,
         );
       });
     });
@@ -334,7 +334,7 @@ describe('#AbstractTransitionController.spec', () => {
           reset,
           labelOUT,
         ),
-      ).to.be.instanceOf(gsap.core.Timeline);
+      ).to.be.instanceOf(TimelineMax);
     });
   });
 
@@ -342,16 +342,16 @@ describe('#AbstractTransitionController.spec', () => {
     it('should try to getTimeline by string', () => {
       expect(
         app.transitionController.getTimeline('[data-component="child-component-a"]'),
-      ).to.be.instanceOf(gsap.core.Timeline);
+      ).to.be.instanceOf(TimelineMax);
     });
 
     it('should try to getTimeline by Component', () => {
-      expect(componentA.transitionController.getTimeline(componentA)).to.be.instanceOf(gsap.core.Timeline);
+      expect(componentA.transitionController.getTimeline(componentA)).to.be.instanceOf(TimelineMax);
     });
 
     it('should try to getTimeline by Element', () => {
       expect(componentA.transitionController.getTimeline(componentA.element)).to.be.instanceOf(
-        gsap.core.Timeline,
+        TimelineMax,
       );
     });
 
@@ -363,7 +363,7 @@ describe('#AbstractTransitionController.spec', () => {
       const spy = sinon.spy(componentA.transitionController, 'getTimelineInstance');
       expect(
         componentA.transitionController.getTimeline(componentA, direction, reset, label),
-      ).to.be.instanceOf(gsap.core.Timeline);
+      ).to.be.instanceOf(TimelineMax);
       expect(spy).to.be.calledWithExactly(componentA, direction, reset, label);
       spy.restore();
     });
