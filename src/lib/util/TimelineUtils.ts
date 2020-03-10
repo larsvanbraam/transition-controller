@@ -107,7 +107,7 @@ export function cloneTimeline(source: TimelineMax, direction: TransitionDirectio
       // Parse the child animations
       children.forEach(child => parseChild(child, subTimeline));
       // Add the timeline to the parent timeline
-      timeline.add(subTimeline.restart(), child._startTime);
+      timeline.add(subTimeline.restart(), child.startTime());
     } else {
       if (child.vars.startAt) {
         if (direction === TransitionDirection.OUT) {
