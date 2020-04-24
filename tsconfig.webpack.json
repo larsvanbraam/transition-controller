@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "target": "es5"
+  }
+}

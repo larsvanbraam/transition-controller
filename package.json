@@ -10,9 +10,10 @@
     "dev": "npm-run-all -p dev:*",
     "dev:babel": "babel ./src -x \".ts\" --out-dir ./ --watch",
     "dev:ts": "tsc --noEmit --allowJs --watch",
-    "build": "npm-run-all -s clean build:*",
+    "build": "npm-run-all -s clean build:babel build:ts",
     "build:babel": "babel ./src -x \".ts\" -x \".js\" --out-dir ./",
     "build:ts": "tsc -p ./tsconfig.build.json && shx cp -Rf decl/* .",
+    "build:webpack": "webpack",
     "test": "cross-env NODE_ENV=test nyc --all mocha --exit \"./test/**/*.spec.{ts,js}\"",
     "test:dev": "mocha -w --watch-extensions ts,js \"./test/**/*.spec.{ts,js}\"",
     "clean": "npm-run-all clean:*",
@@ -88,7 +89,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.4.0",
     "glob": "^7.1.3",
-    "gsap": "^2.1.1",
+    "gsap": "2.1.1",
     "husky": "^3.0.1",
     "jsdom": "^13.2.0",
     "jsdom-global": "^3.0.2",
@@ -108,6 +109,7 @@
     "typedoc": "^0.14.2",
     "typedoc-dash-theme": "^1.1.0",
     "typescript": "^3.5.1",
+    "webpack-cli": "^3.3.11",
     "yargs": "12.0.5"
   },
   "dependencies": {
@@ -115,8 +117,10 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
     "@babel/runtime": "^7.3.4",
     "@types/gsap": "^1.19.2",
+    "babel-loader": "^8.1.0",
     "lodash": "^4.17.11",
-    "seng-event": "^2.0.1"
+    "seng-event": "^2.0.1",
+    "webpack": "^4.43.0"
   },
   "peerDependencies": {
     "gsap": "^2.1.1"
