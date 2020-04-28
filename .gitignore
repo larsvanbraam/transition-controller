@@ -18,3 +18,4 @@ node_modules/
 /index.js
 /index.d.ts
 /dist
+/bundle.d.ts
