@@ -73,7 +73,7 @@ export function killAndClearTimeline(timeline: TimelineMax): void {
 export function clearTimeline(timeline: TimelineMax | TweenMax): void {
   if (timeline && (<TimelineMax>timeline).getChildren) {
     (<TimelineMax>timeline).getChildren().forEach(target => {
-      if (target.targets) {
+      if ((<any>target).targets) {
         // Note: When resetting a timeline clearing just the css properties does not clear the properties like autoAlpha or scale
         gsap.set((<any>target).targets(), { clearProps: 'all' });
       } else {
