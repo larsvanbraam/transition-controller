@@ -2648,10 +2648,10 @@ growl@1.10.3:
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.5.tgz#f2735dc2283674fa67478b10181059355c369e5e"
   integrity sha512-qBr4OuELkhPenW6goKVXiv47US3clb3/IbuWF9KNKEijAy9oeHxU9IgzjvJhHkUzhaj7rOUD7+YGWqUjLp5oSA==
 
-gsap@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/gsap/-/gsap-2.1.1.tgz#31c14ed4b8cfc2a795492b70b01a5787eb1c8378"
-  integrity sha512-+K9n1IB3cHu6s3nSWfjBSpwYFo4OBzOswjtzMvLK2fBsfcOijTNQdJ5NxRIg5rNPjIexIUGZd4xFekHvS+3OZg==
+gsap@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.6.0.tgz#925f25370c698ce0f6ea563522da8f6b5ed21b0a"
+  integrity sha512-0P3syv1TmYr+A/VZ8UMFzw+s0XoaKSzzDFs8NqkXiJTXI4E/VTi0zRjPgxaPBpiUPPycgRnFjLDe0Tb4dRRf+w==
 
 handlebars@^4.0.6:
   version "4.0.11"
